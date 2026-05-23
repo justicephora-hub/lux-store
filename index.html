@@ -1,0 +1,1056 @@
+cat > /mnt/user-data/outputs/clearpath-admin.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ClearPath Admin Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+--navy:#07111f;--navy2:#0c1a2e;--navy3:#132338;--navy4:#1a2e45;
+--gold:#c8a84b;--gold2:#e4c97e;--gold-glow:rgba(200,168,75,.15);
+--text:#edf1f7;--muted:#6b7fa3;--border:rgba(200,168,75,.18);
+--success:#3ecf8e;--danger:#ff5f6d;--warn:#ffb347;--info:#5b8cff;
+--serif:'Cormorant Garamond',serif;--sans:'Outfit',sans-serif;
+}
+html,body{height:100%;font-family:var(--sans);background:var(--navy);color:var(--text);overflow:hidden;}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:var(--navy);}
+.login-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(200,168,75,.07),transparent);}
+.login-card{position:relative;z-index:2;width:440px;padding:52px 44px;background:var(--navy2);border:1px solid var(--border);border-radius:22px;box-shadow:0 48px 96px rgba(0,0,0,.6);animation:fadeUp .5s ease;}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:36px;}
+.login-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:22px;}
+.login-brand{font-family:var(--serif);font-size:24px;}
+.login-brand span{color:var(--gold);}
+.login-badge{font-size:10px;background:rgba(255,95,109,.12);border:1px solid rgba(255,95,109,.3);color:var(--danger);padding:2px 8px;border-radius:4px;font-weight:700;letter-spacing:.8px;margin-left:8px;vertical-align:middle;}
+.login-title{font-family:var(--serif);font-size:28px;margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:30px;}
+.f{margin-bottom:18px;}
+.f label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
+.f input{width:100%;padding:13px 16px;background:var(--navy);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--sans);font-size:14px;outline:none;transition:border-color .2s;}
+.f input:focus{border-color:var(--gold);}
+.login-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-weight:700;font-size:15px;border:none;border-radius:10px;cursor:pointer;font-family:var(--sans);margin-top:4px;transition:opacity .2s;}
+.login-btn:hover{opacity:.9;}
+.login-err{margin-top:12px;padding:10px 14px;background:rgba(255,95,109,.1);border:1px solid rgba(255,95,109,.3);border-radius:8px;font-size:13px;color:var(--danger);display:none;}
+.login-hint{margin-top:14px;font-size:11px;color:var(--muted);text-align:center;}
+
+/* APP SHELL */
+#app{display:none;height:100vh;flex-direction:column;}
+
+/* TOP NAV */
+.topnav{height:62px;background:var(--navy2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 22px;gap:16px;flex-shrink:0;z-index:100;}
+.tn-logo{display:flex;align-items:center;gap:10px;margin-right:8px;}
+.tn-logo-icon{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:17px;}
+.tn-brand{font-family:var(--serif);font-size:18px;}
+.tn-brand span{color:var(--gold);}
+.tn-sep{width:1px;height:28px;background:var(--border);}
+.tn-badge{font-size:10px;background:var(--gold-glow);border:1px solid var(--border);color:var(--gold);padding:3px 10px;border-radius:20px;font-weight:700;letter-spacing:.6px;}
+.tn-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.tn-notif{position:relative;width:36px;height:36px;border-radius:50%;background:var(--navy3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:background .2s;}
+.tn-notif:hover{background:var(--gold-glow);}
+.tn-notif-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:50%;background:var(--danger);border:2px solid var(--navy2);}
+.tn-user{display:flex;align-items:center;gap:10px;padding:6px 12px;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .2s;}
+.tn-user:hover{border-color:var(--gold);}
+.tn-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--navy);}
+.tn-username{font-size:13px;font-weight:600;}
+.tn-role{font-size:10px;color:var(--muted);}
+.logout-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:600;transition:all .2s;}
+.logout-btn:hover{color:var(--danger);border-color:rgba(255,95,109,.4);}
+.view-site-btn{background:var(--gold-glow);border:1px solid var(--border);color:var(--gold);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:600;text-decoration:none;transition:all .2s;}
+.view-site-btn:hover{background:var(--gold);color:var(--navy);}
+
+/* BODY */
+.app-body{display:flex;flex:1;overflow:hidden;}
+
+/* SIDEBAR */
+aside{width:228px;flex-shrink:0;background:var(--navy2);border-right:1px solid var(--border);overflow-y:auto;padding:18px 12px;display:flex;flex-direction:column;gap:2px;}
+.s-section{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;padding:14px 10px 6px;}
+.s-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;border:1px solid transparent;}
+.s-item:hover{background:var(--gold-glow);color:var(--text);}
+.s-item.active{background:var(--gold-glow);color:var(--gold);border-color:var(--border);}
+.s-item svg{width:15px;height:15px;flex-shrink:0;}
+.s-badge{margin-left:auto;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700;}
+.s-badge.red{background:var(--danger);color:#fff;}
+.s-badge.gold{background:var(--gold);color:var(--navy);}
+.s-badge.blue{background:var(--info);color:#fff;}
+
+/* MAIN */
+main{flex:1;overflow-y:auto;background:var(--navy);}
+.page{display:none;padding:28px 32px;}
+.page.active{display:block;animation:fadeUp .3s ease;}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;}
+.ph-left{}
+.page-title{font-family:var(--serif);font-size:26px;font-weight:700;letter-spacing:-.3px;}
+.page-sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.ph-actions{display:flex;gap:10px;align-items:center;}
+
+/* BUTTONS */
+.btn{padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--sans);border:1px solid var(--border);transition:all .2s;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border-color:transparent;}
+.btn-gold:hover{opacity:.9;}
+.btn-outline{background:none;color:var(--text);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn-success{background:rgba(62,207,142,.12);color:var(--success);border-color:rgba(62,207,142,.3);}
+.btn-success:hover{background:var(--success);color:var(--navy);}
+.btn-danger{background:rgba(255,95,109,.1);color:var(--danger);border-color:rgba(255,95,109,.3);}
+.btn-danger:hover{background:var(--danger);color:#fff;}
+.btn-sm{padding:5px 12px;font-size:11px;}
+
+/* STAT CARDS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px;}
+.stat{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;cursor:default;transition:border-color .2s,transform .2s;}
+.stat:hover{border-color:rgba(200,168,75,.4);transform:translateY(-2px);}
+.stat-icon{font-size:22px;margin-bottom:12px;}
+.stat-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;}
+.stat-val{font-family:var(--serif);font-size:32px;letter-spacing:-1px;line-height:1;}
+.stat-val.gold{color:var(--gold);}
+.stat-val.green{color:var(--success);}
+.stat-val.red{color:var(--danger);}
+.stat-val.blue{color:var(--info);}
+.stat-meta{font-size:11px;color:var(--muted);margin-top:6px;}
+.stat-trend{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
+.stat-trend.up{background:rgba(62,207,142,.12);color:var(--success);}
+.stat-trend.down{background:rgba(255,95,109,.12);color:var(--danger);}
+
+/* CARDS */
+.card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:20px;}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border);}
+.card-title{font-family:var(--serif);font-size:16px;font-weight:700;}
+.card-body{padding:22px;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+th{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;padding:11px 18px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:13px 18px;font-size:13px;border-bottom:1px solid rgba(200,168,75,.06);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(200,168,75,.03);}
+.client-cell{display:flex;align-items:center;gap:10px;}
+.client-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--navy3),var(--gold-glow));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);flex-shrink:0;}
+.client-name{font-weight:600;font-size:13px;}
+.client-email{font-size:11px;color:var(--muted);}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;}
+.badge .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.b-new{background:rgba(91,140,255,.12);color:var(--info);}
+.b-new .dot{background:var(--info);}
+.b-active{background:rgba(62,207,142,.12);color:var(--success);}
+.b-active .dot{background:var(--success);animation:pulse 1.8s infinite;}
+.b-pending{background:rgba(255,179,71,.12);color:var(--warn);}
+.b-pending .dot{background:var(--warn);}
+.b-closed{background:rgba(107,127,163,.12);color:var(--muted);}
+.b-closed .dot{background:var(--muted);}
+.b-approved{background:rgba(62,207,142,.12);color:var(--success);}
+.b-rejected{background:rgba(255,95,109,.12);color:var(--danger);}
+.action-group{display:flex;gap:6px;flex-wrap:wrap;}
+
+/* SEARCH */
+.search-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--navy);border:1px solid var(--border);border-radius:9px;padding:8px 14px;}
+.search-box input{background:none;border:none;outline:none;color:var(--text);font-family:var(--sans);font-size:13px;width:200px;}
+.search-box input::placeholder{color:var(--muted);}
+.filter-select{background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;padding:8px 14px;outline:none;}
+
+/* DEBT AUDIT */
+.audit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.audit-summary{background:var(--navy);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.audit-amount{font-family:var(--serif);font-size:42px;font-weight:700;line-height:1;}
+.audit-label{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.audit-breakdown{display:flex;flex-direction:column;gap:10px;}
+.audit-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--navy2);border:1px solid var(--border);border-radius:9px;}
+.audit-row-label{font-size:13px;color:var(--muted);}
+.audit-row-val{font-size:14px;font-weight:600;}
+.bar-wrap{margin-top:4px;}
+.bar-label-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;}
+.bar-bg{height:6px;background:var(--navy3);border-radius:4px;}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.bar-fill.red{background:linear-gradient(90deg,#ff5f6d,#ff8f9a);}
+.bar-fill.green{background:linear-gradient(90deg,var(--success),#7ee8bf);}
+
+/* CONSOLIDATION */
+.consol-table{width:100%;border-collapse:collapse;margin-bottom:14px;}
+.consol-table th{font-size:11px;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;text-transform:uppercase;letter-spacing:.7px;}
+.consol-table td{padding:10px 12px;font-size:13px;border-bottom:1px solid rgba(200,168,75,.06);}
+.consol-input{width:100%;background:var(--navy);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:var(--sans);font-size:13px;padding:6px 10px;outline:none;}
+.consol-input:focus{border-color:var(--gold);}
+.consol-total{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--gold-glow);border:1px solid var(--border);border-radius:10px;margin-bottom:14px;}
+.consol-total-label{font-size:14px;font-weight:600;}
+.consol-total-val{font-family:var(--serif);font-size:28px;color:var(--gold);}
+.nca-result{background:var(--navy);border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:14px;}
+.nca-title{font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px;}
+.nca-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(200,168,75,.07);}
+.nca-row:last-child{border-bottom:none;margin-top:6px;font-weight:700;}
+.nca-row span:last-child{font-weight:600;}
+
+/* REVENUE */
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.rev-chart{background:var(--navy);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.rev-bars{display:flex;align-items:flex-end;gap:8px;height:120px;margin-bottom:10px;}
+.rev-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.rev-bar{width:100%;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--gold2),var(--gold));min-height:4px;transition:height .5s ease;}
+.rev-bar-label{font-size:10px;color:var(--muted);}
+.rev-bar-val{font-size:10px;color:var(--gold);font-weight:600;}
+.rev-calc{background:var(--navy);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.rev-calc-field{margin-bottom:14px;}
+.rev-calc-field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;}
+.rev-calc-field input,.rev-calc-field select{width:100%;padding:10px 14px;background:var(--navy2);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;}
+.rev-calc-field input:focus{border-color:var(--gold);}
+.rev-result{background:var(--gold-glow);border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:14px;}
+.rev-result-amount{font-family:var(--serif);font-size:36px;color:var(--gold);}
+
+/* TASKS */
+.task-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.task-col{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:16px;}
+.task-col-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.task-col-title{font-size:13px;font-weight:700;}
+.task-col-count{font-size:11px;background:var(--navy);border:1px solid var(--border);padding:2px 8px;border-radius:10px;color:var(--muted);}
+.task-items{display:flex;flex-direction:column;gap:10px;}
+.task-card{background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color .2s;}
+.task-card:hover{border-color:rgba(200,168,75,.4);}
+.task-card-title{font-size:13px;font-weight:600;margin-bottom:6px;}
+.task-card-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);}
+.task-priority{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;}
+.tp-high{background:rgba(255,95,109,.15);color:var(--danger);}
+.tp-med{background:rgba(255,179,71,.15);color:var(--warn);}
+.tp-low{background:rgba(62,207,142,.12);color:var(--success);}
+.add-task-btn{width:100%;padding:8px;background:none;border:1px dashed var(--border);border-radius:9px;color:var(--muted);font-family:var(--sans);font-size:12px;cursor:pointer;transition:all .2s;margin-top:10px;}
+.add-task-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* STAFF */
+.staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.staff-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:22px;text-align:center;}
+.staff-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--navy3));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--navy);margin:0 auto 12px;}
+.staff-name{font-family:var(--serif);font-size:17px;margin-bottom:4px;}
+.staff-role{font-size:12px;color:var(--muted);margin-bottom:12px;}
+.staff-access{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;text-align:left;}
+.staff-access-item{display:flex;align-items:center;justify-content:space-between;font-size:12px;}
+.access-key{color:var(--muted);}
+.access-val{color:var(--success);}
+.access-val.no{color:var(--danger);}
+
+/* CREDIT BUREAU */
+.bureau-search{display:flex;gap:12px;align-items:flex-end;margin-bottom:22px;flex-wrap:wrap;}
+.bureau-field{flex:1;min-width:180px;}
+.bureau-field label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;}
+.bureau-field input{width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;}
+.bureau-field input:focus{border-color:var(--gold);}
+.credit-score-visual{display:flex;align-items:center;gap:24px;padding:24px;background:var(--navy);border:1px solid var(--border);border-radius:14px;margin-bottom:16px;}
+.score-ring{width:90px;height:90px;border-radius:50%;background:conic-gradient(var(--success) 0% 62%,var(--navy3) 62% 100%);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0;}
+.score-inner{width:68px;height:68px;border-radius:50%;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-num{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--success);}
+.score-max{font-size:10px;color:var(--muted);}
+.score-details{}
+.score-name{font-family:var(--serif);font-size:20px;margin-bottom:4px;}
+.score-rating{font-size:13px;color:var(--success);font-weight:600;margin-bottom:8px;}
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.score-item label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:2px;}
+.score-item p{font-size:13px;font-weight:600;}
+
+/* MESSAGES */
+.msg-layout{display:grid;grid-template-columns:260px 1fr;gap:0;height:500px;background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.msg-list{border-right:1px solid var(--border);overflow-y:auto;}
+.msg-list-head{padding:14px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;}
+.msg-item{padding:12px 16px;border-bottom:1px solid rgba(200,168,75,.07);cursor:pointer;transition:background .15s;}
+.msg-item:hover,.msg-item.active{background:var(--gold-glow);}
+.msg-item-name{font-size:13px;font-weight:600;margin-bottom:2px;}
+.msg-item-preview{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-item-time{font-size:10px;color:var(--muted);}
+.msg-unread{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+.msg-chat{display:flex;flex-direction:column;}
+.msg-chat-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.msg-chat-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--navy3));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--navy);}
+.msg-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+.msg-bubble{max-width:72%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;}
+.msg-bubble.admin{background:var(--gold-glow);border:1px solid var(--border);align-self:flex-end;border-bottom-right-radius:4px;color:var(--gold);}
+.msg-bubble.client{background:var(--navy3);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px;}
+.msg-input-wrap{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px;}
+.msg-input{flex:1;background:var(--navy);border:1px solid var(--border);border-radius:9px;padding:10px 14px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;}
+.msg-send{background:var(--gold);border:none;border-radius:9px;padding:10px 16px;cursor:pointer;font-size:14px;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--navy2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:720px;max-height:88vh;overflow-y:auto;animation:fadeUp .3s ease;}
+.modal-head{position:sticky;top:0;background:var(--navy2);padding:20px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;z-index:5;}
+.modal-title{font-family:var(--serif);font-size:22px;}
+.modal-x{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:none;color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.modal-x:hover{color:var(--text);border-color:var(--gold);}
+.modal-body{padding:26px;}
+.modal-section{margin-bottom:22px;}
+.modal-section-title{font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.info-item label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.6px;display:block;margin-bottom:3px;}
+.info-item p{font-size:13px;font-weight:500;}
+.modal-actions{display:flex;gap:10px;flex-wrap:wrap;padding:20px 26px;border-top:1px solid var(--border);}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:14px 20px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 20px 40px rgba(0,0,0,.4);transform:translateY(20px);opacity:0;transition:all .3s;pointer-events:none;max-width:320px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-color:rgba(62,207,142,.4);}
+.toast.danger{border-color:rgba(255,95,109,.4);}
+.toast.info{border-color:var(--border);}
+
+/* SETTINGS */
+.settings-card{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:16px;}
+.settings-title{font-family:var(--serif);font-size:17px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(200,168,75,.07);}
+.setting-row:last-child{border-bottom:none;}
+.setting-info label{font-size:13px;font-weight:600;display:block;margin-bottom:3px;}
+.setting-info p{font-size:12px;color:var(--muted);}
+.toggle{width:44px;height:24px;border-radius:12px;background:var(--navy);border:1px solid var(--border);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;}
+.toggle.on{background:var(--gold);}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s;}
+.toggle.on::after{left:23px;}
+.settings-input{width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;transition:border-color .2s;margin-top:8px;}
+.settings-input:focus{border-color:var(--gold);}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.settings-grid .sg-field{}
+.sg-field label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:6px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+<div class="login-bg"></div>
+<div class="login-card">
+<div class="login-logo">
+<div class="login-icon">💙</div>
+<span class="login-brand">Clear<span>Path</span></span>
+<span class="login-badge">ADMIN</span>
+</div>
+<div class="login-title">Welcome back</div>
+<div class="login-sub">Sign in to your admin portal</div>
+<div class="f"><label>Username</label><input type="text" id="lu" placeholder="admin" autocomplete="username"/></div>
+<div class="f"><label>Password</label><input type="password" id="lp" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+<button class="login-btn" onclick="doLogin()">Sign In to Admin Portal</button>
+<div class="login-err" id="lerr">❌ Incorrect username or password.</div>
+<div class="login-hint">Default credentials: admin / clearpath2026<br>Change these in Settings after first login.</div>
+</div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;height:100vh;flex-direction:column;">
+
+<!-- TOP NAV -->
+<div class="topnav">
+<div class="tn-logo">
+<div class="tn-logo-icon">💙</div>
+<div class="tn-brand">Clear<span>Path</span></div>
+</div>
+<div class="tn-sep"></div>
+<div class="tn-badge">ADMIN PORTAL</div>
+<div class="tn-right">
+<a class="view-site-btn" href="clearpath-website.html" target="_blank">🌐 View Live Site</a>
+<div class="tn-notif" onclick="showToast('3 new applications awaiting review','info')">🔔<div class="tn-notif-dot"></div></div>
+<div class="tn-user">
+<div class="tn-avatar">AD</div>
+<div><div class="tn-username">Admin</div><div class="tn-role">Super Admin</div></div>
+</div>
+<button class="logout-btn" onclick="doLogout()">Sign Out</button>
+</div>
+</div>
+
+<div class="app-body">
+<!-- SIDEBAR -->
+<aside>
+<div class="s-section">Main</div>
+<div class="s-item active" onclick="nav('dashboard',this)">
+<svg viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="8.5" y="1" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="8.5" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/><rect x="8.5" y="8.5" width="5.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.4"/></svg>
+Dashboard
+</div>
+<div class="s-item" onclick="nav('applications',this)">
+<svg viewBox="0 0 15 15" fill="none"><path d="M2 3h11M2 7h11M2 11h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+Applications <span class="s-badge red">3</span>
+</div>
+<div class="s-item" onclick="nav('clients',this)">
+<svg viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+All Clients <span class="s-badge gold">7</span>
+</div>
+<div class="s-section">Finance Tools</div>
+<div class="s-item" onclick="nav('audit',this)">
+<svg viewBox="0 0 15 15" fill="none"><path d="M2 12V4l5-2 6 2v8l-6 2-5-2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 2v12M2 7h11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+Debt Audit
+</div>
+<div class="s-item" onclick="nav('consolidation',this)">
+<svg viewBox="0 0 15 15" fill="none"><path d="M3 11 L7.5 4 L12 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7.5" cy="12" r="1.2" fill="currentColor"/></svg>
+Consolidation
+</div>
+<div class="s-item" onclick="nav('bureau',this)">
+<svg viewBox="0 0 15 15" fill="none"><rect x="2" y="2" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 7.5h5M7.5 5v5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+Credit Bureau
+</div>
+<div class="s-item" onclick="nav('revenue',this)">
+<svg viewBox="0 0 15 15" fill="none"><path d="M2 11L5.5 7.5 8.5 9.5 13 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Revenue
+</div>
+<div class="s-section">Communication</div>
+<div class="s-item" onclick="nav('messages',this)">
+<svg viewBox="0 0 15 15" fill="none"><rect x="1" y="2" width="13" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 13l3-2 3 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Messages <span class="s-badge blue">5</span>
+</div>
+<div class="s-section">Management</div>
+<div class="s-item" onclick="nav('tasks',this)">
+<svg viewBox="0 0 15 15" fill="none"><rect x="2" y="2" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 7.5l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Task Tracker
+</div>
+<div class="s-item" onclick="nav('staff',this)">
+<svg viewBox="0 0 15 15" fill="none"><circle cx="5.5" cy="5" r="2" stroke="currentColor" stroke-width="1.4"/><circle cx="10.5" cy="5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M1 13c0-2.5 2-4.5 4.5-4.5S10 10.5 10 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M11 8.5c1.7.4 3 1.8 3 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+Staff & Access
+</div>
+<div class="s-item" onclick="nav('settings',this)">
+<svg viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="2" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 1v1.5M7.5 12.5V14M1 7.5h1.5M12.5 7.5H14M3.1 3.1l1.1 1.1M10.8 10.8l1.1 1.1M3.1 11.9l1.1-1.1M10.8 4.2l1.1-1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+Settings
+</div>
+</aside>
+
+<main id="main-content">
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+<div class="ph">
+<div class="ph-left"><div class="page-title">Good morning 👋</div><div class="page-sub">Here's your ClearPath overview for today</div></div>
+<div class="ph-actions"><button class="btn btn-gold" onclick="nav('applications',document.querySelector('[onclick*=applications]'))">Review Applications</button></div>
+</div>
+<div class="stats">
+<div class="stat"><div class="stat-icon">👥</div><div class="stat-label">Total Clients</div><div class="stat-val gold">7</div><div class="stat-meta"><span class="stat-trend up">↑ 2 this week</span></div></div>
+<div class="stat"><div class="stat-icon">✅</div><div class="stat-label">Active Cases</div><div class="stat-val green">4</div><div class="stat-meta">In progress</div></div>
+<div class="stat"><div class="stat-icon">📋</div><div class="stat-label">New Applications</div><div class="stat-val red">3</div><div class="stat-meta">Awaiting review</div></div>
+<div class="stat"><div class="stat-icon">💰</div><div class="stat-label">Total Revenue</div><div class="stat-val gold">R48,200</div><div class="stat-meta"><span class="stat-trend up">↑ 12% this month</span></div></div>
+</div>
+<div style="display:grid;grid-template-columns:1.4fr 1fr;gap:20px;">
+<div class="card">
+<div class="card-head"><div class="card-title">Recent Applications</div><button class="btn btn-outline btn-sm" onclick="nav('applications',document.querySelector('[onclick*=applications]'))">View All</button></div>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Client</th><th>Service</th><th>Debt</th><th>Status</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td><div class="client-cell"><div class="client-avatar">TM</div><div><div class="client-name">Thabo Mokoena</div><div class="client-email">thabo@gmail.com</div></div></div></td><td>All Services</td><td>R 84,500</td><td><span class="badge b-new"><span class="dot"></span>New</span></td><td><button class="btn btn-gold btn-sm" onclick="openClient('thabo')">View</button></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">ND</div><div><div class="client-name">Nomvula Dlamini</div><div class="client-email">nomvula@yahoo.com</div></div></div></td><td>Subscription</td><td>R 52,000</td><td><span class="badge b-new"><span class="dot"></span>New</span></td><td><button class="btn btn-gold btn-sm" onclick="openClient('nomvula')">View</button></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">SK</div><div><div class="client-name">Sipho Nkosi</div><div class="client-email">sipho@outlook.com</div></div></div></td><td>Consolidation</td><td>R 120,000</td><td><span class="badge b-active"><span class="dot"></span>Active</span></td><td><button class="btn btn-outline btn-sm" onclick="openClient('sipho')">View</button></td></tr>
+</tbody>
+</table></div>
+</div>
+<div class="card">
+<div class="card-head"><div class="card-title">Today's Tasks</div><button class="btn btn-outline btn-sm" onclick="nav('tasks',document.querySelector('[onclick*=tasks]'))">All Tasks</button></div>
+<div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+<div style="padding:12px 14px;background:var(--navy);border:1px solid var(--border);border-radius:10px;display:flex;gap:10px;align-items:flex-start;"><span style="font-size:16px;">🔥</span><div><div style="font-size:13px;font-weight:600;">Review Thabo's application</div><div style="font-size:11px;color:var(--muted);">High priority · Due today</div></div><span class="task-priority tp-high" style="margin-left:auto;flex-shrink:0;">High</span></div>
+<div style="padding:12px 14px;background:var(--navy);border:1px solid var(--border);border-radius:10px;display:flex;gap:10px;align-items:flex-start;"><span style="font-size:16px;">📞</span><div><div style="font-size:13px;font-weight:600;">Call Capitec re: Sipho settlement</div><div style="font-size:11px;color:var(--muted);">Medium · Due tomorrow</div></div><span class="task-priority tp-med" style="margin-left:auto;flex-shrink:0;">Med</span></div>
+<div style="padding:12px 14px;background:var(--navy);border:1px solid var(--border);border-radius:10px;display:flex;gap:10px;align-items:flex-start;"><span style="font-size:16px;">📄</span><div><div style="font-size:13px;font-weight:600;">Submit FNB consolidation docs</div><div style="font-size:11px;color:var(--muted);">High · Due Fri</div></div><span class="task-priority tp-high" style="margin-left:auto;flex-shrink:0;">High</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- APPLICATIONS -->
+<div class="page" id="page-applications">
+<div class="ph"><div class="ph-left"><div class="page-title">Applications</div><div class="page-sub">Review, approve or reject new client applications</div></div></div>
+<div class="card">
+<div class="card-head">
+<div class="card-title">Pending Review (3)</div>
+<div class="search-row"><div class="search-box">🔍<input type="text" placeholder="Search..."/></div><select class="filter-select"><option>All Services</option><option>Subscription</option><option>Settlement</option><option>Consolidation</option></select></div>
+</div>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Client</th><th>Applied</th><th>Service</th><th>Income</th><th>Total Debt</th><th>Docs</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>
+<tr><td><div class="client-cell"><div class="client-avatar">TM</div><div><div class="client-name">Thabo Mokoena</div><div class="client-email">+27 82 345 6789</div></div></div></td><td>23 May 2026</td><td>All Services</td><td>R 22,000</td><td>R 84,500</td><td><span style="color:var(--success);">✓ 4 docs</span></td><td><span class="badge b-new"><span class="dot"></span>New</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('thabo')">View Profile</button><button class="btn btn-success btn-sm" onclick="approveApp('Thabo')">Approve</button><button class="btn btn-danger btn-sm" onclick="showToast('Application rejected','danger')">Reject</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">ND</div><div><div class="client-name">Nomvula Dlamini</div><div class="client-email">+27 71 234 5678</div></div></div></td><td>22 May 2026</td><td>Subscription</td><td>R 18,500</td><td>R 52,000</td><td><span style="color:var(--success);">✓ 4 docs</span></td><td><span class="badge b-new"><span class="dot"></span>New</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('nomvula')">View Profile</button><button class="btn btn-success btn-sm" onclick="approveApp('Nomvula')">Approve</button><button class="btn btn-danger btn-sm" onclick="showToast('Application rejected','danger')">Reject</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">KS</div><div><div class="client-name">Keabetswe Sithole</div><div class="client-email">+27 63 456 7890</div></div></div></td><td>20 May 2026</td><td>Consolidation</td><td>R 31,000</td><td>R 210,000</td><td><span style="color:var(--warn);">⚠ 3 docs</span></td><td><span class="badge b-pending"><span class="dot"></span>Pending</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('keabo')">View Profile</button><button class="btn btn-success btn-sm" onclick="approveApp('Keabetswe')">Approve</button><button class="btn btn-danger btn-sm" onclick="showToast('Application rejected','danger')">Reject</button></div></td></tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+<!-- CLIENTS -->
+<div class="page" id="page-clients">
+<div class="ph"><div class="ph-left"><div class="page-title">All Clients</div><div class="page-sub">Full client list and management</div></div></div>
+<div class="card">
+<div class="card-head"><div class="card-title">Client List (7)</div><div class="search-row"><div class="search-box">🔍<input type="text" placeholder="Search clients..."/></div><select class="filter-select"><option>All Status</option><option>Active</option><option>New</option><option>Pending</option><option>Closed</option></select></div></div>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Client</th><th>Service</th><th>Total Debt</th><th>Monthly Saving</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>
+<tr><td><div class="client-cell"><div class="client-avatar">SN</div><div><div class="client-name">Sipho Nkosi</div><div class="client-email">sipho@outlook.com</div></div></div></td><td>Consolidation</td><td>R 120,000</td><td style="color:var(--success);">R 2,240/mo</td><td><span class="badge b-active"><span class="dot"></span>Active</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('sipho')">View</button><button class="btn btn-outline btn-sm" onclick="nav('audit',document.querySelector('[onclick*=audit]'))">Audit</button><button class="btn btn-outline btn-sm" onclick="nav('messages',document.querySelector('[onclick*=messages]'))">Message</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">LK</div><div><div class="client-name">Lerato Khumalo</div><div class="client-email">lerato@gmail.com</div></div></div></td><td>Subscription</td><td>R 67,000</td><td style="color:var(--success);">R 1,450/mo</td><td><span class="badge b-active"><span class="dot"></span>Active</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('lerato')">View</button><button class="btn btn-outline btn-sm" onclick="nav('audit',document.querySelector('[onclick*=audit]'))">Audit</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">MZ</div><div><div class="client-name">Mandla Zulu</div><div class="client-email">mandla@webmail.co.za</div></div></div></td><td>Settlement</td><td>R 45,200</td><td style="color:var(--success);">R 980/mo</td><td><span class="badge b-active"><span class="dot"></span>Active</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('mandla')">View</button><button class="btn btn-outline btn-sm" onclick="nav('audit',document.querySelector('[onclick*=audit]'))">Audit</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">TM</div><div><div class="client-name">Thabo Mokoena</div><div class="client-email">thabo@gmail.com</div></div></div></td><td>All Services</td><td>R 84,500</td><td>—</td><td><span class="badge b-new"><span class="dot"></span>New</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('thabo')">View</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">ND</div><div><div class="client-name">Nomvula Dlamini</div><div class="client-email">nomvula@yahoo.com</div></div></div></td><td>Subscription</td><td>R 52,000</td><td>—</td><td><span class="badge b-new"><span class="dot"></span>New</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('nomvula')">View</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">KS</div><div><div class="client-name">Keabetswe Sithole</div><div class="client-email">kea@gmail.com</div></div></div></td><td>Consolidation</td><td>R 210,000</td><td>—</td><td><span class="badge b-pending"><span class="dot"></span>Pending</span></td><td><div class="action-group"><button class="btn btn-gold btn-sm" onclick="openClient('keabo')">View</button></div></td></tr>
+<tr><td><div class="client-cell"><div class="client-avatar">ZM</div><div><div class="client-name">Zanele Mthembu</div><div class="client-email">zanele@icloud.com</div></div></div></td><td>Subscription</td><td>R 33,000</td><td style="color:var(--muted);">Completed</td><td><span class="badge b-closed"><span class="dot"></span>Closed</span></td><td><div class="action-group"><button class="btn btn-outline btn-sm" onclick="openClient('zanele')">View</button></div></td></tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+<!-- DEBT AUDIT -->
+<div class="page" id="page-audit">
+<div class="ph"><div class="ph-left"><div class="page-title">Debt Audit Tool</div><div class="page-sub">Analyse client finances and calculate potential savings</div></div></div>
+<div class="card" style="margin-bottom:20px;">
+<div class="card-head"><div class="card-title">Select Client to Audit</div></div>
+<div class="card-body">
+<div style="display:flex;gap:14px;align-items:flex-end;">
+<div style="flex:1;"><label style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:7px;">Client</label><select id="audit-client-select" style="width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;" onchange="loadAudit()"><option value="">-- Select a client --</option><option value="sipho">Sipho Nkosi – R 120,000 debt</option><option value="thabo">Thabo Mokoena – R 84,500 debt</option><option value="lerato">Lerato Khumalo – R 67,000 debt</option></select></div>
+<button class="btn btn-gold" onclick="loadAudit()">Run Audit</button>
+</div>
+</div>
+</div>
+<div id="audit-result" style="display:none;">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+<div>
+<div class="card">
+<div class="card-head"><div class="card-title">💳 Active Debts</div></div>
+<div class="card-body">
+<div style="display:flex;flex-direction:column;gap:10px;" id="audit-debts"></div>
+</div>
+</div>
+<div class="card">
+<div class="card-head"><div class="card-title">🗑️ Subscriptions to Cancel</div></div>
+<div class="card-body">
+<div style="display:flex;flex-direction:column;gap:8px;" id="audit-subs"></div>
+</div>
+</div>
+</div>
+<div>
+<div class="card">
+<div class="card-head"><div class="card-title">📊 Savings Summary</div></div>
+<div class="card-body">
+<div id="audit-summary"></div>
+</div>
+</div>
+<div class="card">
+<div class="card-head"><div class="card-title">⚖️ NCA Affordability Check</div></div>
+<div class="card-body" id="audit-nca"></div>
+</div>
+</div>
+</div>
+<div style="margin-top:14px;display:flex;gap:12px;">
+<button class="btn btn-gold" onclick="showToast('Audit report generated and ready to download','success')">⬇ Download Audit Report PDF</button>
+<button class="btn btn-outline" onclick="nav('consolidation',document.querySelector('[onclick*=consolidation]'))">→ Proceed to Consolidation</button>
+</div>
+</div>
+</div>
+
+<!-- CONSOLIDATION -->
+<div class="page" id="page-consolidation">
+<div class="ph"><div class="ph-left"><div class="page-title">Debt Consolidation</div><div class="page-sub">Calculate and submit consolidation loan applications to partner banks</div></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+<div class="card">
+<div class="card-head"><div class="card-title">Client Debt Entry</div></div>
+<div class="card-body">
+<div style="margin-bottom:14px;"><label style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:7px;">Select Client</label><select id="consol-client" style="width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;"><option>Sipho Nkosi</option><option>Thabo Mokoena</option><option>Lerato Khumalo</option></select></div>
+<table class="consol-table">
+<thead><tr><th>Creditor</th><th>Type</th><th>Balance (R)</th><th>Rate %</th><th></th></tr></thead>
+<tbody id="consol-tbody">
+<tr><td><input class="consol-input" value="Capitec Bank"/></td><td><select class="consol-input"><option>Personal Loan</option><option>Credit Card</option><option>Vehicle</option><option>Home Loan</option></select></td><td><input class="consol-input" value="45000" oninput="calcConsol()"/></td><td><input class="consol-input" value="24.5" oninput="calcConsol()"/></td><td><button onclick="this.closest('tr').remove();calcConsol()" style="background:none;border:none;color:var(--danger);cursor:pointer;">✕</button></td></tr>
+<tr><td><input class="consol-input" value="African Bank"/></td><td><select class="consol-input"><option>Personal Loan</option></select></td><td><input class="consol-input" value="22000" oninput="calcConsol()"/></td><td><input class="consol-input" value="27.0" oninput="calcConsol()"/></td><td><button onclick="this.closest('tr').remove();calcConsol()" style="background:none;border:none;color:var(--danger);cursor:pointer;">✕</button></td></tr>
+<tr><td><input class="consol-input" value="Edgars"/></td><td><select class="consol-input"><option>Store Account</option></select></td><td><input class="consol-input" value="17500" oninput="calcConsol()"/></td><td><input class="consol-input" value="21.0" oninput="calcConsol()"/></td><td><button onclick="this.closest('tr').remove();calcConsol()" style="background:none;border:none;color:var(--danger);cursor:pointer;">✕</button></td></tr>
+</tbody>
+</table>
+<button class="add-task-btn" onclick="addConsolRow()">+ Add Debt</button>
+<div style="margin-top:16px;"><label style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:7px;">Gross Monthly Income (R)</label><input type="number" id="consol-income" class="consol-input" value="22000" oninput="calcConsol()" style="width:100%;"/></div>
+<div style="margin-top:12px;"><label style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:7px;">Preferred Loan Term</label><select id="consol-term" class="consol-input" style="width:100%;" onchange="calcConsol()"><option value="48">48 months</option><option value="60" selected>60 months</option><option value="72">72 months</option><option value="84">84 months</option></select></div>
+</div>
+</div>
+<div>
+<div class="card">
+<div class="card-head"><div class="card-title">📊 Consolidation Result</div></div>
+<div class="card-body" id="consol-result">
+<div class="consol-total"><span class="consol-total-label">Total Debt to Consolidate</span><span class="consol-total-val" id="consol-total-val">R 84,500</span></div>
+<div class="nca-result">
+<div class="nca-title">NCA Affordability Waterfall (Reg 23A)</div>
+<div class="nca-row"><span>Gross Monthly Income</span><span id="nr-gross">R 22,000</span></div>
+<div class="nca-row"><span>Less: Statutory Deductions (PAYE/UIF)</span><span id="nr-stat" style="color:var(--danger);">- R 4,840</span></div>
+<div class="nca-row"><span>Less: Min Living Expenses (NCA table)</span><span id="nr-enc" style="color:var(--danger);">- R 3,500</span></div>
+<div class="nca-row"><span>Less: Current Debt Commitments</span><span id="nr-curr" style="color:var(--danger);">- R 3,200</span></div>
+<div class="nca-row" style="border-top:1px solid var(--border);padding-top:8px;"><span style="color:var(--gold);">Net Disposable Income (INet)</span><span id="nr-inet" style="color:var(--success);">R 10,460</span></div>
+</div>
+<div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+<div style="padding:14px;background:var(--navy);border:1px solid var(--border);border-radius:10px;text-align:center;"><div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Est. Monthly Instalment</div><div style="font-family:var(--serif);font-size:24px;color:var(--gold);" id="consol-instalment">R 2,180</div></div>
+<div style="padding:14px;background:var(--navy);border:1px solid var(--border);border-radius:10px;text-align:center;"><div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Affordability Status</div><div style="font-size:16px;font-weight:700;color:var(--success);" id="consol-status">✓ Qualifies</div></div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:20px;">
+<div class="card-head"><div class="card-title">🏦 Submit to Bank</div></div>
+<div class="card-body">
+<div style="margin-bottom:14px;"><label style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:7px;">Partner Bank</label>
+<select style="width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;"><option>FNB – First National Bank</option><option>Absa Bank</option><option>Standard Bank</option><option>Nedbank</option><option>Capitec Bank</option></select></div>
+<div style="padding:12px 14px;background:rgba(200,168,75,.06);border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:14px;">📋 The following documents will be submitted: Verified income strings, Credit bureau report, Bank statements (API-verified), Settlement discount letters, NCA Reg 23A affordability assessment.</div>
+<button class="btn btn-gold" style="width:100%;" onclick="showToast('Consolidation file submitted to FNB via Broker Code API ✓','success')">🚀 Submit to Bank API</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CREDIT BUREAU -->
+<div class="page" id="page-bureau">
+<div class="ph"><div class="ph-left"><div class="page-title">Credit Bureau</div><div class="page-sub">Pull live credit reports via TransUnion / Experian integration</div></div></div>
+<div class="card">
+<div class="card-head"><div class="card-title">Credit Report Search</div></div>
+<div class="card-body">
+<div class="bureau-search">
+<div class="bureau-field"><label>Client ID Number</label><input type="text" placeholder="8501015009087" id="bureau-id"/></div>
+<div class="bureau-field" style="flex:0.6;"><label>Bureau</label><select style="width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;"><option>TransUnion</option><option>Experian</option></select></div>
+<div class="bureau-field" style="flex:0.6;min-width:140px;"><label>Client</label><select style="width:100%;padding:11px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;"><option>Sipho Nkosi</option><option>Thabo Mokoena</option><option>Lerato Khumalo</option></select></div>
+<button class="btn btn-gold" onclick="pullCreditReport()">Pull Report</button>
+</div>
+<div id="bureau-result" style="display:none;">
+<div class="credit-score-visual">
+<div class="score-ring"><div class="score-inner"><div class="score-num">698</div><div class="score-max">/ 999</div></div></div>
+<div class="score-details">
+<div class="score-name">Sipho Nkosi</div>
+<div class="score-rating">✅ Good Credit Standing</div>
+<div class="score-grid">
+<div class="score-item"><label>Payment History</label><p style="color:var(--success);">Good</p></div>
+<div class="score-item"><label>Active Accounts</label><p>4</p></div>
+<div class="score-item"><label>Adverse Listings</label><p style="color:var(--success);">None</p></div>
+<div class="score-item"><label>Debt-to-Income</label><p style="color:var(--warn);">38%</p></div>
+<div class="score-item"><label>Judgements</label><p style="color:var(--success);">None</p></div>
+<div class="score-item"><label>Bureau</label><p>TransUnion</p></div>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+<div style="padding:14px 16px;background:var(--navy);border:1px solid var(--border);border-radius:10px;">
+<div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">Active Credit Accounts</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Capitec Personal Loan</span><span>R 85,000</span></div>
+<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Absa Credit Card</span><span>R 25,000</span></div>
+<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Foschini Account</span><span>R 10,000</span></div>
+</div>
+</div>
+<div style="padding:14px 16px;background:var(--navy);border:1px solid var(--border);border-radius:10px;">
+<div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px;">Enquiry History</div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">FNB (Loan query)</span><span style="font-size:11px;">Mar 2026</span></div>
+<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">Capitec (Review)</span><span style="font-size:11px;">Jan 2026</span></div>
+<div style="display:flex;justify-content:space-between;"><span style="color:var(--muted);">African Bank</span><span style="font-size:11px;">Nov 2025</span></div>
+</div>
+</div>
+</div>
+<button class="btn btn-gold" onclick="showToast('Credit report saved to client profile ✓','success')">⬇ Save Report to Client File</button>
+<button class="btn btn-outline" style="margin-left:10px;" onclick="showToast('Report PDF downloading...','info')">Download PDF</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- REVENUE -->
+<div class="page" id="page-revenue">
+<div class="ph"><div class="ph-left"><div class="page-title">Revenue Tracker</div><div class="page-sub">Track payments, commissions, and calculate your earnings</div></div></div>
+<div class="stats" style="grid-template-columns:repeat(3,1fr);">
+<div class="stat"><div class="stat-icon">💰</div><div class="stat-label">Total Revenue (MTD)</div><div class="stat-val gold">R 48,200</div><div class="stat-meta"><span class="stat-trend up">↑ 12% vs last month</span></div></div>
+<div class="stat"><div class="stat-icon">📥</div><div class="stat-label">Pending Payments</div><div class="stat-val warn">R 9,400</div><div class="stat-meta">3 clients due</div></div>
+<div class="stat"><div class="stat-icon">🏦</div><div class="stat-label">Bank Commissions</div><div class="stat-val green">R 18,600</div><div class="stat-meta">4 consolidations</div></div>
+</div>
+<div class="rev-grid">
+<div class="card">
+<div class="card-head"><div class="card-title">Monthly Revenue</div></div>
+<div class="card-body">
+<div class="rev-chart">
+<div class="rev-bars" id="rev-bars"></div>
+<div style="display:flex;justify-content:space-around;font-size:11px;color:var(--muted);" id="rev-labels"></div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-head"><div class="card-title">Revenue Calculator</div></div>
+<div class="card-body">
+<div class="rev-calc-field"><label>Service Fee per Client (R)</label><input type="number" id="rc-fee" value="1500" oninput="calcRev()"/></div>
+<div class="rev-calc-field"><label>Number of Active Clients</label><input type="number" id="rc-clients" value="7" oninput="calcRev()"/></div>
+<div class="rev-calc-field"><label>Bank Commission Rate (%)</label><input type="number" id="rc-comm" value="1.5" step="0.1" oninput="calcRev()"/></div>
+<div class="rev-calc-field"><label>Avg Consolidation Loan (R)</label><input type="number" id="rc-loan" value="85000" oninput="calcRev()"/></div>
+<div class="rev-result">
+<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Estimated Monthly Revenue</div>
+<div class="rev-result-amount" id="rc-result">R 0</div>
+</div>
+<div style="margin-top:10px;padding:12px;background:var(--navy);border:1px solid var(--border);border-radius:10px;font-size:12px;color:var(--muted);line-height:1.8;" id="rc-breakdown"></div>
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:20px;">
+<div class="card-head"><div class="card-title">Payment Transactions</div></div>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Client</th><th>Date</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Sipho Nkosi</td><td>01 May 2026</td><td>Service Fee</td><td style="color:var(--success);">+ R 1,500</td><td><span class="badge b-active"><span class="dot"></span>Paid</span></td></tr>
+<tr><td>Lerato Khumalo</td><td>01 May 2026</td><td>Service Fee</td><td style="color:var(--success);">+ R 1,500</td><td><span class="badge b-active"><span class="dot"></span>Paid</span></td></tr>
+<tr><td>FNB Commission</td><td>15 May 2026</td><td>Bank Commission</td><td style="color:var(--success);">+ R 4,250</td><td><span class="badge b-active"><span class="dot"></span>Paid</span></td></tr>
+<tr><td>Mandla Zulu</td><td>23 May 2026</td><td>Settlement Fee</td><td style="color:var(--warn);">R 1,800</td><td><span class="badge b-pending"><span class="dot"></span>Pending</span></td></tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+<!-- MESSAGES -->
+<div class="page" id="page-messages">
+<div class="ph"><div class="ph-left"><div class="page-title">Messages</div><div class="page-sub">Client communication hub · WhatsApp · Email</div></div></div>
+<div style="display:flex;gap:12px;margin-bottom:16px;">
+<button class="btn btn-gold">💬 In-App Messages</button>
+<a href="https://web.whatsapp.com" target="_blank" class="btn btn-outline" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">🟢 Open WhatsApp Web</a>
+<a href="mailto:admin@clearpath.co.za" class="btn btn-outline" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;">📧 Open Email</a>
+</div>
+<div class="card">
+<div class="msg-layout">
+<div class="msg-list">
+<div class="msg-list-head">Conversations (5)</div>
+<div class="msg-item active" onclick="selectMsg(this,'Sipho Nkosi','SN')"><div style="display:flex;justify-content:space-between;align-items:center;"><span class="msg-item-name">Sipho Nkosi</span><span class="msg-item-time">2m ago</span></div><div class="msg-item-preview">When will the loan be disbursed?</div></div>
+<div class="msg-item" onclick="selectMsg(this,'Thabo Mokoena','TM')"><div style="display:flex;justify-content:space-between;align-items:center;"><span class="msg-item-name">Thabo Mokoena</span><span class="msg-unread"></span></div><div class="msg-item-preview">Hi, I just applied for your services</div></div>
+<div class="msg-item" onclick="selectMsg(this,'Nomvula Dlamini','ND')"><div style="display:flex;justify-content:space-between;align-items:center;"><span class="msg-item-name">Nomvula Dlamini</span><span class="msg-unread"></span></div><div class="msg-item-preview">Can you cancel my Virgin Active?</div></div>
+<div class="msg-item" onclick="selectMsg(this,'Lerato Khumalo','LK')"><div style="display:flex;justify-content:space-between;align-items:center;"><span class="msg-item-name">Lerato Khumalo</span><span class="msg-item-time">1d ago</span></div><div class="msg-item-preview">Thank you so much ClearPath!</div></div>
+<div class="msg-item" onclick="selectMsg(this,'Mandla Zulu','MZ')"><div style="display:flex;justify-content:space-between;align-items:center;"><span class="msg-item-name">Mandla Zulu</span><span class="msg-item-time">2d ago</span></div><div class="msg-item-preview">Please update me on my case</div></div>
+</div>
+<div class="msg-chat">
+<div class="msg-chat-head"><div class="msg-chat-avatar" id="msg-avatar">SN</div><div><div style="font-size:14px;font-weight:600;" id="msg-name">Sipho Nkosi</div><div style="font-size:11px;color:var(--success);">● Active client</div></div><div style="margin-left:auto;display:flex;gap:8px;"><button class="btn btn-outline btn-sm">📞 Call</button><button class="btn btn-outline btn-sm">📧 Email</button></div></div>
+<div class="msg-messages" id="msg-messages">
+<div class="msg-bubble client">When will my consolidation loan be disbursed? FNB said they're waiting for documents.</div>
+<div class="msg-bubble admin">Hi Sipho! We've already submitted everything to FNB. Disbursement should be within 3–5 business days. I'll follow up with them today.</div>
+<div class="msg-bubble client">Thank you so much! You guys have been amazing 🙏</div>
+</div>
+<div class="msg-input-wrap">
+<input class="msg-input" id="msg-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+<button class="msg-send" onclick="sendMsg()">➤</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TASKS -->
+<div class="page" id="page-tasks">
+<div class="ph"><div class="ph-left"><div class="page-title">Task Tracker</div><div class="page-sub">Manage your workload and client action items</div></div>
+<div class="ph-actions"><button class="btn btn-gold" onclick="addTaskPrompt()">+ Add Task</button></div></div>
+<div class="task-columns">
+<div class="task-col">
+<div class="task-col-head"><div class="task-col-title">📋 To Do</div><div class="task-col-count" id="todo-count">4</div></div>
+<div class="task-items" id="todo-tasks">
+<div class="task-card"><div class="task-card-title">Review Thabo's application</div><div class="task-card-meta"><span class="task-priority tp-high">High</span><span>Due: Today</span></div></div>
+<div class="task-card"><div class="task-card-title">Pull credit report – Nomvula</div><div class="task-card-meta"><span class="task-priority tp-med">Medium</span><span>Due: Mon</span></div></div>
+<div class="task-card"><div class="task-card-title">Send POA to Keabetswe</div><div class="task-card-meta"><span class="task-priority tp-low">Low</span><span>Due: Tue</span></div></div>
+<div class="task-card"><div class="task-card-title">Update client portal records</div><div class="task-card-meta"><span class="task-priority tp-low">Low</span><span>Due: Fri</span></div></div>
+</div>
+<button class="add-task-btn" onclick="addTaskPrompt()">+ Add Task</button>
+</div>
+<div class="task-col">
+<div class="task-col-head"><div class="task-col-title">⚡ In Progress</div><div class="task-col-count">3</div></div>
+<div class="task-items">
+<div class="task-card"><div class="task-card-title">Submit FNB consolidation docs – Sipho</div><div class="task-card-meta"><span class="task-priority tp-high">High</span><span>Due: Fri</span></div></div>
+<div class="task-card"><div class="task-card-title">Call Capitec re: settlement offer</div><div class="task-card-meta"><span class="task-priority tp-high">High</span><span>Due: Tomorrow</span></div></div>
+<div class="task-card"><div class="task-card-title">Cancel Virgin Active – Nomvula</div><div class="task-card-meta"><span class="task-priority tp-med">Medium</span><span>Due: Mon</span></div></div>
+</div>
+</div>
+<div class="task-col">
+<div class="task-col-head"><div class="task-col-title">✅ Done</div><div class="task-col-count">5</div></div>
+<div class="task-items">
+<div class="task-card" style="opacity:.6;"><div class="task-card-title" style="text-decoration:line-through;">Cancel DStv – Lerato</div><div class="task-card-meta"><span class="task-priority tp-low">Done</span><span>20 May</span></div></div>
+<div class="task-card" style="opacity:.6;"><div class="task-card-title" style="text-decoration:line-through;">Onboard Sipho Nkosi</div><div class="task-card-meta"><span class="task-priority tp-low">Done</span><span>18 May</span></div></div>
+<div class="task-card" style="opacity:.6;"><div class="task-card-title" style="text-decoration:line-through;">Affordability check – Lerato</div><div class="task-card-meta"><span class="task-priority tp-low">Done</span><span>17 May</span></div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- STAFF -->
+<div class="page" id="page-staff">
+<div class="ph"><div class="ph-left"><div class="page-title">Staff & Access Control</div><div class="page-sub">Manage your team and control what each person can see</div></div>
+<div class="ph-actions"><button class="btn btn-gold" onclick="showToast('Staff invite sent via email','success')">+ Invite Staff Member</button></div></div>
+<div class="staff-grid">
+<div class="staff-card">
+<div class="staff-avatar">👑</div>
+<div class="staff-name">You (Admin)</div>
+<div class="staff-role">Super Administrator</div>
+<div class="staff-access">
+<div class="staff-access-item"><span class="access-key">All Clients</span><span class="access-val">✓ Full Access</span></div>
+<div class="staff-access-item"><span class="access-key">Financial Data</span><span class="access-val">✓ Full Access</span></div>
+<div class="staff-access-item"><span class="access-key">Bank Submissions</span><span class="access-val">✓ Full Access</span></div>
+<div class="staff-access-item"><span class="access-key">Staff Management</span><span class="access-val">✓ Full Access</span></div>
+<div class="staff-access-item"><span class="access-key">Revenue Data</span><span class="access-val">✓ Full Access</span></div>
+</div>
+<span class="badge b-active" style="width:100%;justify-content:center;"><span class="dot"></span>Active</span>
+</div>
+<div class="staff-card">
+<div class="staff-avatar">👤</div>
+<div class="staff-name">Case Manager</div>
+<div class="staff-role">Client Services</div>
+<div class="staff-access">
+<div class="staff-access-item"><span class="access-key">View Clients</span><span class="access-val">✓ Yes</span></div>
+<div class="staff-access-item"><span class="access-key">Edit Clients</span><span class="access-val">✓ Yes</span></div>
+<div class="staff-access-item"><span class="access-key">Bank Submissions</span><span class="access-val no">✗ No</span></div>
+<div class="staff-access-item"><span class="access-key">Revenue Data</span><span class="access-val no">✗ No</span></div>
+<div class="staff-access-item"><span class="access-key">Staff Management</span><span class="access-val no">✗ No</span></div>
+</div>
+<div style="display:flex;gap:8px;"><button class="btn btn-outline btn-sm" style="flex:1;">Edit Access</button><button class="btn btn-danger btn-sm" onclick="showToast('Staff member removed','danger')">Remove</button></div>
+</div>
+<div class="staff-card" style="border-style:dashed;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;" onclick="showToast('Invite sent! Staff member will receive a setup email.','success')">
+<div style="font-size:36px;margin-bottom:12px;color:var(--muted);">+</div>
+<div style="font-size:14px;font-weight:600;color:var(--muted);">Invite New Staff Member</div>
+<div style="font-size:12px;color:var(--muted);margin-top:4px;">Click to send an invite</div>
+</div>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div class="page" id="page-settings">
+<div class="ph"><div class="ph-left"><div class="page-title">Settings</div><div class="page-sub">Manage your account, integrations, and preferences</div></div></div>
+<div class="settings-card">
+<div class="settings-title">🔐 Change Login Credentials</div>
+<div class="settings-grid">
+<div class="sg-field"><label>Current Password</label><input class="settings-input" type="password" placeholder="••••••••"/></div>
+<div class="sg-field"><label>New Password</label><input class="settings-input" type="password" placeholder="New password"/></div>
+<div class="sg-field"><label>Admin Username</label><input class="settings-input" type="text" value="admin"/></div>
+<div class="sg-field"><label>Confirm New Password</label><input class="settings-input" type="password" placeholder="Confirm"/></div>
+</div>
+<button class="btn btn-gold" style="margin-top:14px;" onclick="showToast('Password updated successfully ✓','success')">Update Credentials</button>
+</div>
+<div class="settings-card">
+<div class="settings-title">🏢 Business Information</div>
+<div class="settings-grid">
+<div class="sg-field"><label>Business Name</label><input class="settings-input" value="ClearPath Financial Services (Pty) Ltd"/></div>
+<div class="sg-field"><label>Contact Email</label><input class="settings-input" value="admin@clearpath.co.za"/></div>
+<div class="sg-field"><label>Phone</label><input class="settings-input" value="+27 00 000 0000"/></div>
+<div class="sg-field"><label>NCR Registration Number</label><input class="settings-input" placeholder="NCR/XXXXX/XXXX"/></div>
+</div>
+<button class="btn btn-gold" style="margin-top:14px;" onclick="showToast('Business info saved ✓','success')">Save Changes</button>
+</div>
+<div class="settings-card">
+<div class="settings-title">🔗 Integrations</div>
+<div class="setting-row"><div class="setting-info"><label>Paystack (Payments & Debit Orders)</label><p>Connect Paystack to process client payments and debit orders</p></div><button class="btn btn-outline btn-sm" onclick="showToast('Redirecting to Paystack setup...','info')">Connect</button></div>
+<div class="setting-row"><div class="setting-info"><label>WhatsApp Business API</label><p>Receive and send WhatsApp messages from the admin portal</p></div><button class="btn btn-outline btn-sm" onclick="showToast('WhatsApp API — enter your API key below','info')">Configure</button></div>
+<div class="setting-row"><div class="setting-info"><label>SendGrid (Email)</label><p>Send automated emails to clients from ClearPath</p></div><button class="btn btn-outline btn-sm" onclick="showToast('Enter your SendGrid API key to connect','info')">Connect</button></div>
+<div class="setting-row"><div class="setting-info"><label>TransUnion / Experian Bureau</label><p>Connect your registered credit bureau data code</p></div><button class="btn btn-outline btn-sm" onclick="showToast('Enter your bureau data code below','info')">Configure</button></div>
+<div class="setting-row"><div class="setting-info"><label>Stitch / Mono (Open Banking)</label><p>Connect for real-time bank statement ingestion</p></div><button class="btn btn-outline btn-sm" onclick="showToast('Open banking API configured','success')">Connect</button></div>
+</div>
+<div class="settings-card">
+<div class="settings-title">🔔 Notifications</div>
+<div class="setting-row"><div class="setting-info"><label>New Application Alert</label><p>Email me when a client applies</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+<div class="setting-row"><div class="setting-info"><label>Payment Received</label><p>Alert when a client payment is confirmed</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+<div class="setting-row"><div class="setting-info"><label>Daily Summary</label><p>Send me a daily report of all activity</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+<div class="setting-row"><div class="setting-info"><label>WhatsApp Notifications</label><p>Receive alerts on WhatsApp</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+</div>
+</div>
+
+</main>
+</div>
+</div>
+
+<!-- CLIENT MODAL -->
+<div class="modal-overlay" id="client-modal">
+<div class="modal">
+<div class="modal-head"><div class="modal-title" id="cm-title">Client Profile</div><button class="modal-x" onclick="document.getElementById('client-modal').classList.remove('open')">✕</button></div>
+<div class="modal-body" id="cm-body"></div>
+<div class="modal-actions" id="cm-actions"></div>
+</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// AUTH
+const CREDS={user:'admin',pass:'clearpath2026'};
+function doLogin(){
+const u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value.trim();
+const err=document.getElementById('lerr');
+if(u===CREDS.user&&p===CREDS.pass){
+document.getElementById('login-screen').style.display='none';
+const app=document.getElementById('app');app.style.display='flex';app.style.flexDirection='column';
+initRevChart();calcConsol();calcRev();
+} else {err.style.display='block';setTimeout(()=>err.style.display='none',3000);}
+}
+document.getElementById('lp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+function doLogout(){document.getElementById('app').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('lu').value='';document.getElementById('lp').value='';}
+
+// NAVIGATION
+function nav(id,el){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.s-item').forEach(s=>s.classList.remove('active'));
+document.getElementById('page-'+id).classList.add('active');
+if(el)el.classList.add('active');
+}
+
+// CLIENT DATA
+const clientData={
+thabo:{name:'Thabo Mokoena',email:'thabo@gmail.com',phone:'+27 82 345 6789',id:'8501015009087',income:'R 22,000',service:'All Services',status:'New',debt:'R 84,500',debts:[{n:'Capitec Personal Loan',a:'R 45,000',r:'24.5%'},{n:'African Bank',a:'R 22,000',r:'27%'},{n:'Edgars Account',a:'R 17,500',r:'21%'}],subs:[{n:'DStv Premium',a:'R 899/mo'},{n:'Planet Fitness',a:'R 499/mo'},{n:'Netflix',a:'R 199/mo'},{n:'Telkom Plan',a:'R 241/mo'}],saving:'R 1,838/mo',notes:'4 subscriptions identified. Bank statements verified. High priority.'},
+nomvula:{name:'Nomvula Dlamini',email:'nomvula@yahoo.com',phone:'+27 71 234 5678',id:'9203220045083',income:'R 18,500',service:'Subscription Cancellation',status:'New',debt:'R 52,000',debts:[{n:'Nedbank Home Loan',a:'R 30,000',r:'12%'},{n:'FNB Credit Card',a:'R 12,000',r:'22.5%'},{n:'Woolworths Account',a:'R 10,000',r:'20%'}],subs:[{n:'DStv Compact',a:'R 469/mo'},{n:'Virgin Active',a:'R 699/mo'},{n:'Showmax',a:'R 99/mo'},{n:'Apple Music',a:'R 79/mo'},{n:'Discovery Vitality',a:'R 155/mo'},{n:'Old Insurance',a:'R 330/mo'}],saving:'R 1,831/mo',notes:'6 subscriptions found. Excellent savings opportunity.'},
+sipho:{name:'Sipho Nkosi',email:'sipho@outlook.com',phone:'+27 83 567 8901',id:'8807155001083',income:'R 35,000',service:'Debt Consolidation',status:'Active',debt:'R 120,000',debts:[{n:'Standard Bank Vehicle',a:'R 85,000',r:'18%'},{n:'Absa Personal Loan',a:'R 25,000',r:'24%'},{n:'Foschini Account',a:'R 10,000',r:'21%'}],subs:[{n:'DStv Premium',a:'R 899/mo'},{n:'Gym',a:'R 650/mo'}],saving:'R 2,240/mo',notes:'FNB consolidation approved. Disbursement in 3–5 days.'},
+lerato:{name:'Lerato Khumalo',email:'lerato@gmail.com',phone:'+27 76 890 1234',id:'9504180032081',income:'R 26,000',service:'Subscription Cancellation',status:'Active',debt:'R 67,000',debts:[{n:'Capitec Credit Card',a:'R 40,000',r:'22%'},{n:'MFC Vehicle Finance',a:'R 27,000',r:'16%'}],subs:[{n:'DStv Compact',a:'R 469/mo'},{n:'Netflix',a:'R 199/mo'}],saving:'R 1,450/mo',notes:'Subscriptions cancelled. Awaiting bank settlement offer.'},
+mandla:{name:'Mandla Zulu',email:'mandla@webmail.co.za',phone:'+27 72 123 4567',id:'8612255018082',income:'R 19,000',service:'Debt Settlement',status:'Active',debt:'R 45,200',debts:[{n:'African Bank Loan',a:'R 30,000',r:'27%'},{n:'Edgars Account',a:'R 15,200',r:'21%'}],subs:[{n:'Showmax',a:'R 99/mo'},{n:'Old Insurance',a:'R 250/mo'}],saving:'R 980/mo',notes:'Final stage of debt settlement negotiation.'},
+keabo:{name:'Keabetswe Sithole',email:'kea@gmail.com',phone:'+27 63 456 7890',id:'9101100067086',income:'R 31,000',service:'Debt Consolidation',status:'Pending',debt:'R 210,000',debts:[{n:'Nedbank Home Loan',a:'R 180,000',r:'11.5%'},{n:'FNB Personal Loan',a:'R 30,000',r:'22%'}],subs:[{n:'Planet Fitness',a:'R 499/mo'},{n:'Discovery Vitality',a:'R 155/mo'}],saving:'R 654/mo',notes:'High debt-to-income ratio. Bureau check required.'},
+zanele:{name:'Zanele Mthembu',email:'zanele@icloud.com',phone:'+27 84 321 0987',id:'8809090021084',income:'R 15,000',service:'Subscription Cancellation',status:'Closed',debt:'R 33,000',debts:[{n:'Capitec Personal Loan',a:'R 33,000',r:'24.5%'}],subs:[{n:'DStv Access',a:'R 119/mo'}],saving:'Completed',notes:'Case closed. Client saving R 980/mo total.'}
+};
+
+function openClient(key){
+const c=clientData[key];if(!c)return;
+const sMap={New:'b-new',Active:'b-active',Pending:'b-pending',Closed:'b-closed'};
+document.getElementById('cm-title').textContent=c.name;
+document.getElementById('cm-body').innerHTML=`
+<div class="modal-section"><div class="modal-section-title">Personal Details</div>
+<div class="info-grid">
+<div class="info-item"><label>Full Name</label><p>${c.name}</p></div>
+<div class="info-item"><label>Status</label><p><span class="badge ${sMap[c.status]||'b-new'}"><span class="dot"></span>${c.status}</span></p></div>
+<div class="info-item"><label>Email</label><p>${c.email}</p></div>
+<div class="info-item"><label>Phone</label><p>${c.phone}</p></div>
+<div class="info-item"><label>ID Number</label><p>${c.id}</p></div>
+<div class="info-item"><label>Gross Monthly Income</label><p style="color:var(--success);font-weight:700;">${c.income}</p></div>
+<div class="info-item"><label>Service Applied</label><p>${c.service}</p></div>
+<div class="info-item"><label>Total Debt</label><p style="color:var(--danger);font-weight:700;">${c.debt}</p></div>
+</div></div>
+<div class="modal-section"><div class="modal-section-title">Active Debts</div>
+<div style="display:flex;flex-direction:column;gap:8px;">${c.debts.map(d=>`<div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;font-size:13px;"><span style="color:var(--muted);">${d.n}</span><span><strong>${d.a}</strong> <span style="color:var(--muted);font-size:11px;">@ ${d.r}</span></span></div>`).join('')}</div></div>
+<div class="modal-section"><div class="modal-section-title">Subscriptions Found</div>
+<div style="display:flex;flex-direction:column;gap:8px;">${c.subs.map(s=>`<div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--navy);border:1px solid var(--border);border-radius:9px;font-size:13px;"><span>${s.n}</span><span style="color:var(--danger);font-weight:600;">${s.a}</span></div>`).join('')}</div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--gold-glow);border:1px solid var(--border);border-radius:10px;margin-top:10px;"><span style="font-size:13px;font-weight:600;">Estimated Monthly Saving</span><span style="font-family:var(--serif);font-size:22px;color:var(--gold);">${c.saving}</span></div></div>
+<div class="modal-section"><div class="modal-section-title">Admin Notes</div>
+<textarea style="width:100%;padding:12px 14px;background:var(--navy);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--sans);font-size:13px;outline:none;min-height:70px;resize:vertical;">${c.notes}</textarea></div>`;
+document.getElementById('cm-actions').innerHTML=`
+<button class="btn btn-success" onclick="approveApp('${c.name.split(' ')[0]}');document.getElementById('client-modal').classList.remove('open')">✓ Approve</button>
+<button class="btn btn-gold" onclick="showToast('Opening audit for ${c.name}...','info');document.getElementById('client-modal').classList.remove('open');nav('audit',document.querySelector('[onclick*=audit]'))">📊 Run Audit</button>
+<button class="btn btn-outline" onclick="showToast('Message sent to ${c.name} ✓','success')">💬 Send Message</button>
+<button class="btn btn-danger" onclick="showToast('Application rejected','danger');document.getElementById('client-modal').classList.remove('open')">✕ Reject</button>`;
+document.getElementById('client-modal').classList.add('open');
+}
+document.getElementById('client-modal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open');});
+
+function approveApp(name){showToast(`${name}'s application approved ✓`,'success');}
+
+// AUDIT
+const auditData={
+sipho:{debts:[{n:'Standard Bank Vehicle',a:85000,r:18},{n:'Absa Personal Loan',a:25000,r:24},{n:'Foschini Account',a:10000,r:21}],subs:[{n:'DStv Premium',a:899},{n:'Gym Contract',a:650}],income:35000},
+thabo:{debts:[{n:'Capitec Personal Loan',a:45000,r:24.5},{n:'African Bank',a:22000,r:27},{n:'Edgars Account',a:17500,r:21}],subs:[{n:'DStv Premium',a:899},{n:'Planet Fitness',a:499},{n:'Netflix',a:199},{n:'Telkom Plan',a:241}],income:22000},
+lerato:{debts:[{n:'Capitec Credit Card',a:40000,r:22},{n:'MFC Vehicle Finance',a:27000,r:16}],subs:[{n:'DStv Compact',a:469},{n:'Netflix',a:199}],income:26000}
+};
+function loadAudit(){
+const key=document.getElementById('audit-client-select').value;
+if(!key)return;
+const d=auditData[key];if(!d)return;
+document.getElementById('audit-result').style.display='block';
+const totalDebt=d.debts.reduce((s,x)=>s+x.a,0);
+const totalSubs=d.subs.reduce((s,x)=>s+x.a,0);
+const avgRate=d.debts.reduce((s,x)=>s+x.r,0)/d.debts.length;
+document.getElementById('audit-debts').innerHTML=d.debts.map(x=>`
+<div class="bar-wrap"><div class="bar-label-row"><span style="font-size:13px;">${x.n}</span><span style="font-weight:700;">R ${x.a.toLocaleString()} <span style="font-size:11px;color:var(--muted);">@ ${x.r}%</span></span></div>
+<div class="bar-bg"><div class="bar-fill red" style="width:${(x.a/totalDebt*100).toFixed(0)}%"></div></div></div>`).join('');
+document.getElementById('audit-subs').innerHTML=d.subs.map(x=>`
+<div style="display:flex;justify-content:space-between;padding:9px 13px;background:var(--navy2);border:1px solid var(--border);border-radius:8px;font-size:13px;"><span>${x.n}</span><span style="color:var(--danger);font-weight:600;">- R ${x.a}/mo</span></div>`).join('');
+const subSave=totalSubs;
+const consolSave=(totalDebt*0.18/12).toFixed(0);
+document.getElementById('audit-summary').innerHTML=`
+<div class="audit-amount gold" style="color:var(--gold);">R ${(subSave+parseInt(consolSave)).toLocaleString()}</div>
+<div class="audit-label">Total estimated monthly saving</div>
+<div class="audit-breakdown">
+<div class="audit-row"><span class="audit-row-label">Total Debt</span><span class="audit-row-val" style="color:var(--danger);">R ${totalDebt.toLocaleString()}</span></div>
+<div class="audit-row"><span class="audit-row-label">Subscription Saving</span><span class="audit-row-val" style="color:var(--success);">+ R ${subSave.toLocaleString()}/mo</span></div>
+<div class="audit-row"><span class="audit-row-label">Est. Consolidation Saving</span><span class="audit-row-val" style="color:var(--success);">+ R ${parseInt(consolSave).toLocaleString()}/mo</span></div>
+<div class="audit-row"><span class="audit-row-label">Avg Interest Rate</span><span class="audit-row-val" style="color:var(--warn);">${avgRate.toFixed(1)}%</span></div>
+</div>`;
+const stat=(d.income*0.22).toFixed(0),enc=3500,curr=Math.round(totalDebt*avgRate/100/12);
+const inet=d.income-parseInt(stat)-enc-curr;
+document.getElementById('audit-nca').innerHTML=`
+<div class="nca-title">NCA Reg 23A Affordability</div>
+<div class="nca-row"><span>Gross Monthly Income</span><span>R ${d.income.toLocaleString()}</span></div>
+<div class="nca-row"><span>Less: Statutory Deductions</span><span style="color:var(--danger);">- R ${parseInt(stat).toLocaleString()}</span></div>
+<div class="nca-row"><span>Less: Min Living Expenses</span><span style="color:var(--danger);">- R ${enc.toLocaleString()}</span></div>
+<div class="nca-row"><span>Less: Current Debt Payments</span><span style="color:var(--danger);">- R ${curr.toLocaleString()}</span></div>
+<div class="nca-row" style="border-top:1px solid var(--border);padding-top:8px;"><span style="color:var(--gold);">Net Disposable Income</span><span style="color:${inet>0?'var(--success)':'var(--danger)'};font-weight:700;">R ${inet.toLocaleString()}</span></div>`;
+}
+
+// CONSOLIDATION
+function calcConsol(){
+const rows=document.querySelectorAll('#consol-tbody tr');
+let total=0;
+rows.forEach(r=>{const inputs=r.querySelectorAll('input');if(inputs[1])total+=parseFloat(inputs[1].value)||0;});
+const income=parseFloat(document.getElementById('consol-income').value)||22000;
+const term=parseInt(document.getElementById('consol-term').value)||60;
+const stat=income*0.22,enc=3500,curr=total*0.22/100/12;
+const inet=income-stat-enc-curr;
+const rate=0.185/12;
+const instalment=total>0?(total*rate*Math.pow(1+rate,term))/(Math.pow(1+rate,term)-1):0;
+document.getElementById('consol-total-val').textContent='R '+Math.round(total).toLocaleString();
+document.getElementById('nr-gross').textContent='R '+income.toLocaleString();
+document.getElementById('nr-stat').textContent='- R '+Math.round(stat).toLocaleString();
+document.getElementById('nr-inet').textContent='R '+Math.round(inet).toLocaleString();
+document.getElementById('consol-instalment').textContent='R '+Math.round(instalment).toLocaleString();
+document.getElementById('consol-status').textContent=instalment<inet?'✓ Qualifies':'⚠ Review Needed';
+document.getElementById('consol-status').style.color=instalment<inet?'var(--success)':'var(--warn)';
+}
+function addConsolRow(){
+const tbody=document.getElementById('consol-tbody');
+const row=document.createElement('tr');
+row.innerHTML=`<td><input class="consol-input" placeholder="Creditor"/></td><td><select class="consol-input"><option>Personal Loan</option><option>Credit Card</option><option>Vehicle</option><option>Home Loan</option></select></td><td><input class="consol-input" placeholder="0" oninput="calcConsol()"/></td><td><input class="consol-input" placeholder="0" oninput="calcConsol()"/></td><td><button onclick="this.closest('tr').remove();calcConsol()" style="background:none;border:none;color:var(--danger);cursor:pointer;">✕</button></td>`;
+tbody.appendChild(row);
+}
+
+// CREDIT BUREAU
+function pullCreditReport(){
+const id=document.getElementById('bureau-id').value;
+if(!id&&id.length!==13){showToast('Enter a valid 13-digit ID number','danger');return;}
+showToast('Querying TransUnion bureau...','info');
+setTimeout(()=>{document.getElementById('bureau-result').style.display='block';showToast('Credit report retrieved successfully ✓','success');},1200);
+}
+
+// REVENUE CHART
+const revData=[{m:'Dec',v:28000},{m:'Jan',v:31000},{m:'Feb',v:36000},{m:'Mar',v:38000},{m:'Apr',v:44000},{m:'May',v:48200}];
+function initRevChart(){
+const bars=document.getElementById('rev-bars'),labels=document.getElementById('rev-labels');
+if(!bars)return;
+const max=Math.max(...revData.map(d=>d.v));
+bars.innerHTML=revData.map(d=>`<div class="rev-bar-wrap"><div class="rev-bar-val">R${Math.round(d.v/1000)}k</div><div class="rev-bar" style="height:${(d.v/max*100)}%"></div></div>`).join('');
+labels.innerHTML=revData.map(d=>`<span class="rev-bar-label">${d.m}</span>`).join('');
+}
+function calcRev(){
+const fee=parseFloat(document.getElementById('rc-fee').value)||0;
+const clients=parseInt(document.getElementById('rc-clients').value)||0;
+const comm=parseFloat(document.getElementById('rc-comm').value)||0;
+const loan=parseFloat(document.getElementById('rc-loan').value)||0;
+const feeRev=fee*clients;
+const commRev=(comm/100)*loan*clients;
+const total=feeRev+commRev;
+document.getElementById('rc-result').textContent='R '+Math.round(total).toLocaleString();
+document.getElementById('rc-breakdown').innerHTML=`Service fees: R ${Math.round(feeRev).toLocaleString()}<br>Bank commissions: R ${Math.round(commRev).toLocaleString()}<br>Total estimate: <strong style="color:var(--gold)">R ${Math.round(total).toLocaleString()}/month</strong>`;
+}
+
+// MESSAGES
+function selectMsg(el,name,avatar){
+document.querySelectorAll('.msg-item').forEach(m=>m.classList.remove('active'));
+el.classList.add('active');
+document.getElementById('msg-name').textContent=name;
+document.getElementById('msg-avatar').textContent=avatar;
+}
+function sendMsg(){
+const input=document.getElementById('msg-input');
+if(!input.value.trim())return;
+const msgs=document.getElementById('msg-messages');
+const div=document.createElement('div');div.className='msg-bubble admin';div.textContent=input.value;
+msgs.appendChild(div);input.value='';msgs.scrollTop=msgs.scrollHeight;
+}
+
+// TASKS
+function addTaskPrompt(){
+const title=prompt('Task title:');
+if(!title)return;
+const priority=prompt('Priority? (high/med/low)','med')||'med';
+const due=prompt('Due date:','Tomorrow')||'Tomorrow';
+const el=document.createElement('div');el.className='task-card';
+el.innerHTML=`<div class="task-card-title">${title}</div><div class="task-card-meta"><span class="task-priority tp-${priority==='high'?'high':priority==='low'?'low':'med'}">${priority.charAt(0).toUpperCase()+priority.slice(1)}</span><span>Due: ${due}</span></div>`;
+document.getElementById('todo-tasks').appendChild(el);
+showToast('Task added ✓','success');
+}
+
+// TOAST
+function showToast(msg,type='info'){
+const t=document.getElementById('toast');
+const icons={success:'✅',danger:'❌',info:'ℹ️'};
+t.innerHTML=`<span>${icons[type]||'ℹ️'}</span><span>${msg}</span>`;
+t.className=`toast ${type}`;
+setTimeout(()=>t.classList.add('show'),10);
+setTimeout(()=>t.classList.remove('show'),3500);
+}
+</script>
+</body>
+</html>
+HTMLEOF
+echo "Admin done"
