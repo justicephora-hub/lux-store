@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearPath Admin | Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --gold: #C9A84C; --gold-light: #E8D5A3; --gold-dark: #9B7B2E;
+  --navy: #0D1B2A; --navy-mid: #1A2E45; --navy-light: #243B55;
+  --sidebar: #0A1520; --white: #FFFFFF; --off-white: #F8F6F1;
+  --text-muted: #7A8FA8; --success: #27AE60; --danger: #E74C3C;
+  --warning: #F39C12; --info: #3498DB; --border: rgba(201,168,76,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:var(--navy); color:var(--white); display:flex; min-height:100vh; }
+
+/* LOGIN SCREEN */
+.login-screen { position:fixed; inset:0; background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%); z-index:9999; display:flex; align-items:center; justify-content:center; }
+.login-box { background:rgba(26,46,69,0.9); border:1px solid var(--border); border-radius:24px; padding:48px 44px; width:420px; text-align:center; }
+.login-box .logo-icon { width:60px; height:60px; background:var(--gold); border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 20px; }
+.login-box h2 { font-family:'Playfair Display',serif; font-size:26px; margin-bottom:8px; }
+.login-box p { font-size:14px; color:var(--text-muted); margin-bottom:32px; }
+.login-input { width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:14px 16px; color:var(--white); font-size:15px; font-family:'DM Sans',sans-serif; outline:none; margin-bottom:14px; transition:border-color .2s; }
+.login-input:focus { border-color:var(--gold); }
+.login-btn { width:100%; background:var(--gold); border:none; border-radius:10px; padding:15px; font-size:16px; font-weight:600; color:var(--navy); cursor:pointer; transition:all .2s; margin-top:4px; }
+.login-btn:hover { background:var(--gold-dark); color:var(--white); }
+.login-error { color:var(--danger); font-size:13px; margin-top:10px; display:none; }
+
+/* SIDEBAR */
+.sidebar { width:260px; min-height:100vh; background:var(--sidebar); border-right:1px solid var(--border); display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0; z-index:100; }
+.sidebar-logo { padding:24px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+.sidebar-logo-icon { width:38px; height:38px; background:var(--gold); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+.sidebar-logo-text { font-family:'Playfair Display',serif; font-size:18px; }
+.sidebar-logo-text span { color:var(--gold); }
+.sidebar-nav { flex:1; padding:16px 0; overflow-y:auto; }
+.nav-section { font-size:10px; font-weight:600; letter-spacing:2px; color:var(--text-muted); text-transform:uppercase; padding:12px 20px 6px; }
+.nav-item { display:flex; align-items:center; gap:12px; padding:11px 20px; cursor:pointer; color:var(--text-muted); font-size:14px; font-weight:500; transition:all .2s; border-left:3px solid transparent; }
+.nav-item:hover { color:var(--white); background:rgba(255,255,255,0.04); }
+.nav-item.active { color:var(--gold); background:rgba(201,168,76,0.08); border-left-color:var(--gold); }
+.nav-item i { width:18px; text-align:center; }
+.nav-badge { margin-left:auto; background:var(--danger); color:#fff; font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; }
+.sidebar-footer { padding:16px 20px; border-top:1px solid var(--border); }
+.admin-profile { display:flex; align-items:center; gap:10px; }
+.admin-avatar { width:36px; height:36px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:var(--navy); }
+.admin-info h5 { font-size:13px; font-weight:600; }
+.admin-info span { font-size:11px; color:var(--text-muted); }
+.logout-btn { margin-left:auto; background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:16px; transition:color .2s; }
+.logout-btn:hover { color:var(--danger); }
+
+/* MAIN */
+.main { margin-left:260px; flex:1; min-height:100vh; display:flex; flex-direction:column; }
+.topbar { padding:16px 32px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; background:rgba(13,27,42,0.8); backdrop-filter:blur(10px); position:sticky; top:0; z-index:50; }
+.topbar h1 { font-size:20px; font-weight:600; }
+.topbar-actions { display:flex; gap:12px; align-items:center; }
+.topbar-btn { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 14px; color:var(--text-muted); cursor:pointer; font-size:13px; display:flex; align-items:center; gap:8px; transition:all .2s; }
+.topbar-btn:hover { color:var(--white); border-color:var(--gold); }
+.content { padding:32px; flex:1; }
+
+/* PANELS */
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* METRICS GRID */
+.metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:32px; }
+.metric-card { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:24px; }
+.metric-card .metric-icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:16px; }
+.metric-card .metric-label { font-size:12px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+.metric-card .metric-value { font-family:'Playfair Display',serif; font-size:30px; color:var(--white); }
+.metric-card .metric-delta { font-size:12px; margin-top:6px; }
+.metric-card .metric-delta.up { color:var(--success); }
+.metric-card .metric-delta.down { color:var(--danger); }
+
+/* TABLE */
+.table-card { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+.table-header { padding:20px 24px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); }
+.table-header h3 { font-size:16px; font-weight:600; }
+.search-box { display:flex; gap:10px; align-items:center; }
+.search-input { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 14px; color:var(--white); font-size:13px; font-family:'DM Sans'; outline:none; width:220px; }
+.search-input:focus { border-color:var(--gold); }
+table { width:100%; border-collapse:collapse; }
+thead th { padding:12px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); border-bottom:1px solid var(--border); }
+tbody tr { transition:background .15s; cursor:pointer; }
+tbody tr:hover { background:rgba(255,255,255,0.03); }
+tbody td { padding:14px 16px; font-size:14px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.status-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:600; }
+.badge-new { background:rgba(52,152,219,0.15); color:#3498DB; }
+.badge-review { background:rgba(243,156,18,0.15); color:#F39C12; }
+.badge-active { background:rgba(39,174,96,0.15); color:var(--success); }
+.badge-complete { background:rgba(201,168,76,0.15); color:var(--gold); }
+.badge-cancelled { background:rgba(231,76,60,0.15); color:var(--danger); }
+
+/* CHARTS */
+.chart-grid { display:grid; grid-template-columns:2fr 1fr; gap:20px; margin-bottom:32px; }
+.chart-card { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:24px; }
+.chart-card h3 { font-size:15px; font-weight:600; margin-bottom:20px; }
+
+/* DEBT AUDIT TOOL */
+.audit-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.audit-debts { display:flex; flex-direction:column; gap:12px; }
+.debt-row { display:flex; gap:12px; align-items:center; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:12px; }
+.debt-row input { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 12px; color:var(--white); font-size:13px; font-family:'DM Sans'; outline:none; transition:border-color .2s; }
+.debt-row input:focus { border-color:var(--gold); }
+.debt-row .del-btn { background:rgba(231,76,60,0.1); border:none; border-radius:6px; width:32px; height:32px; color:var(--danger); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:14px; }
+.audit-summary { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:28px; }
+.summary-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:14px; }
+.summary-row:last-child { border-bottom:none; }
+.summary-row span:first-child { color:var(--text-muted); }
+.summary-row span:last-child { font-weight:600; color:var(--white); }
+.summary-highlight { background:rgba(201,168,76,0.08); border:1px solid var(--border); border-radius:10px; padding:16px; margin-top:16px; text-align:center; }
+.summary-highlight .big-num { font-family:'Playfair Display',serif; font-size:36px; color:var(--gold); }
+
+/* REVENUE CALCULATOR */
+.revenue-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.rev-card { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:28px; }
+.rev-card h3 { font-size:16px; font-weight:600; margin-bottom:20px; }
+.rev-input-group { margin-bottom:16px; }
+.rev-input-group label { display:block; font-size:12px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.rev-input-group input { width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px 14px; color:var(--white); font-size:14px; font-family:'DM Sans'; outline:none; }
+.rev-input-group input:focus { border-color:var(--gold); }
+
+/* CREDIT REPORT PANEL */
+.credit-form { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:28px; max-width:600px; }
+.credit-result { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:28px; margin-top:20px; display:none; }
+.score-circle { width:120px; height:120px; border-radius:50%; border:6px solid var(--gold); display:flex; align-items:center; justify-content:center; flex-direction:column; margin:0 auto 20px; }
+.score-num { font-family:'Playfair Display',serif; font-size:32px; color:var(--gold); }
+.score-label { font-size:11px; color:var(--text-muted); }
+
+/* STAFF PANEL */
+.staff-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.staff-card { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:24px; text-align:center; }
+.staff-avatar { width:60px; height:60px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; color:var(--navy); margin:0 auto 14px; }
+.staff-card h4 { font-size:15px; font-weight:600; margin-bottom:4px; }
+.staff-card .role { font-size:13px; color:var(--gold); margin-bottom:12px; }
+.staff-card .permissions { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:12px; }
+.perm-tag { background:rgba(255,255,255,0.06); border-radius:4px; padding:3px 8px; font-size:11px; color:var(--text-muted); }
+.perm-tag.active { background:rgba(201,168,76,0.1); color:var(--gold); }
+
+/* MESSAGES PANEL */
+.messages-layout { display:grid; grid-template-columns:300px 1fr; gap:0; background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; overflow:hidden; height:600px; }
+.msg-list { border-right:1px solid var(--border); overflow-y:auto; }
+.msg-search { padding:14px; border-bottom:1px solid var(--border); }
+.msg-search input { width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 12px; color:var(--white); font-size:13px; font-family:'DM Sans'; outline:none; }
+.msg-item { padding:14px 16px; cursor:pointer; transition:background .15s; border-bottom:1px solid rgba(255,255,255,0.04); }
+.msg-item:hover, .msg-item.active { background:rgba(201,168,76,0.08); }
+.msg-item .msg-name { font-size:14px; font-weight:600; margin-bottom:4px; display:flex; justify-content:space-between; }
+.msg-item .msg-preview { font-size:12px; color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.msg-item .msg-time { font-size:11px; color:var(--text-muted); }
+.msg-content { display:flex; flex-direction:column; }
+.msg-header { padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+.msg-body { flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; }
+.admin-msg { background:rgba(201,168,76,0.08); border:1px solid var(--border); border-radius:14px 14px 4px 14px; padding:10px 14px; max-width:70%; margin-left:auto; font-size:13px; }
+.client-msg { background:rgba(255,255,255,0.06); border-radius:14px 14px 14px 4px; padding:10px 14px; max-width:70%; font-size:13px; }
+.msg-footer { padding:14px 16px; border-top:1px solid var(--border); display:flex; gap:10px; }
+.msg-footer input { flex:1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px 14px; color:var(--white); font-size:13px; font-family:'DM Sans'; outline:none; }
+.msg-footer input:focus { border-color:var(--gold); }
+
+/* BUTTONS */
+.btn { padding:10px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:none; transition:all .2s; font-family:'DM Sans'; }
+.btn-gold { background:var(--gold); color:var(--navy); }
+.btn-gold:hover { background:var(--gold-dark); color:var(--white); }
+.btn-outline { background:transparent; border:1.5px solid var(--gold); color:var(--gold); }
+.btn-outline:hover { background:var(--gold); color:var(--navy); }
+.btn-sm { padding:7px 14px; font-size:12px; }
+.btn-danger { background:rgba(231,76,60,0.1); border:1px solid var(--danger); color:var(--danger); }
+
+/* MODAL */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:2000; display:none; align-items:center; justify-content:center; padding:20px; }
+.modal-overlay.active { display:flex; }
+.modal-box { background:var(--navy-mid); border:1px solid var(--border); border-radius:20px; width:600px; max-height:80vh; overflow-y:auto; }
+.modal-box-header { padding:24px 28px 20px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.modal-box-header h3 { font-size:18px; font-weight:600; }
+.modal-box-body { padding:28px; }
+.form-group { margin-bottom:16px; }
+.form-group label { display:block; font-size:12px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:7px; }
+.form-group input, .form-group select, .form-group textarea { width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:11px 14px; color:var(--white); font-size:14px; font-family:'DM Sans'; outline:none; transition:border-color .2s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); }
+.form-group select option { background:var(--navy-mid); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+/* TOAST */
+.toast { position:fixed; top:24px; right:24px; z-index:9999; background:var(--navy-light); border:1px solid var(--gold); border-radius:12px; padding:14px 18px; max-width:300px; display:flex; gap:10px; transform:translateX(120%); transition:transform .3s ease; }
+.toast.show { transform:translateX(0); }
+.toast i { color:var(--gold); }
+.toast-content h5 { font-size:13px; font-weight:600; }
+.toast-content p { font-size:12px; color:var(--text-muted); margin-top:2px; }
+
+/* SETTINGS PANEL */
+.settings-grid { display:grid; grid-template-columns:200px 1fr; gap:24px; }
+.settings-menu { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:8px 0; }
+.settings-menu-item { padding:10px 16px; cursor:pointer; font-size:14px; color:var(--text-muted); transition:all .2s; display:flex; align-items:center; gap:10px; }
+.settings-menu-item:hover, .settings-menu-item.active { color:var(--gold); background:rgba(201,168,76,0.08); }
+.settings-content { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:28px; }
+.settings-content h3 { font-size:16px; font-weight:600; margin-bottom:20px; }
+
+/* CONSOLIDATION TOOL */
+.consol-layout { display:grid; grid-template-columns:1fr 400px; gap:24px; }
+.consol-debts { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:24px; }
+.consol-result { background:var(--navy-mid); border:1px solid var(--border); border-radius:16px; padding:24px; }
+.institution-row { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:16px; margin-bottom:12px; }
+.institution-row h5 { font-size:14px; font-weight:600; margin-bottom:12px; color:var(--gold); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.3); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="logo-icon">💎</div>
+    <h2>Admin Portal</h2>
+    <p>ClearPath Financial — Secure Admin Access</p>
+    <input class="login-input" type="text" id="loginUser" placeholder="Username" value="admin">
+    <input class="login-input" type="password" id="loginPass" placeholder="Password">
+    <p style="font-size:12px;color:var(--text-muted);text-align:left;margin:-8px 0 14px">Default password: <strong style="color:var(--gold)">Admin@2025!</strong></p>
+    <button class="login-btn" onclick="doLogin()">Sign In <i class="fas fa-arrow-right" style="margin-left:8px"></i></button>
+    <div class="login-error" id="loginError">Incorrect username or password</div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:20px"><i class="fas fa-lock" style="color:var(--gold);margin-right:6px"></i>Protected by 256-bit SSL encryption</p>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar" style="display:none">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">💎</div>
+    <span class="sidebar-logo-text">Clear<span>Path</span></span>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="showPanel('dashboard',this)"><i class="fas fa-th-large"></i>Dashboard</div>
+    <div class="nav-item" onclick="showPanel('applications',this)"><i class="fas fa-file-alt"></i>Applications<span class="nav-badge" id="appBadge">0</span></div>
+    <div class="nav-item" onclick="showPanel('clients',this)"><i class="fas fa-users"></i>Clients</div>
+
+    <div class="nav-section">Tools</div>
+    <div class="nav-item" onclick="showPanel('debtaudit',this)"><i class="fas fa-calculator"></i>Debt Audit Tool</div>
+    <div class="nav-item" onclick="showPanel('consolidation',this)"><i class="fas fa-compress-arrows-alt"></i>Debt Consolidation</div>
+    <div class="nav-item" onclick="showPanel('creditreport',this)"><i class="fas fa-chart-line"></i>Credit Reports</div>
+    <div class="nav-item" onclick="showPanel('revenue',this)"><i class="fas fa-coins"></i>Revenue Calculator</div>
+
+    <div class="nav-section">Communication</div>
+    <div class="nav-item" onclick="showPanel('messages',this)"><i class="fas fa-comments"></i>Messages<span class="nav-badge" id="msgBadge">0</span></div>
+    <div class="nav-item" onclick="showPanel('whatsapp',this)"><i class="fab fa-whatsapp"></i>WhatsApp</div>
+    <div class="nav-item" onclick="showPanel('email',this)"><i class="fas fa-envelope"></i>Email</div>
+
+    <div class="nav-section">Admin</div>
+    <div class="nav-item" onclick="showPanel('staff',this)"><i class="fas fa-user-shield"></i>Staff & Access</div>
+    <div class="nav-item" onclick="showPanel('institutions',this)"><i class="fas fa-university"></i>Institutions</div>
+    <div class="nav-item" onclick="showPanel('settings',this)"><i class="fas fa-cog"></i>Settings</div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="admin-profile">
+      <div class="admin-avatar" id="adminAvatarSidebar">A</div>
+      <div class="admin-info"><h5 id="adminNameSidebar">Admin</h5><span>Super Admin</span></div>
+      <button class="logout-btn" onclick="doLogout()" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="mainContent" style="display:none">
+  <div class="topbar">
+    <h1 id="panelTitle">Dashboard</h1>
+    <div class="topbar-actions">
+      <button class="topbar-btn" onclick="loadApplications()"><i class="fas fa-sync"></i>Refresh</button>
+      <button class="topbar-btn" onclick="showPanel('applications',null)"><i class="fas fa-plus"></i>New Application</button>
+      <button class="topbar-btn" style="color:var(--gold)"><i class="fas fa-bell"></i><span id="notifCount">0</span></button>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(52,152,219,0.12);color:#3498DB"><i class="fas fa-file-alt"></i></div>
+          <div class="metric-label">Total Applications</div>
+          <div class="metric-value" id="m_total">0</div>
+          <div class="metric-delta up" id="m_total_d">— new today</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(39,174,96,0.12);color:var(--success)"><i class="fas fa-check-circle"></i></div>
+          <div class="metric-label">Active Clients</div>
+          <div class="metric-value" id="m_active">0</div>
+          <div class="metric-delta up">↑ This month</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(201,168,76,0.12);color:var(--gold)"><i class="fas fa-coins"></i></div>
+          <div class="metric-label">Monthly Revenue</div>
+          <div class="metric-value" id="m_revenue">R0</div>
+          <div class="metric-delta up" id="m_rev_d">R0 collected</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon" style="background:rgba(243,156,18,0.12);color:var(--warning)"><i class="fas fa-clock"></i></div>
+          <div class="metric-label">Pending Review</div>
+          <div class="metric-value" id="m_pending">0</div>
+          <div class="metric-delta down">Requires action</div>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Applications & Revenue (6 months)</h3>
+          <canvas id="mainChart" height="220"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Service Distribution</h3>
+          <canvas id="pieChart" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Recent Applications</h3>
+          <div class="search-box">
+            <input class="search-input" type="text" placeholder="Search..." id="dashSearch" oninput="filterDashTable()">
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Ref #</th><th>Client Name</th><th>Service</th><th>Date</th><th>Package</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="dashTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="panel" id="panel-applications">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>All Applications</h3>
+          <div class="search-box">
+            <select id="appFilter" onchange="filterApplications()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--white);font-size:13px;font-family:'DM Sans';outline:none">
+              <option value="">All Status</option>
+              <option>New</option><option>In Review</option><option>Active</option><option>Complete</option><option>Cancelled</option>
+            </select>
+            <input class="search-input" type="text" placeholder="Search client..." id="appSearch" oninput="filterApplications()">
+            <button class="btn btn-sm btn-gold" onclick="exportCSV()"><i class="fas fa-download" style="margin-right:6px"></i>Export</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Ref #</th><th>Client</th><th>Email</th><th>Phone</th><th>Package</th><th>Bank</th><th>Date</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="appTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="panel" id="panel-clients">
+      <div class="table-card">
+        <div class="table-header">
+          <h3>Client Registry</h3>
+          <div class="search-box">
+            <input class="search-input" type="text" placeholder="Search..." id="clientSearch" oninput="filterClients()">
+            <button class="btn btn-sm btn-gold" onclick="showAddClient()"><i class="fas fa-plus" style="margin-right:6px"></i>Add Client</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Name</th><th>Email</th><th>Phone</th><th>Income</th><th>Bank</th><th>Applications</th><th>Status</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="clientTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEBT AUDIT TOOL -->
+    <div class="panel" id="panel-debtaudit">
+      <div style="margin-bottom:24px;display:flex;justify-content:space-between;align-items:center">
+        <div><h2 style="font-size:20px;font-weight:600">Client Debt Audit Tool</h2><p style="color:var(--text-muted);font-size:14px;margin-top:4px">Enter all client debts to calculate savings and consolidation potential</p></div>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-outline btn-sm" onclick="clearAudit()"><i class="fas fa-redo" style="margin-right:6px"></i>Clear</button>
+          <button class="btn btn-gold btn-sm" onclick="generateAuditReport()"><i class="fas fa-file-download" style="margin-right:6px"></i>Generate Report</button>
+        </div>
+      </div>
+      <div class="audit-grid">
+        <div>
+          <div class="table-card" style="padding:24px;margin-bottom:20px">
+            <h3 style="font-size:15px;margin-bottom:16px">Client Income Details</h3>
+            <div class="form-row">
+              <div class="form-group"><label>Client Name</label><input type="text" id="audit_name" placeholder="Full Name"></div>
+              <div class="form-group"><label>Monthly Gross Income</label><input type="number" id="audit_income" placeholder="25000" oninput="calcAudit()"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Monthly Net Income</label><input type="number" id="audit_net" placeholder="18000" oninput="calcAudit()"></div>
+              <div class="form-group"><label>Monthly Living Expenses</label><input type="number" id="audit_living" placeholder="8000" oninput="calcAudit()"></div>
+            </div>
+          </div>
+          <div class="table-card" style="padding:24px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+              <h3 style="font-size:15px">Debt Entries</h3>
+              <button class="btn btn-sm btn-gold" onclick="addDebtRow()"><i class="fas fa-plus" style="margin-right:6px"></i>Add Debt</button>
+            </div>
+            <div id="debtRows">
+              <div style="display:grid;grid-template-columns:1fr 80px 80px 90px 90px 36px;gap:8px;margin-bottom:8px;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;padding:0 4px">
+                <span>Creditor Name</span><span>Balance</span><span>Rate %</span><span>Monthly</span><span>Remaining</span><span></span>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="addDebtRow()" style="width:100%;margin-top:12px"><i class="fas fa-plus" style="margin-right:6px"></i>Add Another Debt</button>
+          </div>
+        </div>
+        <div class="audit-summary">
+          <h3 style="font-size:15px;margin-bottom:20px;color:var(--gold)"><i class="fas fa-chart-pie" style="margin-right:8px"></i>Audit Summary</h3>
+          <div class="summary-row"><span>Total Debt Balance</span><span id="sum_total_debt" style="color:var(--danger)">R0</span></div>
+          <div class="summary-row"><span>Monthly Commitments</span><span id="sum_monthly">R0</span></div>
+          <div class="summary-row"><span>Net Income</span><span id="sum_net_income">R0</span></div>
+          <div class="summary-row"><span>Living Expenses</span><span id="sum_living">R0</span></div>
+          <div class="summary-row"><span>Debt-to-Income Ratio</span><span id="sum_dti">0%</span></div>
+          <div class="summary-row"><span>Available After Debt</span><span id="sum_available">R0</span></div>
+          <div class="summary-highlight">
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">POTENTIAL MONTHLY SAVING</p>
+            <div class="big-num" id="sum_saving">R0</div>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:8px">via consolidation @ reduced rate</p>
+          </div>
+          <div style="margin-top:16px;background:rgba(255,255,255,0.04);border-radius:10px;padding:16px">
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">CONSOLIDATION LOAN AMOUNT</p>
+            <div style="font-family:'Playfair Display',serif;font-size:24px;color:var(--white)" id="sum_consol_amount">R0</div>
+          </div>
+          <div style="margin-top:16px">
+            <div class="form-row">
+              <div>
+                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:5px">CONSOL. RATE %</label>
+                <input type="number" id="consol_rate" value="18" min="0" max="30" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;color:var(--white);font-size:13px;font-family:'DM Sans';outline:none" oninput="calcAudit()">
+              </div>
+              <div>
+                <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:5px">TERM (MONTHS)</label>
+                <input type="number" id="consol_term" value="60" min="12" max="84" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px;color:var(--white);font-size:13px;font-family:'DM Sans';outline:none" oninput="calcAudit()">
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">AFFORDABILITY RATING</p>
+            <div id="affordability_bar" style="background:rgba(255,255,255,0.08);border-radius:6px;height:10px;overflow:hidden"><div id="afford_fill" style="height:100%;background:var(--success);width:0;transition:width .6s ease;border-radius:6px"></div></div>
+            <p style="font-size:12px;color:var(--text-muted);margin-top:6px" id="afford_label">—</p>
+          </div>
+          <button class="btn btn-gold" style="width:100%;margin-top:20px" onclick="sendToConsolidation()"><i class="fas fa-paper-plane" style="margin-right:8px"></i>Send to Consolidation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEBT CONSOLIDATION -->
+    <div class="panel" id="panel-consolidation">
+      <div class="consol-layout">
+        <div class="consol-debts">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+            <h3 style="font-size:16px;font-weight:600">Consolidation Application Builder</h3>
+            <button class="btn btn-gold btn-sm" onclick="submitConsolidation()"><i class="fas fa-paper-plane" style="margin-right:6px"></i>Submit to Institutions</button>
+          </div>
+          <div class="form-row" style="margin-bottom:16px">
+            <div class="form-group"><label>Client Name</label><input type="text" id="c_name" placeholder="Full name"></div>
+            <div class="form-group"><label>ID Number</label><input type="text" id="c_id" placeholder="SA ID"></div>
+          </div>
+          <div class="form-row" style="margin-bottom:16px">
+            <div class="form-group"><label>Monthly Income (Gross)</label><input type="number" id="c_income" placeholder="25000" oninput="calcConsol()"></div>
+            <div class="form-group"><label>Total Loan Required</label><input type="number" id="c_loan_amount" placeholder="80000" oninput="calcConsol()"></div>
+          </div>
+          <div style="margin-bottom:20px">
+            <label style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:12px;font-weight:600">Debts to Consolidate</label>
+            <div id="consolDebtList"></div>
+            <button class="btn btn-outline btn-sm" onclick="addConsolDebt()" style="margin-top:8px"><i class="fas fa-plus" style="margin-right:6px"></i>Add Debt</button>
+          </div>
+          <div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:16px">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px">Financial Institutions</h4>
+            <div style="display:flex;flex-direction:column;gap:8px" id="institutionChecklist">
+              <label style="display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="ABSA" style="accent-color:var(--gold)">ABSA Bank — Personal Loans</label>
+              <label style="display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="STD" style="accent-color:var(--gold)">Standard Bank — Consolidation</label>
+              <label style="display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="FNB" style="accent-color:var(--gold)">FNB — Personal Lending</label>
+              <label style="display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="NED" style="accent-color:var(--gold)">Nedbank — Loans</label>
+              <label style="display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="CAP" style="accent-color:var(--gold)">Capitec Bank — Credit</label>
+              <label style="display:flex;gap:10px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" value="AFR" style="accent-color:var(--gold)">African Bank</label>
+            </div>
+          </div>
+        </div>
+        <div class="consol-result">
+          <h3 style="font-size:15px;font-weight:600;color:var(--gold);margin-bottom:20px"><i class="fas fa-calculator" style="margin-right:8px"></i>Consolidation Summary</h3>
+          <div class="summary-row"><span>Total Loan Amount</span><span id="c_sum_loan" style="color:var(--gold)">R0</span></div>
+          <div class="summary-row"><span>Gross Income</span><span id="c_sum_income">R0</span></div>
+          <div class="summary-row"><span>Affordability (30%)</span><span id="c_sum_afford">R0</span></div>
+          <div style="margin:20px 0;height:1px;background:var(--border)"></div>
+          <h4 style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text-muted)">REPAYMENT SCENARIOS</h4>
+          <div id="consolScenarios"></div>
+          <div style="margin-top:20px;background:rgba(255,255,255,0.04);border-radius:10px;padding:14px">
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px">SUBMISSION STATUS</p>
+            <div id="consolStatus" style="font-size:14px;color:var(--text-muted)">No submission yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREDIT REPORTS -->
+    <div class="panel" id="panel-creditreport">
+      <div class="credit-form">
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:6px">Pull Client Credit Report</h3>
+        <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Integrated with TransUnion / Experian (simulation)</p>
+        <div class="form-row">
+          <div class="form-group"><label>Client ID Number</label><input type="text" id="cr_id" placeholder="8001015009087" maxlength="13"></div>
+          <div class="form-group"><label>Client Full Name</label><input type="text" id="cr_name" placeholder="Full name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Date of Birth</label><input type="date" id="cr_dob"></div>
+          <div class="form-group"><label>Bureau</label>
+            <select id="cr_bureau" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none">
+              <option>TransUnion</option><option>Experian</option><option>Compuscan</option><option>XDS</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-gold" onclick="pullCreditReport()"><i class="fas fa-search" style="margin-right:8px"></i>Pull Credit Report</button>
+      </div>
+      <div class="credit-result" id="creditResult">
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:20px">Credit Report — <span id="cr_result_name"></span></h3>
+        <div style="display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:start">
+          <div>
+            <div class="score-circle" id="scoreCircle">
+              <div class="score-num" id="cr_score">0</div>
+              <div class="score-label">Credit Score</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:13px;font-weight:600;margin-bottom:4px" id="cr_rating">—</div>
+              <div style="font-size:12px;color:var(--text-muted)">Rating</div>
+            </div>
+          </div>
+          <div>
+            <div class="summary-row"><span>Accounts in Good Standing</span><span id="cr_good" style="color:var(--success)">—</span></div>
+            <div class="summary-row"><span>Accounts in Default</span><span id="cr_default" style="color:var(--danger)">—</span></div>
+            <div class="summary-row"><span>Judgements</span><span id="cr_judgements">—</span></div>
+            <div class="summary-row"><span>Enquiries (6 months)</span><span id="cr_enquiries">—</span></div>
+            <div class="summary-row"><span>Total Outstanding Debt</span><span id="cr_debt_total" style="color:var(--warning)">—</span></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;background:rgba(255,255,255,0.04);border-radius:10px;padding:16px">
+          <h4 style="font-size:13px;margin-bottom:10px;color:var(--gold)">Accounts Detail</h4>
+          <div id="cr_accounts"></div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+          <button class="btn btn-gold btn-sm" onclick="downloadCreditReport()"><i class="fas fa-download" style="margin-right:6px"></i>Download Report</button>
+          <button class="btn btn-outline btn-sm" onclick="sendToAudit()"><i class="fas fa-calculator" style="margin-right:6px"></i>Send to Debt Audit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVENUE CALCULATOR -->
+    <div class="panel" id="panel-revenue">
+      <div class="revenue-grid">
+        <div class="rev-card">
+          <h3>Revenue Inputs</h3>
+          <div class="rev-input-group"><label>Basic Audit Clients (#)</label><input type="number" id="rev_basic" value="0" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Basic Audit Price (R)</label><input type="number" id="rev_basic_price" value="499" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Full Optimization Clients (#)</label><input type="number" id="rev_full" value="0" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Full Optimization Price (R)</label><input type="number" id="rev_full_price" value="999" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Debt Consolidation Cases (#)</label><input type="number" id="rev_consol" value="0" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Avg Consolidation Fee (R)</label><input type="number" id="rev_consol_fee" value="2500" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Performance Savings % Earned</label><input type="number" id="rev_perf_pct" value="10" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Total Client Savings Processed (R)</label><input type="number" id="rev_savings" value="0" oninput="calcRevenue()"></div>
+          <div class="rev-input-group"><label>Operational Costs (R/month)</label><input type="number" id="rev_costs" value="5000" oninput="calcRevenue()"></div>
+        </div>
+        <div class="rev-card">
+          <h3>Revenue Summary</h3>
+          <div class="metrics-grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+            <div class="metric-card" style="padding:16px">
+              <div class="metric-label" style="font-size:11px">Basic Revenue</div>
+              <div class="metric-value" style="font-size:22px" id="rv_basic">R0</div>
+            </div>
+            <div class="metric-card" style="padding:16px">
+              <div class="metric-label" style="font-size:11px">Full Opt. Revenue</div>
+              <div class="metric-value" style="font-size:22px" id="rv_full">R0</div>
+            </div>
+            <div class="metric-card" style="padding:16px">
+              <div class="metric-label" style="font-size:11px">Consolidation</div>
+              <div class="metric-value" style="font-size:22px" id="rv_consol">R0</div>
+            </div>
+            <div class="metric-card" style="padding:16px">
+              <div class="metric-label" style="font-size:11px">Performance %</div>
+              <div class="metric-value" style="font-size:22px" id="rv_perf">R0</div>
+            </div>
+          </div>
+          <div class="summary-row"><span>Gross Revenue</span><span id="rv_gross" style="color:var(--success)">R0</span></div>
+          <div class="summary-row"><span>Operational Costs</span><span id="rv_costs_out" style="color:var(--danger)">R0</span></div>
+          <div class="summary-row"><span style="font-weight:600;color:var(--white)">Net Profit</span><span id="rv_net" style="color:var(--gold);font-family:'Playfair Display',serif;font-size:22px">R0</span></div>
+          <div style="margin-top:20px">
+            <canvas id="revenueChart" height="160"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="panel" id="panel-messages">
+      <div class="messages-layout">
+        <div class="msg-list">
+          <div class="msg-search"><input type="text" placeholder="Search messages..." oninput="filterMessages(this.value)"></div>
+          <div id="msgList"></div>
+        </div>
+        <div class="msg-content">
+          <div class="msg-header" id="msgHeader">
+            <div class="admin-avatar" style="width:36px;height:36px;font-size:13px">?</div>
+            <div><h4>Select a conversation</h4><p style="font-size:12px;color:var(--text-muted)">Choose from the left</p></div>
+          </div>
+          <div class="msg-body" id="msgBody"></div>
+          <div class="msg-footer">
+            <input type="text" id="adminMsgInput" placeholder="Type a reply..." onkeypress="if(event.key==='Enter')sendAdminMsg()">
+            <button class="btn btn-sm btn-gold" onclick="sendAdminMsg()"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHATSAPP -->
+    <div class="panel" id="panel-whatsapp">
+      <div style="max-width:600px">
+        <div style="background:var(--navy-mid);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:20px">
+          <h3 style="font-size:16px;font-weight:600;margin-bottom:6px"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:10px"></i>WhatsApp Business Integration</h3>
+          <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Connect your WhatsApp Business number to receive and reply to client messages directly.</p>
+          <div class="form-group"><label>WhatsApp Business Number</label><input type="text" value="+27 81 234 5678" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+          <div class="form-group"><label>API Key (WhatsApp Business Cloud API)</label><input type="text" placeholder="Enter your API key from Meta Business..." style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+          <button class="btn btn-gold" onclick="showToast('WhatsApp','Integration settings saved!')"><i class="fab fa-whatsapp" style="margin-right:8px"></i>Save & Connect</button>
+        </div>
+        <div style="background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.2);border-radius:12px;padding:16px">
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.7"><strong style="color:#25D366">Integration Guide:</strong> To enable real WhatsApp integration, sign up at Meta for Developers (developers.facebook.com), create a WhatsApp Business App, and paste your API credentials above. All client messages will then appear in your Messages panel automatically.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="panel" id="panel-email">
+      <div style="max-width:600px">
+        <div style="background:var(--navy-mid);border:1px solid var(--border);border-radius:16px;padding:28px">
+          <h3 style="font-size:16px;font-weight:600;margin-bottom:20px"><i class="fas fa-envelope" style="color:var(--gold);margin-right:10px"></i>Email Configuration</h3>
+          <div class="form-group"><label>From Email Address</label><input type="email" value="info@clearpath.co.za" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+          <div class="form-group"><label>SMTP Host</label><input type="text" placeholder="smtp.gmail.com or your host" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+          <div class="form-row">
+            <div class="form-group"><label>SMTP Port</label><input type="text" value="587" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+            <div class="form-group"><label>SMTP Password</label><input type="password" placeholder="••••••••" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+          </div>
+          <div style="margin-top:16px">
+            <h4 style="font-size:14px;font-weight:600;margin-bottom:12px">Send Test / Compose Email</h4>
+            <div class="form-group"><label>To</label><input type="email" id="email_to" placeholder="client@email.com" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="email_subject" placeholder="Your application update" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"></div>
+            <div class="form-group"><label>Message</label><textarea id="email_body" rows="4" placeholder="Type your message..." style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none;resize:vertical"></textarea></div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-gold" onclick="showToast('Email','Email sent successfully!')"><i class="fas fa-paper-plane" style="margin-right:6px"></i>Send Email</button>
+              <button class="btn btn-outline" onclick="showToast('Email','SMTP settings saved!')">Save Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAFF -->
+    <div class="panel" id="panel-staff">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 style="font-size:20px">Staff Management</h2>
+        <button class="btn btn-gold" onclick="showAddStaff()"><i class="fas fa-plus" style="margin-right:8px"></i>Add Staff Member</button>
+      </div>
+      <div class="staff-grid" id="staffGrid"></div>
+    </div>
+
+    <!-- INSTITUTIONS -->
+    <div class="panel" id="panel-institutions">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 style="font-size:20px">Financial Institutions</h2>
+        <button class="btn btn-gold" onclick="showAddInstitution()"><i class="fas fa-plus" style="margin-right:8px"></i>Add Institution</button>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead><tr><th>Institution</th><th>Type</th><th>Contact</th><th>Products</th><th>Rate Range</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="institutionsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="settings-grid">
+        <div class="settings-menu">
+          <div class="settings-menu-item active" onclick="showSettingsTab('profile',this)"><i class="fas fa-user" style="width:16px"></i>Profile</div>
+          <div class="settings-menu-item" onclick="showSettingsTab('security',this)"><i class="fas fa-lock" style="width:16px"></i>Security</div>
+          <div class="settings-menu-item" onclick="showSettingsTab('business',this)"><i class="fas fa-building" style="width:16px"></i>Business Info</div>
+          <div class="settings-menu-item" onclick="showSettingsTab('payments',this)"><i class="fas fa-credit-card" style="width:16px"></i>Payments</div>
+          <div class="settings-menu-item" onclick="showSettingsTab('notifications',this)"><i class="fas fa-bell" style="width:16px"></i>Notifications</div>
+        </div>
+        <div class="settings-content" id="settingsContent"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- APPLICATION DETAIL MODAL -->
+<div class="modal-overlay" id="appDetailModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h3>Application Details</h3>
+      <button onclick="document.getElementById('appDetailModal').classList.remove('active')" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-box-body" id="appDetailBody"></div>
+  </div>
+</div>
+
+<!-- ADD STAFF MODAL -->
+<div class="modal-overlay" id="staffModal">
+  <div class="modal-box">
+    <div class="modal-box-header"><h3>Add Staff Member</h3><button onclick="document.getElementById('staffModal').classList.remove('active')" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px"><i class="fas fa-times"></i></button></div>
+    <div class="modal-box-body">
+      <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" id="st_first"></div><div class="form-group"><label>Last Name</label><input type="text" id="st_last"></div></div>
+      <div class="form-group"><label>Email</label><input type="email" id="st_email"></div>
+      <div class="form-group"><label>Role</label>
+        <select id="st_role" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none">
+          <option>Case Manager</option><option>Consultant</option><option>Admin</option><option>Read Only</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Permissions</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px" id="permGrid">
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" style="accent-color:var(--gold)">View Applications</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" style="accent-color:var(--gold)">Edit Applications</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" style="accent-color:var(--gold)">Debt Audit Tool</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" style="accent-color:var(--gold)">Credit Reports</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" style="accent-color:var(--gold)">Messages</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--text-muted);cursor:pointer"><input type="checkbox" style="accent-color:var(--gold)">Revenue Data</label>
+        </div>
+      </div>
+      <div class="form-group"><label>Temporary Password</label><input type="text" id="st_pass" placeholder="Set initial password"></div>
+      <button class="btn btn-gold" style="width:100%" onclick="saveStaff()">Add Staff Member</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="adminToast"><i class="fas fa-check-circle"></i><div class="toast-content"><h5 id="aToastTitle"></h5><p id="aToastMsg"></p></div></div>
+
+<script>
+// --- AUTH ---
+const ADMIN_CREDS = { username: 'admin', password: 'Admin@2025!' };
+
+function doLogin() {
+  const u = document.getElementById('loginUser').value;
+  const p = document.getElementById('loginPass').value;
+  const saved = JSON.parse(localStorage.getItem('cp_admin_pass') || 'null');
+  const pwd = saved || ADMIN_CREDS.password;
+  if (u === ADMIN_CREDS.username && p === pwd) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('sidebar').style.display = 'flex';
+    document.getElementById('mainContent').style.display = 'flex';
+    loadAllData();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+document.getElementById('loginPass').addEventListener('keypress', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('sidebar').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('loginPass').value = '';
+}
+
+// --- NAVIGATION ---
+function showPanel(name, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  document.getElementById('panelTitle').textContent = el ? el.textContent.trim().replace(/\d+$/,'') : name;
+  if (name === 'dashboard') refreshDashboard();
+  if (name === 'applications') loadApplications();
+  if (name === 'clients') loadClients();
+  if (name === 'revenue') calcRevenue();
+  if (name === 'staff') renderStaff();
+  if (name === 'messages') loadMessages();
+  if (name === 'institutions') loadInstitutions();
+  if (name === 'settings') loadSettings();
+  if (name === 'consolidation') { initConsolDebts(); calcConsol(); }
+  if (name === 'debtaudit') initDebtAudit();
+}
+
+// --- DATA ---
+function getApps() { return JSON.parse(localStorage.getItem('cp_applications') || '[]'); }
+function saveApps(apps) { localStorage.setItem('cp_applications', JSON.stringify(apps)); }
+function getStaff() { return JSON.parse(localStorage.getItem('cp_staff') || '[]'); }
+function saveStaff_data(staff) { localStorage.setItem('cp_staff', JSON.stringify(staff)); }
+
+function loadAllData() {
+  refreshDashboard();
+  loadApplications();
+  updateBadges();
+  initDebtAudit();
+  initConsolDebts();
+  calcConsol();
+  calcRevenue();
+  renderStaff();
+  loadInstitutions();
+  loadSettings('profile');
+  loadMessages();
+}
+
+// --- DASHBOARD ---
+function refreshDashboard() {
+  const apps = getApps();
+  document.getElementById('m_total').textContent = apps.length;
+  const today = new Date().toDateString();
+  const todayApps = apps.filter(a => new Date(a.date).toDateString() === today);
+  document.getElementById('m_total_d').textContent = `↑ ${todayApps.length} new today`;
+  const active = apps.filter(a => a.status === 'Active' || a.status === 'New').length;
+  document.getElementById('m_active').textContent = active;
+  const pending = apps.filter(a => a.status === 'New').length;
+  document.getElementById('m_pending').textContent = pending;
+  document.getElementById('notifCount').textContent = pending;
+
+  // Revenue estimate
+  let rev = 0;
+  apps.forEach(a => {
+    if (a.package && a.package.includes('499')) rev += 499;
+    else if (a.package && a.package.includes('999')) rev += 999;
+    else rev += 2500;
+  });
+  document.getElementById('m_revenue').textContent = 'R' + rev.toLocaleString();
+  document.getElementById('m_rev_d').textContent = 'R' + (rev * 0.7).toFixed(0) + ' collected';
+
+  renderDashTable(apps.slice(-10).reverse());
+  renderCharts(apps);
+}
+
+function renderDashTable(apps) {
+  const tb = document.getElementById('dashTableBody');
+  tb.innerHTML = apps.map(a => `
+    <tr onclick="viewApp('${a.ref}')">
+      <td style="color:var(--gold);font-weight:600">${a.ref||'—'}</td>
+      <td>${a.name||'—'}</td>
+      <td style="color:var(--text-muted);font-size:12px">${(a.package||'').split('—')[0].split('(')[0].trim()}</td>
+      <td style="color:var(--text-muted);font-size:12px">${a.date ? new Date(a.date).toLocaleDateString('en-ZA') : '—'}</td>
+      <td style="font-size:12px">${(a.package||'—').split('—')[1]||''}</td>
+      <td><span class="status-badge badge-${(a.status||'new').toLowerCase().replace(' ','-')}">${a.status||'New'}</span></td>
+      <td><button class="btn btn-sm btn-outline" onclick="event.stopPropagation();updateStatus('${a.ref}')">Update</button></td>
+    </tr>`).join('');
+  if (!apps.length) tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted)">No applications yet. <a href="index.html" style="color:var(--gold)">View the website</a> to receive applications.</td></tr>';
+}
+
+function renderCharts(apps) {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const currentMonth = new Date().getMonth();
+  const labels = [];
+  const appData = [];
+  const revData = [];
+  for (let i = 5; i >= 0; i--) {
+    const m = (currentMonth - i + 12) % 12;
+    labels.push(months[m]);
+    const count = apps.filter(a => new Date(a.date).getMonth() === m).length || Math.floor(Math.random() * 12 + 3);
+    appData.push(count);
+    revData.push(count * 750);
+  }
+
+  const ctx1 = document.getElementById('mainChart').getContext('2d');
+  if (window._mainChart) window._mainChart.destroy();
+  window._mainChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Applications', data: appData, backgroundColor: 'rgba(201,168,76,0.3)', borderColor: '#C9A84C', borderWidth: 1.5, borderRadius: 4 },
+        { label: 'Revenue (R)', data: revData, type: 'line', borderColor: '#27AE60', backgroundColor: 'rgba(39,174,96,0.1)', borderWidth: 2, tension: 0.4, pointBackgroundColor: '#27AE60', yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#7A8FA8', font: { size: 12 } } } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7A8FA8' } },
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#7A8FA8' } },
+        y1: { position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#7A8FA8' } }
+      }
+    }
+  });
+
+  const services = ['Subscription','Debt Consol.','Insurance','Banking','Telecom','Credit'];
+  const sData = services.map(() => Math.floor(Math.random() * 30 + 5));
+  const ctx2 = document.getElementById('pieChart').getContext('2d');
+  if (window._pieChart) window._pieChart.destroy();
+  window._pieChart = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: services,
+      datasets: [{ data: sData, backgroundColor: ['#C9A84C','#27AE60','#3498DB','#E74C3C','#F39C12','#9B59B6'], borderWidth: 0, hoverOffset: 8 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { color: '#7A8FA8', font: { size: 11 }, padding: 10 } } }
+    }
+  });
+}
+
+// --- APPLICATIONS ---
+function loadApplications() {
+  filterApplications();
+  updateBadges();
+}
+
+function filterApplications() {
+  const apps = getApps();
+  const search = (document.getElementById('appSearch')?.value || '').toLowerCase();
+  const status = document.getElementById('appFilter')?.value || '';
+  const filtered = apps.filter(a =>
+    (!search || (a.name||'').toLowerCase().includes(search) || (a.email||'').toLowerCase().includes(search) || (a.ref||'').toLowerCase().includes(search)) &&
+    (!status || a.status === status)
+  );
+  const tb = document.getElementById('appTableBody');
+  if (!tb) return;
+  tb.innerHTML = filtered.map(a => `
+    <tr onclick="viewApp('${a.ref}')">
+      <td style="color:var(--gold);font-weight:600;font-size:12px">${a.ref||'—'}</td>
+      <td><strong>${a.name||'—'}</strong></td>
+      <td style="color:var(--text-muted);font-size:13px">${a.email||'—'}</td>
+      <td style="font-size:13px">${a.phone||'—'}</td>
+      <td style="font-size:12px">${(a.package||'—').split('—')[0].trim()}</td>
+      <td style="font-size:12px">${a.bank||'—'}</td>
+      <td style="font-size:12px;color:var(--text-muted)">${a.date ? new Date(a.date).toLocaleDateString('en-ZA') : '—'}</td>
+      <td><span class="status-badge badge-${(a.status||'new').toLowerCase().replace(/ /g,'-')}">${a.status||'New'}</span></td>
+      <td style="display:flex;gap:6px">
+        <button class="btn btn-sm btn-outline" onclick="event.stopPropagation();updateStatus('${a.ref}')">Status</button>
+        <button class="btn btn-sm btn-danger" onclick="event.stopPropagation();deleteApp('${a.ref}')"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>`).join('');
+  if (!filtered.length) tb.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text-muted)">No applications found.</td></tr>';
+}
+
+function filterDashTable() {
+  const s = document.getElementById('dashSearch').value.toLowerCase();
+  const apps = getApps().filter(a => !s || (a.name||'').toLowerCase().includes(s));
+  renderDashTable(apps.slice(-10).reverse());
+}
+
+function viewApp(ref) {
+  const apps = getApps();
+  const app = apps.find(a => a.ref === ref);
+  if (!app) return;
+  const statusColors = { New: 'info', 'In Review': 'warning', Active: 'success', Complete: 'complete', Cancelled: 'danger' };
+  document.getElementById('appDetailBody').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Client Name</label><strong>${app.name||'—'}</strong></div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Reference</label><span style="color:var(--gold)">${app.ref||'—'}</span></div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Email</label>${app.email||'—'}</div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Phone</label>${app.phone||'—'}</div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Monthly Income</label>R${Number(app.income||0).toLocaleString()}</div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Bank</label>${app.bank||'—'}</div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Package</label>${app.package||'—'}</div>
+      <div><label style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px">Date Applied</label>${app.date ? new Date(app.date).toLocaleDateString('en-ZA') : '—'}</div>
+    </div>
+    ${app.notes ? `<div style="background:rgba(255,255,255,0.04);border-radius:10px;padding:14px;margin-bottom:16px"><p style="font-size:13px;color:var(--text-muted)">${app.notes}</p></div>` : ''}
+    <div><label style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Update Status</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${['New','In Review','Active','Complete','Cancelled'].map(s =>
+        `<button class="btn btn-sm ${s===app.status?'btn-gold':'btn-outline'}" onclick="setAppStatus('${ref}','${s}')">${s}</button>`
+      ).join('')}
+    </div></div>
+    <div style="margin-top:20px;display:flex;gap:10px">
+      <button class="btn btn-outline btn-sm" onclick="showPanel('debtaudit',null);document.getElementById('audit_name').value='${app.name||''}'">Send to Debt Audit</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('appDetailModal').classList.remove('active')">Close</button>
+    </div>`;
+  document.getElementById('appDetailModal').classList.add('active');
+}
+
+function setAppStatus(ref, status) {
+  const apps = getApps();
+  const app = apps.find(a => a.ref === ref);
+  if (app) { app.status = status; saveApps(apps); viewApp(ref); loadApplications(); refreshDashboard(); showToast('Status Updated', `${ref} → ${status}`); }
+}
+
+function updateStatus(ref) { viewApp(ref); }
+
+function deleteApp(ref) {
+  if (!confirm('Delete application ' + ref + '?')) return;
+  const apps = getApps().filter(a => a.ref !== ref);
+  saveApps(apps); loadApplications(); refreshDashboard(); showToast('Deleted', 'Application removed.');
+}
+
+function updateBadges() {
+  const apps = getApps();
+  const newCount = apps.filter(a => a.status === 'New').length;
+  document.getElementById('appBadge').textContent = newCount;
+  document.getElementById('notifCount').textContent = newCount;
+  const chats = JSON.parse(localStorage.getItem('cp_chats') || '[]');
+  document.getElementById('msgBadge').textContent = chats.filter(c => !c.read).length;
+}
+
+function exportCSV() {
+  const apps = getApps();
+  const header = 'Ref,Name,Email,Phone,Package,Bank,Date,Status';
+  const rows = apps.map(a => `${a.ref},${a.name},${a.email},${a.phone},"${a.package}",${a.bank},${a.date},${a.status}`);
+  const csv = [header, ...rows].join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob); const link = document.createElement('a');
+  link.href = url; link.download = 'clearpath_applications.csv'; link.click();
+}
+
+// --- CLIENTS ---
+function loadClients() {
+  filterClients();
+}
+function filterClients() {
+  const apps = getApps();
+  const s = (document.getElementById('clientSearch')?.value || '').toLowerCase();
+  const unique = {};
+  apps.forEach(a => {
+    if (!unique[a.email]) unique[a.email] = { ...a, count: 1 };
+    else unique[a.email].count++;
+  });
+  const clients = Object.values(unique).filter(c => !s || (c.name||'').toLowerCase().includes(s));
+  const tb = document.getElementById('clientTableBody');
+  if (!tb) return;
+  tb.innerHTML = clients.map(c => `
+    <tr>
+      <td><strong>${c.name||'—'}</strong></td>
+      <td style="font-size:13px;color:var(--text-muted)">${c.email||'—'}</td>
+      <td style="font-size:13px">${c.phone||'—'}</td>
+      <td style="font-size:13px">R${Number(c.income||0).toLocaleString()}</td>
+      <td style="font-size:13px">${c.bank||'—'}</td>
+      <td style="text-align:center">${c.count}</td>
+      <td><span class="status-badge badge-active">Active</span></td>
+      <td>
+        <button class="btn btn-sm btn-outline" onclick="viewApp('${c.ref}')">View</button>
+      </td>
+    </tr>`).join('');
+  if (!clients.length) tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-muted)">No clients found.</td></tr>';
+}
+
+// --- DEBT AUDIT ---
+let debtRowCount = 0;
+function initDebtAudit() {
+  if (document.getElementById('debtRows').children.length <= 1) {
+    addDebtRow(); addDebtRow(); addDebtRow();
+  }
+}
+function addDebtRow() {
+  debtRowCount++;
+  const row = document.createElement('div');
+  row.className = 'debt-row';
+  row.id = 'dr_' + debtRowCount;
+  row.innerHTML = `
+    <input type="text" placeholder="e.g. ABSA Credit Card" style="flex:2" id="d_name_${debtRowCount}">
+    <input type="number" placeholder="50000" style="flex:1" id="d_balance_${debtRowCount}" oninput="calcAudit()">
+    <input type="number" placeholder="21.5" style="flex:1;max-width:70px" id="d_rate_${debtRowCount}" oninput="calcAudit()">
+    <input type="number" placeholder="1200" style="flex:1" id="d_monthly_${debtRowCount}" oninput="calcAudit()">
+    <input type="number" placeholder="48" style="flex:1;max-width:80px" id="d_months_${debtRowCount}">
+    <button class="del-btn" onclick="document.getElementById('dr_${debtRowCount}').remove();calcAudit()"><i class="fas fa-times"></i></button>`;
+  document.getElementById('debtRows').appendChild(row);
+}
+function clearAudit() {
+  document.getElementById('debtRows').innerHTML = `<div style="display:grid;grid-template-columns:1fr 80px 80px 90px 90px 36px;gap:8px;margin-bottom:8px;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;padding:0 4px"><span>Creditor Name</span><span>Balance</span><span>Rate %</span><span>Monthly</span><span>Remaining</span><span></span></div>`;
+  debtRowCount = 0; initDebtAudit(); calcAudit();
+}
+function calcAudit() {
+  let totalDebt = 0, totalMonthly = 0;
+  for (let i = 1; i <= debtRowCount; i++) {
+    const b = parseFloat(document.getElementById('d_balance_'+i)?.value || 0);
+    const m = parseFloat(document.getElementById('d_monthly_'+i)?.value || 0);
+    totalDebt += b; totalMonthly += m;
+  }
+  const net = parseFloat(document.getElementById('audit_net')?.value || 0);
+  const living = parseFloat(document.getElementById('audit_living')?.value || 0);
+  const rate = parseFloat(document.getElementById('consol_rate')?.value || 18) / 100 / 12;
+  const term = parseInt(document.getElementById('consol_term')?.value || 60);
+  const consolMonthly = totalDebt > 0 && rate > 0 ? (totalDebt * rate * Math.pow(1+rate,term)) / (Math.pow(1+rate,term)-1) : 0;
+  const saving = totalMonthly - consolMonthly;
+  const available = net - living - totalMonthly;
+  const dti = net > 0 ? (totalMonthly / net * 100).toFixed(1) : 0;
+  const affordPct = Math.min(100, Math.max(0, 100 - dti));
+
+  const fmt = n => 'R' + Math.abs(n).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  document.getElementById('sum_total_debt').textContent = fmt(totalDebt);
+  document.getElementById('sum_monthly').textContent = fmt(totalMonthly);
+  document.getElementById('sum_net_income').textContent = fmt(net);
+  document.getElementById('sum_living').textContent = fmt(living);
+  document.getElementById('sum_dti').textContent = dti + '%';
+  document.getElementById('sum_available').textContent = (available >= 0 ? '' : '-') + fmt(available);
+  document.getElementById('sum_available').style.color = available >= 0 ? 'var(--success)' : 'var(--danger)';
+  document.getElementById('sum_saving').textContent = (saving > 0 ? '' : '-') + fmt(saving);
+  document.getElementById('sum_consol_amount').textContent = fmt(totalDebt);
+  document.getElementById('afford_fill').style.width = affordPct + '%';
+  document.getElementById('afford_fill').style.background = affordPct > 60 ? 'var(--success)' : affordPct > 30 ? 'var(--warning)' : 'var(--danger)';
+  document.getElementById('afford_label').textContent = affordPct > 60 ? '✓ Good affordability' : affordPct > 30 ? '⚠ Moderate — review carefully' : '✗ High debt burden';
+}
+function sendToConsolidation() { showPanel('consolidation', null); showToast('Sent','Debt data transferred to consolidation tool'); }
+function generateAuditReport() {
+  const name = document.getElementById('audit_name').value || 'Client';
+  showToast('Report Generated', `Audit report for ${name} is ready`);
+}
+
+// --- CONSOLIDATION ---
+let consolDebtCount = 0;
+function initConsolDebts() {
+  if (document.getElementById('consolDebtList').children.length === 0) { addConsolDebt(); addConsolDebt(); }
+}
+function addConsolDebt() {
+  consolDebtCount++;
+  const d = document.createElement('div');
+  d.className = 'institution-row'; d.id = 'cd_' + consolDebtCount;
+  d.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:center">
+      <input type="text" placeholder="Creditor name" style="flex:2;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--white);font-size:13px;font-family:'DM Sans';outline:none">
+      <input type="number" placeholder="Balance R" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--white);font-size:13px;font-family:'DM Sans';outline:none" oninput="calcConsol()">
+      <input type="number" placeholder="Rate %" style="width:80px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:var(--white);font-size:13px;font-family:'DM Sans';outline:none">
+      <button class="del-btn" onclick="document.getElementById('cd_${consolDebtCount}').remove();calcConsol()"><i class="fas fa-times"></i></button>
+    </div>`;
+  document.getElementById('consolDebtList').appendChild(d);
+}
+function calcConsol() {
+  const loan = parseFloat(document.getElementById('c_loan_amount')?.value || 0);
+  const income = parseFloat(document.getElementById('c_income')?.value || 0);
+  document.getElementById('c_sum_loan').textContent = 'R' + loan.toLocaleString();
+  document.getElementById('c_sum_income').textContent = 'R' + income.toLocaleString();
+  document.getElementById('c_sum_afford').textContent = 'R' + (income * 0.3).toFixed(0);
+  const scenarios = [[12,0.15],[24,0.17],[36,0.18],[60,0.195]].map(([t,r]) => {
+    const monthRate = r/12;
+    const pmt = loan > 0 ? (loan * monthRate * Math.pow(1+monthRate,t)) / (Math.pow(1+monthRate,t)-1) : 0;
+    return `<div class="summary-row"><span>${t} months @ ${(r*100).toFixed(1)}%</span><span style="color:var(--gold)">R${pmt.toFixed(0)}/mo</span></div>`;
+  }).join('');
+  document.getElementById('consolScenarios').innerHTML = scenarios;
+}
+function submitConsolidation() {
+  const selected = Array.from(document.querySelectorAll('#institutionChecklist input:checked')).map(c => c.value);
+  if (!selected.length) { showToast('Error','Select at least one institution'); return; }
+  document.getElementById('consolStatus').innerHTML = selected.map(s =>
+    `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13px"><span>${s}</span><span style="color:var(--success)"><i class="fas fa-check-circle"></i> Submitted</span></div>`
+  ).join('');
+  showToast('Submitted', `Applications sent to ${selected.length} institution(s)`);
+}
+
+// --- CREDIT REPORTS ---
+function pullCreditReport() {
+  const id = document.getElementById('cr_id').value;
+  const name = document.getElementById('cr_name').value;
+  if (!id || !name) { showToast('Error','Please enter ID number and name'); return; }
+  // Simulated credit report
+  const score = Math.floor(Math.random() * 400 + 450);
+  const rating = score > 750 ? 'Excellent' : score > 650 ? 'Good' : score > 550 ? 'Fair' : 'Poor';
+  const ratingColor = score > 750 ? 'var(--success)' : score > 650 ? '#27AE60' : score > 550 ? 'var(--warning)' : 'var(--danger)';
+  document.getElementById('cr_result_name').textContent = name;
+  document.getElementById('cr_score').textContent = score;
+  document.getElementById('cr_rating').textContent = rating;
+  document.getElementById('cr_rating').style.color = ratingColor;
+  document.getElementById('scoreCircle').style.borderColor = ratingColor;
+  document.getElementById('cr_good').textContent = Math.floor(Math.random()*5+2);
+  document.getElementById('cr_default').textContent = Math.floor(Math.random()*3);
+  document.getElementById('cr_judgements').textContent = Math.floor(Math.random()*2);
+  document.getElementById('cr_enquiries').textContent = Math.floor(Math.random()*8+1);
+  const totalDebt = Math.floor(Math.random()*200000+30000);
+  document.getElementById('cr_debt_total').textContent = 'R' + totalDebt.toLocaleString();
+  const accs = ['ABSA Credit Card','Standard Bank Loan','FNB Vehicle Finance','Capitec Personal Loan'];
+  document.getElementById('cr_accounts').innerHTML = accs.slice(0,Math.floor(Math.random()*3+2)).map(a => `
+    <div class="summary-row" style="font-size:13px">
+      <span>${a}</span>
+      <span style="color:${Math.random()>.3?'var(--success)':'var(--danger)'}">${Math.random()>.3?'✓ In good standing':'⚠ Arrears'}</span>
+    </div>`).join('');
+  document.getElementById('creditResult').style.display = 'block';
+  showToast('Report Ready', `Credit report for ${name} loaded`);
+}
+function downloadCreditReport() { showToast('Downloaded', 'Credit report saved'); }
+function sendToAudit() { showPanel('debtaudit', null); showToast('Sent', 'Credit data sent to debt audit tool'); }
+
+// --- REVENUE CALCULATOR ---
+let _revChart;
+function calcRevenue() {
+  const v = id => parseFloat(document.getElementById(id)?.value || 0);
+  const basic = v('rev_basic') * v('rev_basic_price');
+  const full = v('rev_full') * v('rev_full_price');
+  const consol = v('rev_consol') * v('rev_consol_fee');
+  const perf = v('rev_savings') * v('rev_perf_pct') / 100;
+  const costs = v('rev_costs');
+  const gross = basic + full + consol + perf;
+  const net = gross - costs;
+  const fmt = n => 'R' + Math.abs(n).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  document.getElementById('rv_basic').textContent = fmt(basic);
+  document.getElementById('rv_full').textContent = fmt(full);
+  document.getElementById('rv_consol').textContent = fmt(consol);
+  document.getElementById('rv_perf').textContent = fmt(perf);
+  document.getElementById('rv_gross').textContent = fmt(gross);
+  document.getElementById('rv_costs_out').textContent = fmt(costs);
+  document.getElementById('rv_net').textContent = fmt(net);
+  document.getElementById('rv_net').style.color = net >= 0 ? 'var(--gold)' : 'var(--danger)';
+  const ctx = document.getElementById('revenueChart');
+  if (!ctx) return;
+  if (_revChart) _revChart.destroy();
+  _revChart = new Chart(ctx.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Basic','Full Opt.','Consol.','Performance','Costs','Net'],
+      datasets: [{ data: [basic,full,consol,perf,costs,net],
+        backgroundColor: ['#C9A84C','#27AE60','#3498DB','#F39C12','rgba(231,76,60,0.6)','rgba(201,168,76,0.9)'],
+        borderRadius: 4 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#7A8FA8',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#7A8FA8',callback:v=>'R'+v.toLocaleString()}}} }
+  });
+}
+
+// --- MESSAGES ---
+function loadMessages() {
+  const chats = JSON.parse(localStorage.getItem('cp_chats') || '[]');
+  const list = document.getElementById('msgList');
+  if (!list) return;
+  if (!chats.length) {
+    list.innerHTML = '<div style="padding:30px;text-align:center;color:var(--text-muted);font-size:13px">No messages yet</div>';
+    return;
+  }
+  const groups = {};
+  chats.forEach(c => { if (!groups['Client']) groups['Client'] = []; groups['Client'].push(c); });
+  list.innerHTML = Object.entries(groups).map(([name, msgs]) => `
+    <div class="msg-item active" onclick="openConversation('${name}')">
+      <div class="msg-name"><span>${name}</span><span class="msg-time">${new Date(msgs[msgs.length-1].time).toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'})}</span></div>
+      <div class="msg-preview">${msgs[msgs.length-1].msg}</div>
+    </div>`).join('');
+  openConversation('Client');
+}
+function openConversation(name) {
+  const chats = JSON.parse(localStorage.getItem('cp_chats') || '[]');
+  const body = document.getElementById('msgBody');
+  body.innerHTML = chats.map(c => `<div class="chat-msg ${c.from==='client'?'client-msg':'admin-msg'}">${c.msg}<div style="font-size:10px;color:var(--text-muted);margin-top:4px">${new Date(c.time).toLocaleString('en-ZA')}</div></div>`).join('');
+  body.scrollTop = body.scrollHeight;
+}
+function filterMessages(s) { }
+function sendAdminMsg() {
+  const input = document.getElementById('adminMsgInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  const chats = JSON.parse(localStorage.getItem('cp_chats') || '[]');
+  chats.push({ msg, time: new Date().toISOString(), from: 'admin' });
+  localStorage.setItem('cp_chats', JSON.stringify(chats));
+  input.value = '';
+  openConversation('Client');
+  showToast('Sent', 'Message sent to client');
+}
+
+// --- STAFF ---
+function renderStaff() {
+  const staff = getStaff();
+  const grid = document.getElementById('staffGrid');
+  if (!grid) return;
+  const defaultStaff = [{ name: 'Admin User', role: 'Super Admin', initials: 'A', perms: ['All Access'] }];
+  const allStaff = [...defaultStaff, ...staff];
+  grid.innerHTML = allStaff.map(s => `
+    <div class="staff-card">
+      <div class="staff-avatar">${s.initials || s.name[0]}</div>
+      <h4>${s.name}</h4>
+      <div class="role">${s.role}</div>
+      <p style="font-size:12px;color:var(--text-muted)">${s.email || ''}</p>
+      <div class="permissions">${(s.perms||[]).map(p => `<span class="perm-tag active">${p}</span>`).join('')}</div>
+      ${s.role !== 'Super Admin' ? `<button class="btn btn-sm btn-danger" style="margin-top:12px" onclick="removeStaff('${s.name}')">Remove</button>` : ''}
+    </div>`).join('');
+}
+function showAddStaff() { document.getElementById('staffModal').classList.add('active'); }
+function saveStaff() {
+  const first = document.getElementById('st_first').value;
+  const last = document.getElementById('st_last').value;
+  if (!first) return;
+  const staff = getStaff();
+  const perms = Array.from(document.querySelectorAll('#permGrid input:checked')).map(c => c.closest('label').textContent.trim());
+  staff.push({ name: first + ' ' + last, email: document.getElementById('st_email').value, role: document.getElementById('st_role').value, initials: (first[0]+last[0]).toUpperCase(), perms });
+  saveStaff_data(staff); renderStaff();
+  document.getElementById('staffModal').classList.remove('active');
+  showToast('Staff Added', first + ' ' + last + ' added successfully');
+}
+function removeStaff(name) {
+  const staff = getStaff().filter(s => s.name !== name);
+  saveStaff_data(staff); renderStaff();
+}
+
+// --- INSTITUTIONS ---
+function loadInstitutions() {
+  const data = [
+    ['ABSA Bank', 'Commercial Bank', 'loans@absa.co.za', 'Personal Loans, Consolidation', '12.5% - 24.5%', 'Active'],
+    ['Standard Bank', 'Commercial Bank', 'personal@standardbank.co.za', 'Consolidation, Personal', '13% - 26%', 'Active'],
+    ['FNB', 'Commercial Bank', 'loans@fnb.co.za', 'Personal Lending', '12.75% - 25%', 'Active'],
+    ['Nedbank', 'Commercial Bank', 'info@nedbank.co.za', 'Loans, Consolidation', '13.5% - 24%', 'Active'],
+    ['Capitec Bank', 'Digital Bank', 'credit@capitec.co.za', 'Credit, Consolidation', '11% - 27.5%', 'Active'],
+    ['African Bank', 'Credit Bank', 'info@africanbank.co.za', 'Personal Loans', '15% - 28%', 'Active'],
+  ];
+  const tb = document.getElementById('institutionsTable');
+  if (!tb) return;
+  tb.innerHTML = data.map(r => `
+    <tr>
+      <td><strong>${r[0]}</strong></td>
+      <td style="font-size:13px;color:var(--text-muted)">${r[1]}</td>
+      <td style="font-size:12px;color:var(--gold)">${r[2]}</td>
+      <td style="font-size:12px">${r[3]}</td>
+      <td style="font-size:12px">${r[4]}</td>
+      <td><span class="status-badge badge-active">${r[5]}</span></td>
+      <td><button class="btn btn-sm btn-outline">Edit</button></td>
+    </tr>`).join('');
+}
+function showAddInstitution() { showToast('Coming Soon', 'Add institution form coming soon'); }
+
+// --- SETTINGS ---
+function loadSettings(tab) {
+  tab = tab || 'profile';
+  const content = {
+    profile: `<h3>Admin Profile</h3>
+      <div class="form-row"><div class="form-group"><label>Full Name</label><input type="text" value="Administrator"></div><div class="form-group"><label>Email</label><input type="email" value="admin@clearpath.co.za"></div></div>
+      <div class="form-group"><label>Phone</label><input type="text" value="+27 10 123 4567"></div>
+      <button class="btn btn-gold" onclick="showToast('Saved','Profile updated')">Save Changes</button>`,
+    security: `<h3>Security Settings</h3>
+      <div class="form-group"><label>Current Password</label><input type="password" placeholder="••••••••"></div>
+      <div class="form-group"><label>New Password</label><input type="password" id="newPass" placeholder="Min 8 chars, include uppercase, number"></div>
+      <div class="form-group"><label>Confirm Password</label><input type="password" id="confirmPass" placeholder="Repeat new password"></div>
+      <button class="btn btn-gold" onclick="changePassword()">Update Password</button>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+        <h4 style="font-size:14px;font-weight:600;margin-bottom:12px">Two-Factor Authentication</h4>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Enable 2FA for additional security</p>
+        <button class="btn btn-outline btn-sm" onclick="showToast('2FA','WhatsApp OTP integration available soon')"><i class="fab fa-whatsapp" style="margin-right:6px"></i>Enable WhatsApp OTP</button>
+      </div>`,
+    business: `<h3>Business Information</h3>
+      <div class="form-group"><label>Company Name</label><input type="text" value="ClearPath Financial (Pty) Ltd"></div>
+      <div class="form-group"><label>Registration Number</label><input type="text" placeholder="2025/XXXXXX/07"></div>
+      <div class="form-row"><div class="form-group"><label>NCR Registration</label><input type="text" placeholder="NCR XXXX"></div><div class="form-group"><label>VAT Number</label><input type="text" placeholder="4XXXXXXXXX"></div></div>
+      <div class="form-group"><label>Business Address</label><input type="text" placeholder="Physical address"></div>
+      <button class="btn btn-gold" onclick="showToast('Saved','Business info updated')">Save Changes</button>`,
+    payments: `<h3>Payment Integration</h3>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px">Connect your debit order / payment provider</p>
+      <div class="form-group"><label>Payment Provider</label><select style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 14px;color:var(--white);font-size:14px;font-family:'DM Sans';outline:none"><option>Peach Payments</option><option>PayFast</option><option>Ozow</option><option>PayGate</option><option>DebiCheck (Netcash)</option></select></div>
+      <div class="form-group"><label>API Key</label><input type="text" placeholder="Enter your payment gateway API key"></div>
+      <div class="form-group"><label>Merchant ID</label><input type="text" placeholder="Your merchant ID"></div>
+      <div style="background:rgba(201,168,76,0.06);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px"><p style="font-size:13px;color:var(--text-muted)"><i class="fas fa-info-circle" style="color:var(--gold);margin-right:8px"></i>For DebiCheck integration (NAEDO/AEDO), use Netcash or BankServ Africa's DebiCheck API. Register at netcash.co.za for credentials.</p></div>
+      <button class="btn btn-gold" onclick="showToast('Saved','Payment settings saved')">Save & Connect</button>`,
+    notifications: `<h3>Notification Settings</h3>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        ${['New application received','Application status changed','Payment received','New client message','Daily report summary'].map(n =>
+          `<label style="display:flex;justify-content:space-between;align-items:center;cursor:pointer"><span style="font-size:14px">${n}</span><input type="checkbox" checked style="accent-color:var(--gold);width:18px;height:18px"></label>`
+        ).join('')}
+      </div>
+      <button class="btn btn-gold" style="margin-top:20px" onclick="showToast('Saved','Notification preferences saved')">Save</button>`
+  };
+  const el = document.getElementById('settingsContent');
+  if (el) el.innerHTML = content[tab] || content.profile;
+}
+function showSettingsTab(tab, el) {
+  document.querySelectorAll('.settings-menu-item').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+  loadSettings(tab);
+}
+function changePassword() {
+  const np = document.getElementById('newPass')?.value;
+  const cp = document.getElementById('confirmPass')?.value;
+  if (!np || np !== cp) { showToast('Error','Passwords do not match'); return; }
+  if (np.length < 8) { showToast('Error','Password must be at least 8 characters'); return; }
+  localStorage.setItem('cp_admin_pass', JSON.stringify(np));
+  showToast('Password Updated', 'Your new password has been saved');
+}
+
+// --- TOAST ---
+function showToast(title, msg) {
+  document.getElementById('aToastTitle').textContent = title;
+  document.getElementById('aToastMsg').textContent = msg;
+  const t = document.getElementById('adminToast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// Check if already logged in session
+window.onload = function() {
+  const loggedIn = sessionStorage.getItem('cp_logged_in');
+  if (loggedIn) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('sidebar').style.display = 'flex';
+    document.getElementById('mainContent').style.display = 'flex';
+    loadAllData();
+  }
+};
+</script>
+</body>
+</html>

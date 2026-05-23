@@ -3,1071 +3,1038 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DebtFree ZA — Financial Freedom for South Africans</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>ClearPath Financial | Subscription & Debt Relief Specialists</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{
-  --g:#00C896;--gd:#00A07A;--gl:#E6FAF5;
-  --navy:#0A1628;--n2:#112240;--n3:#1A2F4A;
-  --w:#FFFFFF;--off:#F7F9FB;--mu:#8A9BB0;--bdr:#E2EBF4;
-  --red:#FF4D6D;--amb:#FFB347;--blu:#3A7BFF;
-  --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif;
-  --r:12px;--rl:18px;--sh:0 4px 24px rgba(0,0,0,.07);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--off);color:var(--navy);font-size:15px;line-height:1.6}
-h1,h2,h3,h4,h5{font-family:var(--fh)}
-a{color:inherit;text-decoration:none}
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:99px}
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #9B7B2E;
+    --navy: #0D1B2A;
+    --navy-mid: #1A2E45;
+    --navy-light: #243B55;
+    --white: #FFFFFF;
+    --off-white: #F8F6F1;
+    --text-muted: #8A9BB0;
+    --success: #2ECC71;
+    --danger: #E74C3C;
+    --border: rgba(201,168,76,0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
 
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);height:62px;display:flex;align-items:center;padding:0 1.5rem;gap:1.5rem}
-.logo{font-family:var(--fh);font-weight:800;font-size:19px;color:var(--navy);display:flex;align-items:center;gap:8px;white-space:nowrap;cursor:pointer}
-.logo span{color:var(--g)}
-.logo-b{background:var(--g);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.5px}
-.nav-links{display:flex;gap:2px;flex:1;overflow-x:auto}
-.nl{padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--mu);cursor:pointer;border:none;background:none;font-family:var(--fb);white-space:nowrap;transition:all .15s}
-.nl:hover,.nl.act{background:var(--gl);color:var(--gd)}
-.nright{display:flex;gap:8px;align-items:center;margin-left:auto;flex-shrink:0}
-.nbtn{background:var(--navy);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--fb);white-space:nowrap;transition:background .15s}
-.nbtn:hover{background:var(--n2)}
-.nbtn.ol{background:transparent;color:var(--navy);border:1.5px solid var(--bdr)}
-.nbtn.ol:hover{background:var(--off)}
-.notif-dot{background:var(--red);color:#fff;border-radius:99px;padding:1px 6px;font-size:10px;margin-left:3px;font-weight:700}
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 18px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,27,42,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-icon { width: 42px; height: 42px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .logo-text { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); }
+  .logo-text span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { display: flex; gap: 12px; }
+  .btn { padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; display: inline-block; transition: all .2s; }
+  .btn-outline { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); }
+  .btn-outline:hover { background: var(--gold); color: var(--navy); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: var(--gold-dark); color: var(--white); transform: translateY(-1px); }
+  .btn-lg { padding: 16px 36px; font-size: 16px; border-radius: 10px; }
+  .btn-xl { padding: 18px 48px; font-size: 17px; border-radius: 12px; letter-spacing: 0.3px; }
 
-/* PAGES */
-.pg{display:none;padding-top:62px;min-height:100vh}
-.pg.act{display:block}
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #162035 100%);
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 70% 70% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { max-width: 620px; position: relative; z-index: 1; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); padding: 8px 16px; border-radius: 100px; font-size: 13px; color: var(--gold); margin-bottom: 28px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(42px, 5vw, 64px); line-height: 1.1; margin-bottom: 24px; }
+  .hero h1 span { color: var(--gold); }
+  .hero p { font-size: 18px; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; max-width: 520px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-stats { display: flex; gap: 48px; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); }
+  .stat-item h3 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); }
+  .stat-item p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .hero-visual { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); width: 440px; }
+  .hero-card { background: rgba(26,46,69,0.8); border: 1px solid var(--border); border-radius: 20px; padding: 28px; backdrop-filter: blur(10px); }
+  .savings-bar { margin: 12px 0; }
+  .savings-bar-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+  .savings-bar-label span:first-child { color: var(--text-muted); }
+  .savings-bar-label span:last-child { color: var(--success); font-weight: 600; }
+  .bar-track { background: rgba(255,255,255,0.08); height: 6px; border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dark), var(--gold)); border-radius: 4px; transition: width 1.5s ease; }
 
-/* HERO */
-.hero{background:var(--navy);color:#fff;padding:5.5rem 2rem 4.5rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(0,200,150,.18) 0%,transparent 55%),radial-gradient(ellipse at 75% 25%,rgba(58,123,255,.12) 0%,transparent 50%)}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(0,200,150,.15);color:var(--g);border:1px solid rgba(0,200,150,.3);padding:5px 14px;border-radius:99px;font-size:11.5px;font-weight:600;margin-bottom:1.25rem;letter-spacing:.4px;position:relative;z-index:1}
-.hero h1{font-size:clamp(30px,4.5vw,54px);font-weight:800;line-height:1.15;max-width:700px;margin:0 auto 1.25rem;letter-spacing:-1px;position:relative;z-index:1}
-.hero h1 em{color:var(--g);font-style:normal}
-.hero p{font-size:16px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 2.25rem;font-weight:300;position:relative;z-index:1}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
-.btn-g{background:var(--g);color:#fff;border:none;padding:12px 26px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--fb);transition:all .15s;display:inline-flex;align-items:center;gap:7px}
-.btn-g:hover{background:var(--gd);transform:translateY(-1px)}
-.btn-gh{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.2);padding:12px 26px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--fb);transition:all .15s}
-.btn-gh:hover{background:rgba(255,255,255,.16)}
-.hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-top:3.5rem;flex-wrap:wrap;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);position:relative;z-index:1}
-.hs{text-align:center}
-.hs-num{font-family:var(--fh);font-size:30px;font-weight:800;color:var(--g)}
-.hs-lbl{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+  /* SERVICES */
+  .section { padding: 100px 60px; }
+  .section-label { font-size: 12px; font-weight: 600; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 48px); line-height: 1.2; margin-bottom: 16px; }
+  .section-sub { font-size: 17px; color: var(--text-muted); max-width: 560px; line-height: 1.7; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .service-card {
+    background: var(--navy-mid); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px; cursor: pointer; transition: all .25s; position: relative; overflow: hidden;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .service-card:hover { border-color: var(--gold); transform: translateY(-4px); background: var(--navy-light); }
+  .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform .25s; }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(201,168,76,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 22px; color: var(--gold); }
+  .service-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+  .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .service-tag { display: inline-block; margin-top: 16px; font-size: 12px; color: var(--gold); font-weight: 600; }
 
-/* LAYOUT */
-.sec{padding:3.5rem 2rem;max-width:1100px;margin:0 auto}
-.sec-title{font-size:26px;font-weight:700;margin-bottom:.4rem;letter-spacing:-.5px}
-.sec-sub{font-size:13px;color:var(--mu);margin-bottom:1.75rem}
+  /* HOW IT WORKS */
+  .how-section { background: var(--navy-mid); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 60px; position: relative; }
+  .steps-grid::before { content: ''; position: absolute; top: 32px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: 0.3; }
+  .step-item { text-align: center; padding: 0 20px; }
+  .step-num { width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin: 0 auto 20px; background: var(--navy-mid); position: relative; z-index: 1; }
+  .step-item h4 { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+  .step-item p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-/* CARDS */
-.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:1.25rem}
-.card{background:#fff;border-radius:var(--rl);border:1px solid var(--bdr);padding:1.4rem;transition:box-shadow .2s}
-.card:hover{box-shadow:var(--sh)}
-.ci{width:42px;height:42px;border-radius:11px;background:var(--gl);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;font-size:18px;color:var(--gd)}
-.card h3{font-size:14px;font-weight:600;margin-bottom:5px}
-.card p{font-size:12.5px;color:var(--mu);line-height:1.55}
+  /* TESTIMONIALS */
+  .testimonials { background: var(--navy); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testimonial-card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+  .testimonial-stars { color: var(--gold); margin-bottom: 16px; font-size: 14px; }
+  .testimonial-card p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--navy); }
+  .testimonial-author h5 { font-size: 14px; font-weight: 600; }
+  .testimonial-author span { font-size: 13px; color: var(--text-muted); }
 
-/* FORMS */
-.fw{background:#fff;border-radius:var(--rl);border:1px solid var(--bdr);padding:1.75rem;margin-bottom:1.4rem}
-.fw h3{font-size:17px;font-weight:700;margin-bottom:.35rem}
-.fw .sub{font-size:12.5px;color:var(--mu);margin-bottom:1.4rem}
-.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.fg2.f1{grid-template-columns:1fr}
-.fg2.f3{grid-template-columns:1fr 1fr 1fr}
-.fg{display:flex;flex-direction:column;gap:5px}
-.fg label{font-size:11.5px;font-weight:600;color:var(--navy);letter-spacing:.3px}
-.fg input,.fg select,.fg textarea{padding:9px 13px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--off);color:var(--navy);font-size:13px;font-family:var(--fb);transition:border .15s;outline:none}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);background:#fff}
-.fg textarea{resize:vertical;min-height:85px}
-.uz{border:2px dashed var(--bdr);border-radius:var(--r);padding:1.4rem;text-align:center;cursor:pointer;background:var(--off);transition:all .15s}
-.uz:hover{border-color:var(--g);background:var(--gl)}
-.uz i{font-size:26px;color:var(--mu);display:block;margin-bottom:7px}
-.uz p{font-size:13px;color:var(--mu)}
-.uz span{font-size:11px;color:#aab}
-.dcc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.2rem}
-.dc{display:flex;align-items:center;gap:9px;padding:10px 13px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--off);font-size:13px;cursor:pointer;transition:all .15s}
-.dc:hover{border-color:var(--g)}
-.dc.ok{border-color:var(--g);background:var(--gl)}
-.dc.pend{border-color:var(--amb);background:#FFFBF0}
-.dc i{font-size:14px;color:var(--mu)}
-.dc.ok i{color:var(--gd)}
-.dc-lbl{flex:1;font-weight:500}
-.dc-st{font-size:10px;padding:2px 8px;border-radius:99px;background:var(--bdr);color:var(--mu)}
-.dc.ok .dc-st{background:var(--g);color:#fff}
-.dc.pend .dc-st{background:#FFF3CD;color:#856404}
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .pricing-card { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; transition: all .25s; }
+  .pricing-card.featured { border-color: var(--gold); background: rgba(201,168,76,0.06); position: relative; }
+  .featured-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy); font-size: 12px; font-weight: 700; padding: 4px 16px; border-radius: 100px; }
+  .pricing-card .plan-name { font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .pricing-card .price { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--white); margin-bottom: 6px; }
+  .pricing-card .price span { font-size: 18px; }
+  .pricing-card .price-note { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+  .pricing-features { list-style: none; margin-bottom: 32px; }
+  .pricing-features li { font-size: 14px; color: var(--text-muted); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; }
+  .pricing-features li i { color: var(--success); font-size: 14px; }
 
-/* BUTTONS */
-.btn{padding:9px 20px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--fb);border:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
-.bp{background:var(--navy);color:#fff}.bp:hover{background:var(--n2)}
-.bs{background:var(--g);color:#fff}.bs:hover{background:var(--gd)}
-.bd{background:#FFF0F3;color:var(--red);border:1.5px solid #FFCDD6}
-.bw{background:#FFFBF0;color:#9B7000;border:1.5px solid #FFE69C}
-.bo{background:#fff;color:var(--navy);border:1.5px solid var(--bdr)}.bo:hover{background:var(--off)}
-.bsm{padding:6px 13px;font-size:12px}
-.brow{display:flex;gap:9px;flex-wrap:wrap;margin-top:.9rem}
+  /* FOOTER */
+  footer { background: #080F18; padding: 60px; border-top: 1px solid var(--border); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { color: var(--text-muted); font-size: 14px; line-height: 1.7; margin-top: 16px; max-width: 280px; }
+  footer h4 { font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul li a { text-decoration: none; color: var(--text-muted); font-size: 14px; transition: color .2s; }
+  footer ul li a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { color: var(--text-muted); font-size: 13px; }
 
-/* BADGES */
-.bdg{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600}
-.bg{background:#E6FAF5;color:#006B50}
-.ba{background:#FFF8E6;color:#7A5200}
-.bb{background:#EFF4FF;color:#1D4DBF}
-.br{background:#FFF0F3;color:#C0003A}
-.bgr{background:#F1F3F5;color:#566272}
+  /* APPLY MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(8,15,24,0.95); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.active { display: flex; }
+  .modal { background: var(--navy-mid); border: 1px solid var(--border); border-radius: 24px; max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; }
+  .modal-header { padding: 32px 36px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
+  .modal-header h2 { font-family: 'Playfair Display', serif; font-size: 26px; }
+  .modal-header p { color: var(--text-muted); font-size: 14px; margin-top: 6px; }
+  .modal-close { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; padding: 4px; transition: color .2s; }
+  .modal-close:hover { color: var(--white); }
+  .modal-body { padding: 32px 36px; }
 
-/* TABLE */
-.tw{overflow-x:auto}
-.dt{width:100%;border-collapse:collapse;font-size:13px}
-.dt th{padding:8px 13px;text-align:left;font-size:11px;color:var(--mu);font-weight:600;letter-spacing:.4px;border-bottom:1.5px solid var(--bdr);background:var(--off)}
-.dt td{padding:11px 13px;border-bottom:1px solid var(--bdr)}
-.dt tr:last-child td{border-bottom:none}
-.dt tr:hover td{background:#FAFCFF}
-.av{width:30px;height:30px;border-radius:50%;background:var(--gl);color:var(--gd);font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:7px;vertical-align:middle;flex-shrink:0}
+  /* STEP FORM */
+  .step-indicators { display: flex; gap: 8px; margin-bottom: 32px; }
+  .step-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: all .3s; }
+  .step-dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+  .step-dot.done { background: var(--success); }
+  .form-step { display: none; }
+  .form-step.active { display: block; }
+  .form-step h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .form-step > p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 12px 16px; color: var(--white); font-size: 15px;
+    font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--navy-mid); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .upload-area { border: 2px dashed rgba(201,168,76,0.3); border-radius: 12px; padding: 32px; text-align: center; cursor: pointer; transition: all .2s; }
+  .upload-area:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+  .upload-area i { font-size: 32px; color: var(--gold); margin-bottom: 12px; }
+  .upload-area p { font-size: 14px; color: var(--text-muted); }
+  .upload-area strong { color: var(--white); }
+  .upload-area input[type=file] { display: none; }
 
-/* PROGRESS STEPS */
-.psteps{display:flex;align-items:center;margin-bottom:1.75rem}
-.psc{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all .3s}
-.psc.dn{background:var(--g);color:#fff}
-.psc.ac{background:var(--navy);color:#fff;box-shadow:0 0 0 4px rgba(10,22,40,.14)}
-.psc.td{background:var(--bdr);color:var(--mu)}
-.psl{font-size:11.5px;font-weight:500;white-space:nowrap;margin-left:7px}
-.psln{flex:1;height:2px;background:var(--bdr);margin:0 8px}
-.psln.dn{background:var(--g)}
+  /* BANKING DETAILS */
+  .bank-security-note { display: flex; gap: 12px; background: rgba(46,204,113,0.08); border: 1px solid rgba(46,204,113,0.2); border-radius: 10px; padding: 14px 16px; margin-bottom: 24px; }
+  .bank-security-note i { color: var(--success); margin-top: 2px; }
+  .bank-security-note p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-/* METRICS */
-.mrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:11px;margin-bottom:1.4rem}
-.mc{background:#fff;border-radius:var(--r);border:1px solid var(--bdr);padding:1.1rem;text-align:center}
-.mn{font-family:var(--fh);font-size:24px;font-weight:700}
-.ml{font-size:11px;color:var(--mu);margin-top:3px}
-.mn.gr{color:var(--gd)} .mn.bl{color:var(--blu)} .mn.am{color:#9B7000} .mn.re{color:var(--red)}
+  /* POA SIGN */
+  .poa-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; margin-bottom: 20px; max-height: 200px; overflow-y: auto; font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+  .sign-canvas-wrap { border: 2px dashed rgba(201,168,76,0.3); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+  .sign-canvas-wrap canvas { display: block; width: 100%; cursor: crosshair; }
+  .sign-actions { display: flex; gap: 12px; }
 
-/* PROGRESS BAR */
-.pb{background:var(--bdr);border-radius:99px;height:7px;overflow:hidden;margin-top:5px}
-.pbf{height:100%;border-radius:99px;background:var(--g);transition:width .4s}
+  /* SUCCESS */
+  .success-screen { text-align: center; padding: 20px; display: none; }
+  .success-icon { width: 80px; height: 80px; background: rgba(46,204,113,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 36px; color: var(--success); }
+  .success-screen h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 12px; }
+  .success-screen p { color: var(--text-muted); max-width: 360px; margin: 0 auto 28px; line-height: 1.7; }
+  .ref-badge { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; padding: 10px 20px; display: inline-block; font-family: monospace; color: var(--gold); font-size: 16px; }
 
-/* TIMELINE */
-.tl{display:flex;flex-direction:column}
-.tlr{display:flex;gap:13px;padding-bottom:16px;position:relative}
-.tld{width:11px;height:11px;border-radius:50%;background:var(--g);margin-top:4px;flex-shrink:0;position:relative;z-index:1}
-.tld.pn{background:var(--bdr);border:2px solid var(--mu)}
-.tld.am{background:var(--amb)}
-.tlb{position:absolute;left:4.5px;top:15px;bottom:0;width:2px;background:var(--bdr)}
-.tlb.dn{background:linear-gradient(to bottom,var(--g),var(--bdr))}
-.tlc{flex:1}
-.tlt{font-size:13px;font-weight:600}
-.tlm{font-size:11px;color:var(--mu);margin-top:2px}
-.tld2{font-size:12px;color:var(--mu);margin-top:4px;line-height:1.5}
+  /* FORM NAV */
+  .form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .step-label { font-size: 13px; color: var(--text-muted); }
 
-/* AUDIT */
-.alyt{display:grid;grid-template-columns:270px 1fr;gap:14px;margin-bottom:1.4rem}
-.si{display:flex;align-items:center;gap:9px;padding:10px 13px;border-radius:10px;border:1.5px solid var(--bdr);background:#fff;cursor:pointer;margin-bottom:7px;transition:all .15s}
-.si:hover,.si.sl{border-color:var(--g);background:var(--gl)}
-.sic{width:34px;height:34px;border-radius:8px;background:var(--off);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;color:var(--mu)}
-.sinf{flex:1}
-.sn{font-size:13px;font-weight:600}
-.sd{font-size:11px;color:var(--mu)}
-.sa{font-size:13px;font-weight:700;color:var(--red)}
-.dcard{background:#fff;border-radius:var(--rl);border:1px solid var(--bdr);padding:1.4rem}
-.dr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:13px}
-.dr:last-child{border:none}
-.dlb{color:var(--mu);font-size:12px}
+  /* MESSAGE PORTAL */
+  .chat-float { position: fixed; bottom: 30px; right: 30px; z-index: 1500; }
+  .chat-btn { width: 56px; height: 56px; border-radius: 50%; background: var(--gold); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--navy); box-shadow: 0 4px 20px rgba(201,168,76,0.4); transition: all .25s; }
+  .chat-btn:hover { transform: scale(1.1); }
+  .chat-window { position: absolute; bottom: 68px; right: 0; width: 340px; background: var(--navy-mid); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: none; flex-direction: column; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+  .chat-window.open { display: flex; }
+  .chat-header { background: var(--navy); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+  .chat-avatar { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--navy); }
+  .chat-header h4 { font-size: 14px; }
+  .chat-header p { font-size: 12px; color: var(--success); }
+  .chat-msgs { padding: 16px; height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+  .chat-msg { max-width: 80%; font-size: 13px; line-height: 1.5; padding: 10px 14px; border-radius: 14px; }
+  .chat-msg.agent { background: var(--navy); color: var(--white); border-radius: 14px 14px 14px 4px; }
+  .chat-msg.client { background: var(--gold); color: var(--navy); border-radius: 14px 14px 4px 14px; margin-left: auto; font-weight: 500; }
+  .chat-input { padding: 14px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .chat-input input { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 10px 14px; color: var(--white); font-size: 13px; font-family: 'DM Sans'; outline: none; }
+  .chat-input button { background: var(--gold); border: none; border-radius: 8px; width: 38px; height: 38px; cursor: pointer; color: var(--navy); font-size: 16px; }
 
-/* INBOX */
-.ilyt{display:grid;grid-template-columns:290px 1fr;gap:14px}
-.ii{display:flex;align-items:flex-start;gap:9px;padding:11px 13px;border-radius:10px;border:1.5px solid var(--bdr);background:#fff;cursor:pointer;margin-bottom:7px;transition:all .15s}
-.ii:hover,.ii.sl{border-color:var(--g);background:var(--gl)}
-.iav{width:36px;height:36px;border-radius:50%;background:var(--gl);color:var(--gd);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ib{flex:1;overflow:hidden}
-.inm{font-size:13px;font-weight:600}
-.ipv{font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
-.itm{font-size:10px;color:var(--mu)}
-.ud{width:8px;height:8px;border-radius:50%;background:var(--g);flex-shrink:0;margin-top:6px}
-.mb{background:var(--off);border-radius:12px;padding:11px 14px;font-size:13px;line-height:1.6;max-width:82%}
-.mb.snt{background:var(--navy);color:#fff;margin-left:auto}
+  /* NOTIFICATION */
+  .toast { position: fixed; top: 24px; right: 24px; z-index: 3000; background: var(--navy-light); border: 1px solid var(--gold); border-radius: 12px; padding: 16px 20px; max-width: 320px; display: flex; gap: 12px; align-items: flex-start; transform: translateX(120%); transition: transform .35s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+  .toast.show { transform: translateX(0); }
+  .toast i { color: var(--gold); margin-top: 2px; }
+  .toast-content h5 { font-size: 14px; margin-bottom: 4px; }
+  .toast-content p { font-size: 13px; color: var(--text-muted); }
 
-/* MANDATE */
-.mf{background:#fff;border-radius:var(--rl);border:1px solid var(--bdr);padding:1.75rem;margin-bottom:1.4rem}
-.mhd{background:var(--navy);color:#fff;border-radius:var(--r);padding:1.4rem;margin-bottom:1.4rem}
-.mhd h3{font-family:var(--fh);font-size:19px;margin-bottom:3px}
-.mhd p{font-size:12px;opacity:.55}
-.sig{border:2px dashed var(--bdr);border-radius:10px;height:75px;display:flex;align-items:center;justify-content:center;color:var(--mu);font-size:13px;cursor:pointer;transition:all .15s}
-.sig:hover{border-color:var(--g);background:var(--gl)}
-
-/* LOAN CALC */
-.lcalc{background:var(--navy);color:#fff;border-radius:var(--rl);padding:1.75rem;margin-bottom:1.4rem}
-.lcalc h3{font-size:19px;font-weight:700;margin-bottom:1.4rem}
-.rw{margin-bottom:1.1rem}
-.rw label{font-size:12px;opacity:.6;display:block;margin-bottom:5px}
-.rw input[type=range]{width:100%;accent-color:var(--g)}
-.ro{font-family:var(--fh);font-size:21px;font-weight:700;color:var(--g);margin-top:3px}
-.lres{background:rgba(0,200,150,.1);border:1px solid rgba(0,200,150,.22);border-radius:10px;padding:1.1rem;margin-top:.9rem}
-.lrr{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
-.lrr:last-child{border:none;font-weight:700;font-size:14.5px}
-
-/* SAVINGS BANNER */
-.sbanner{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;border-radius:var(--rl);padding:1.4rem 1.75rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;flex-wrap:wrap;gap:1rem}
-.sbanner h3{font-size:13px;opacity:.8;margin-bottom:3px}
-.sbanner .big{font-family:var(--fh);font-size:32px;font-weight:800}
-
-/* HOW IT WORKS */
-.hiw{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:2rem}
-.hs2{padding:1.75rem 1.4rem;background:#fff;border:1px solid var(--bdr)}
-.hs2:first-child{border-radius:var(--rl) 0 0 var(--rl)}
-.hs2:last-child{border-radius:0 var(--rl) var(--rl) 0}
-.hn{font-family:var(--fh);font-size:44px;font-weight:800;color:var(--gl);line-height:1;margin-bottom:.4rem}
-.hs2 h4{font-size:14px;font-weight:700;margin-bottom:5px}
-.hs2 p{font-size:12px;color:var(--mu);line-height:1.55}
-
-/* PIPELINE */
-.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.4rem}
-.ps{background:#fff;border-radius:var(--r);border:1px solid var(--bdr);padding:.9rem;text-align:center}
-.pc{font-family:var(--fh);font-size:26px;font-weight:700}
-.plb{font-size:11px;color:var(--mu);margin-top:2px}
-.ps.hi{background:var(--gl);border-color:var(--g)}
-.ps.hi .pc{color:var(--gd)}
-
-/* BAR CHART */
-.bchart{display:flex;flex-direction:column;gap:9px}
-.brr{display:flex;align-items:center;gap:9px;font-size:12px}
-.brl{width:85px;color:var(--mu);text-align:right;flex-shrink:0}
-.brt{flex:1;background:var(--off);border-radius:99px;height:17px;overflow:hidden;border:1px solid var(--bdr)}
-.brf{height:100%;border-radius:99px}
-.brv{width:52px;font-weight:600;font-size:12px}
-
-/* POA */
-.poa{background:#fff;border:1px solid var(--bdr);border-radius:var(--rl);padding:2rem;margin-bottom:1rem;font-size:13px;line-height:1.8;color:#1a1a2e;max-width:720px}
-.poa h2{font-size:19px;text-align:center;margin-bottom:1.4rem;font-family:var(--fh)}
-.poas{margin-bottom:1.1rem}
-.poas h4{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--mu);text-transform:uppercase;margin-bottom:5px}
-.pfl{border-bottom:1px solid var(--navy);display:inline-block;min-width:180px;padding:0 3px}
-.sigrow{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.75rem}
-.sigl{border-top:1.5px solid var(--navy);padding-top:5px;text-align:center;font-size:11px;color:var(--mu)}
-
-/* TOAST */
-.toast{position:fixed;bottom:1.75rem;right:1.75rem;background:var(--navy);color:#fff;padding:13px 18px;border-radius:11px;font-size:13px;font-weight:500;z-index:9999;display:flex;align-items:center;gap:9px;transform:translateY(70px);opacity:0;transition:all .3s;max-width:310px;box-shadow:0 8px 28px rgba(0,0,0,.18)}
-.toast.show{transform:translateY(0);opacity:1}
-.toast i{color:var(--g);font-size:15px}
-
-/* PLAN CARDS */
-.plns{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:1.4rem}
-.pln{background:#fff;border-radius:var(--rl);border:1px solid var(--bdr);padding:1.4rem;text-align:center;cursor:pointer;transition:all .2s;position:relative}
-.pln:hover,.pln.sl{border-color:var(--g);box-shadow:0 0 0 3px rgba(0,200,150,.1)}
-.pln.sl::after{content:'✓';position:absolute;top:9px;right:11px;background:var(--g);color:#fff;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
-.pp{font-family:var(--fh);font-size:24px;font-weight:800;color:var(--navy);margin:7px 0 3px}
-.pp span{font-size:12px;font-weight:400;color:var(--mu)}
-.pnm{font-size:13px;font-weight:700}
-.pft{font-size:11px;color:var(--mu);margin-top:7px;line-height:1.8;text-align:left}
-
-@media(max-width:768px){
-  .nav-links{display:none}
-  .alyt,.ilyt{grid-template-columns:1fr}
-  .fg2{grid-template-columns:1fr}
-  .plns{grid-template-columns:1fr}
-  .dcc{grid-template-columns:1fr}
-  .pipe{grid-template-columns:repeat(3,1fr)}
-  .sbanner .big{font-size:24px}
-  .hiw{grid-template-columns:1fr 1fr}
-  .hs2:first-child{border-radius:var(--rl) var(--rl) 0 0}
-  .hs2:last-child{border-radius:0 0 var(--rl) var(--rl)}
-}
+  /* RESPONSIVE */
+  @media(max-width:1100px) {
+    .hero-visual { display: none; }
+    .services-grid, .testimonials-grid, .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid::before { display: none; }
+  }
+  @media(max-width:768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .section { padding: 60px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .services-grid, .testimonials-grid, .pricing-grid, .steps-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 28px; }
+    .modal { border-radius: 16px; }
+    .modal-body, .modal-header { padding: 24px 20px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="tmsg">Done!</span></div>
-
 <!-- NAV -->
-<nav class="nav">
-  <div class="logo" onclick="sp('home',null)"><i class="fas fa-leaf" style="color:var(--g)"></i>DebtFree<span>ZA</span><span class="logo-b">BETA</span></div>
-  <div class="nav-links">
-    <button class="nl act" onclick="sp('home',this)">Home</button>
-    <button class="nl" onclick="sp('apply',this)">Apply <span class="notif-dot">3</span></button>
-    <button class="nl" onclick="sp('loan',this)">Debt Consolidation</button>
-    <button class="nl" onclick="sp('portal',this)">Client Portal</button>
-    <button class="nl" onclick="sp('admin',this)">Admin</button>
-    <button class="nl" onclick="sp('billing',this)">Billing</button>
-    <button class="nl" onclick="sp('inbox',this)">Messages <span class="notif-dot">4</span></button>
-    <button class="nl" onclick="sp('metrics',this)">Metrics</button>
-  </div>
-  <div class="nright">
-    <button class="nbtn ol" onclick="sp('portal',document.querySelectorAll('.nl')[3])">Client login</button>
-    <button class="nbtn" onclick="sp('apply',document.querySelectorAll('.nl')[1])">Get started free</button>
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">💎</div>
+    <span class="logo-text">Clear<span>Path</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="client-portal.html" class="btn btn-outline">Client Login</a>
+    <a href="#" class="btn btn-gold" onclick="openApply('subscription')">Apply Now</a>
   </div>
 </nav>
 
-<!-- HOME -->
-<div id="home" class="pg act">
-  <div class="hero">
-    <div class="hero-tag"><i class="fas fa-shield-alt"></i>100% South African owned &amp; operated</div>
-    <h1>We cancel your subscriptions.<br>We <em>slash</em> your debt.<br>You keep the savings.</h1>
-    <p>South Africa's first full-service subscription audit, debt consolidation &amp; financial optimisation platform — operated by humans, powered by tech.</p>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-shield-alt"></i> Trusted by 2,400+ South Africans</div>
+    <h1>Take Back Control of Your <span>Financial Freedom</span></h1>
+    <p>We cancel unnecessary subscriptions, optimize your contracts, and consolidate your debt — so you keep more of your hard-earned money every month.</p>
     <div class="hero-btns">
-      <button class="btn-g" onclick="sp('apply',document.querySelectorAll('.nl')[1])"><i class="fas fa-search"></i>Start free audit</button>
-      <button class="btn-gh" onclick="sp('loan',document.querySelectorAll('.nl')[2])"><i class="fas fa-hand-holding-usd"></i>Debt consolidation</button>
+      <a href="#" class="btn btn-gold btn-xl" onclick="openApply('subscription')"><i class="fas fa-rocket" style="margin-right:8px"></i>Start Saving Today</a>
+      <a href="#how-it-works" class="btn btn-outline btn-xl">See How It Works</a>
     </div>
     <div class="hero-stats">
-      <div class="hs"><div class="hs-num">R 2.4M</div><div class="hs-lbl">Saved for clients</div></div>
-      <div class="hs"><div class="hs-num">4,812</div><div class="hs-lbl">Subscriptions cancelled</div></div>
-      <div class="hs"><div class="hs-num">1,248</div><div class="hs-lbl">Happy clients</div></div>
-      <div class="hs"><div class="hs-num">R 1,950</div><div class="hs-lbl">Avg monthly saving</div></div>
+      <div class="stat-item"><h3>R2.1M+</h3><p>Saved for clients</p></div>
+      <div class="stat-item"><h3>2,400+</h3><p>Happy clients</p></div>
+      <div class="stat-item"><h3>R1,840</h3><p>Avg monthly saving</p></div>
     </div>
   </div>
-  <div class="sec">
-    <div style="text-align:center;margin-bottom:2rem">
-      <div class="sec-title">Two ways we save you money</div>
-      <div class="sec-sub">Choose one or both — most clients use both</div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:820px;margin:0 auto 3rem">
-      <div class="card" style="border-top:4px solid var(--g);padding:1.75rem">
-        <div class="ci"><i class="fas fa-scissors"></i></div>
-        <h3 style="font-size:17px;margin-bottom:8px">Subscription Audit</h3>
-        <p>We analyse your bank statements, identify forgotten subscriptions, outdated contracts, and overpriced services — then cancel or renegotiate on your behalf.</p>
-        <div class="brow"><button class="btn bs" onclick="sp('apply',document.querySelectorAll('.nl')[1])">Start audit <i class="fas fa-arrow-right"></i></button></div>
-      </div>
-      <div class="card" style="border-top:4px solid var(--blu);padding:1.75rem">
-        <div class="ci" style="background:#EFF4FF"><i class="fas fa-hand-holding-usd" style="color:var(--blu)"></i></div>
-        <h3 style="font-size:17px;margin-bottom:8px">Debt Consolidation</h3>
-        <p>Once your subscriptions are cleaned up, we help you consolidate all outstanding debt into a single lower monthly repayment with competitive rates.</p>
-        <div class="brow"><button class="btn bp" onclick="sp('loan',document.querySelectorAll('.nl')[2])">Apply now <i class="fas fa-arrow-right"></i></button></div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-bottom:1.5rem"><div class="sec-title">How it works</div></div>
-    <div class="hiw">
-      <div class="hs2"><div class="hn">01</div><h4>Submit documents</h4><p>Upload your bank statements, ID, and proof of residence securely online.</p></div>
-      <div class="hs2"><div class="hn">02</div><h4>We audit everything</h4><p>Our team identifies every unnecessary charge and savings opportunity.</p></div>
-      <div class="hs2"><div class="hn">03</div><h4>You approve actions</h4><p>We send a detailed savings report. You decide what gets cancelled.</p></div>
-      <div class="hs2"><div class="hn">04</div><h4>We execute</h4><p>We handle all emails, escalations, and follow-ups — completely hands-off.</p></div>
-      <div class="hs2"><div class="hn">05</div><h4>Track &amp; save</h4><p>Monitor every cancellation live in your personal client portal.</p></div>
-    </div>
-    <div style="margin-top:2.5rem"><div class="sec-title">Our services</div><div class="sec-sub">Everything your finances need under one roof</div></div>
-    <div class="cgrid">
-      <div class="card" style="border-left:3px solid var(--g)"><div class="ci"><i class="fas fa-tv"></i></div><h3>Streaming &amp; apps</h3><p>Netflix, Showmax, DSTV, App Store, Play Store charges</p></div>
-      <div class="card" style="border-left:3px solid var(--blu)"><div class="ci" style="background:#EFF4FF"><i class="fas fa-dumbbell" style="color:var(--blu)"></i></div><h3>Gym contracts</h3><p>Virgin Active, Planet Fitness, Curves — we get you out legally</p></div>
-      <div class="card" style="border-left:3px solid var(--amb)"><div class="ci" style="background:#FFF8E6"><i class="fas fa-mobile-alt" style="color:var(--amb)"></i></div><h3>Telecom &amp; fibre</h3><p>Outdated data plans, fibre contracts, unused airtime subs</p></div>
-      <div class="card" style="border-left:3px solid var(--red)"><div class="ci" style="background:#FFF0F3"><i class="fas fa-heartbeat" style="color:var(--red)"></i></div><h3>Insurance &amp; medical</h3><p>Unnecessary add-ons, overpriced premiums, medical aid optimisation</p></div>
-      <div class="card" style="border-left:3px solid var(--g)"><div class="ci"><i class="fas fa-university"></i></div><h3>Banking fees</h3><p>Excessive account fees, unused credit facilities, hidden charges</p></div>
-      <div class="card" style="border-left:3px solid var(--blu)"><div class="ci" style="background:#EFF4FF"><i class="fas fa-briefcase" style="color:var(--blu)"></i></div><h3>Debt consolidation</h3><p>One loan, one payment, lower interest — we arrange it all</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- APPLY / ONBOARD -->
-<div id="apply" class="pg" style="display:none">
-  <div class="sec" style="max-width:760px">
-    <div class="sec-title"><i class="fas fa-file-alt" style="color:var(--g);margin-right:8px"></i>Start your free audit</div>
-    <div class="sec-sub">Complete the form — we respond within 24 hours</div>
-    <div class="psteps">
-      <div class="psc dn" id="oc1"><i class="fas fa-check"></i></div><div class="psl">Details</div>
-      <div class="psln dn" id="ol1"></div>
-      <div class="psc ac" id="oc2">2</div><div class="psl">Documents</div>
-      <div class="psln" id="ol2"></div>
-      <div class="psc td" id="oc3">3</div><div class="psl">Sign POA</div>
-      <div class="psln" id="ol3"></div>
-      <div class="psc td" id="oc4">4</div><div class="psl">Submitted</div>
-    </div>
-
-    <div id="obs1" style="display:none">
-      <div class="fw"><h3>Personal details</h3><div class="sub">Tell us about yourself so we can create your case</div>
-        <div class="fg2"><div class="fg"><label>First name</label><input type="text" placeholder="Sipho"></div><div class="fg"><label>Last name</label><input type="text" placeholder="Dlamini"></div></div>
-        <div class="fg2"><div class="fg"><label>Email address</label><input type="email" placeholder="sipho@email.com"></div><div class="fg"><label>WhatsApp number</label><input type="tel" placeholder="+27 71 234 5678"></div></div>
-        <div class="fg2"><div class="fg"><label>ID number</label><input type="text" placeholder="9501015800087"></div><div class="fg"><label>Province</label><select><option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option><option>Eastern Cape</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Free State</option><option>Northern Cape</option></select></div></div>
-        <div class="fg2"><div class="fg"><label>Service needed</label><select><option>Subscription Audit only</option><option>Debt Consolidation only</option><option>Both — Audit + Consolidation</option></select></div><div class="fg"><label>Package</label><select><option>Basic Audit (R299 once-off)</option><option>Standard Audit (R599 once-off)</option><option>Premium Optimization (R999 once-off)</option></select></div></div>
-        <div class="fg2 f1"><div class="fg"><label>Brief description of your situation</label><textarea placeholder="E.g. I think I have forgotten subscriptions, a gym I don't use, and some debt I need help with..."></textarea></div></div>
-        <div class="brow"><button class="btn bs" onclick="obn(2)">Continue <i class="fas fa-arrow-right"></i></button></div>
-      </div>
-    </div>
-
-    <div id="obs2">
-      <div class="fw"><h3><i class="fas fa-cloud-upload-alt" style="color:var(--g);margin-right:7px"></i>Required documents</h3><div class="sub">All files are encrypted with 256-bit SSL. We never share your data.</div>
-        <div class="dcc">
-          <div class="dc ok" id="dc1" onclick="tdc(this)"><i class="fas fa-file-pdf"></i><span class="dc-lbl">Bank statement — Month 1</span><span class="dc-st">Uploaded</span></div>
-          <div class="dc ok" id="dc2" onclick="tdc(this)"><i class="fas fa-file-pdf"></i><span class="dc-lbl">Bank statement — Month 2</span><span class="dc-st">Uploaded</span></div>
-          <div class="dc pend" id="dc3" onclick="tdc(this)"><i class="fas fa-file-pdf"></i><span class="dc-lbl">Bank statement — Month 3</span><span class="dc-st">Reviewing</span></div>
-          <div class="dc" id="dc4" onclick="tdc(this)"><i class="fas fa-id-card"></i><span class="dc-lbl">Identity document (ID / Passport)</span><span class="dc-st">Required</span></div>
-          <div class="dc" id="dc5" onclick="tdc(this)"><i class="fas fa-home"></i><span class="dc-lbl">Proof of residence (not older than 3 months)</span><span class="dc-st">Required</span></div>
-          <div class="dc" id="dc6" onclick="tdc(this)"><i class="fas fa-file-signature"></i><span class="dc-lbl">Signed POA (download below, sign &amp; upload)</span><span class="dc-st">Required</span></div>
-        </div>
-        <div class="uz" onclick="st('File uploaded successfully!')" style="margin-bottom:.9rem">
-          <i class="fas fa-cloud-upload-alt"></i>
-          <p>Click to upload or drag &amp; drop files here</p>
-          <span>PDF, JPG, PNG accepted — max 20MB per file</span>
-        </div>
-        <div style="background:var(--off);border-radius:10px;padding:.9rem;border:1px solid var(--bdr);margin-bottom:.9rem">
-          <div style="font-size:12px;font-weight:700;margin-bottom:7px"><i class="fas fa-file-signature" style="color:var(--g);margin-right:5px"></i>Power of Attorney (POA)</div>
-          <p style="font-size:12px;color:var(--mu);margin-bottom:9px">Download the POA, print it, sign it, then upload it above.</p>
-          <button class="btn bo bsm" onclick="sp('poa',null)"><i class="fas fa-download"></i>View &amp; download POA</button>
-        </div>
-        <div style="font-size:12px;color:var(--mu);margin-bottom:.9rem">Or connect your bank directly: <button class="btn bo bsm" style="margin-left:7px"><i class="fas fa-university"></i>Stitch Open Banking</button> <button class="btn bo bsm" style="margin-left:5px"><i class="fas fa-link"></i>Mono Link</button></div>
-        <div class="brow"><button class="btn bo" onclick="obn(1)"><i class="fas fa-arrow-left"></i>Back</button><button class="btn bs" onclick="obn(3)">Continue <i class="fas fa-arrow-right"></i></button></div>
-      </div>
-    </div>
-
-    <div id="obs3" style="display:none">
-      <div class="fw"><h3><i class="fas fa-pen-fancy" style="color:var(--g);margin-right:7px"></i>Consent &amp; authorisation</h3><div class="sub">Please read and accept before we proceed</div>
-        <div style="background:var(--off);border-radius:10px;padding:1.1rem;border:1px solid var(--bdr);font-size:12px;color:var(--mu);line-height:1.8;height:120px;overflow-y:auto;margin-bottom:1.1rem">By submitting this application, you authorise DebtFree ZA (Pty) Ltd (Reg. No. 2023/456789/07) to access, review, and act upon the financial documents you have provided. This authority includes contacting service providers on your behalf, requesting cancellations, renegotiating contracts, and arranging debt consolidation discussions. Your data is stored securely per POPIA regulations and will not be shared with third parties without your explicit written consent. You may revoke this authorisation at any time by written notice. DebtFree ZA charges a service fee based on the package selected. For Premium clients, a success fee of 15% of verified monthly savings applies for the first 12 months.</div>
-        <div style="display:flex;flex-direction:column;gap:11px;margin-bottom:1.4rem">
-          <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="margin-top:3px;accent-color:var(--g)">I authorise DebtFree ZA to act on my behalf for all identified subscriptions and services</label>
-          <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="margin-top:3px;accent-color:var(--g)">I confirm all uploaded documents are authentic and belong to me</label>
-          <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="margin-top:3px;accent-color:var(--g)">I agree to the <a href="#" style="color:var(--g)">Terms of Service</a> and <a href="#" style="color:var(--g)">Privacy Policy</a></label>
-          <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="margin-top:3px;accent-color:var(--g)">I consent to a DebiCheck debit order mandate for the selected service fee</label>
-        </div>
-        <div class="brow"><button class="btn bo" onclick="obn(2)"><i class="fas fa-arrow-left"></i>Back</button><button class="btn bs" onclick="obsub()"><i class="fas fa-paper-plane"></i>Submit application</button></div>
-      </div>
-    </div>
-
-    <div id="obs4" style="display:none">
-      <div class="fw" style="text-align:center;padding:2.75rem 1.75rem">
-        <div style="width:60px;height:60px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:26px;color:var(--gd)"><i class="fas fa-check-circle"></i></div>
-        <h3 style="font-size:21px;margin-bottom:.6rem">Application submitted!</h3>
-        <p style="color:var(--mu);max-width:400px;margin:0 auto .6rem">Your case <strong>#DZ-2025-1847</strong> has been created. Our team will review your documents and begin your audit within 24 hours.</p>
-        <p style="color:var(--mu);font-size:12px;margin-bottom:1.75rem">Confirmation sent to your email and WhatsApp.</p>
-        <div class="brow" style="justify-content:center">
-          <button class="btn bs" onclick="sp('portal',document.querySelectorAll('.nl')[3])"><i class="fas fa-chart-line"></i>Track my progress</button>
-          <button class="btn bo"><i class="fas fa-download"></i>Download confirmation</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DEBT CONSOLIDATION -->
-<div id="loan" class="pg" style="display:none">
-  <div class="sec" style="max-width:920px">
-    <div class="sec-title"><i class="fas fa-hand-holding-usd" style="color:var(--blu);margin-right:8px"></i>Debt Consolidation Loan</div>
-    <div class="sec-sub">We combine all your debt into one affordable monthly payment</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.75rem">
-      <div class="lcalc">
-        <h3>Loan calculator</h3>
-        <div class="rw"><label>Loan amount</label><input type="range" min="5000" max="250000" step="1000" value="80000" id="lamt" oninput="calcL()"><div class="ro" id="lamto">R 80,000</div></div>
-        <div class="rw"><label>Repayment term</label><input type="range" min="6" max="60" step="6" value="36" id="lterm" oninput="calcL()"><div class="ro" id="ltermo">36 months</div></div>
-        <div class="rw"><label>Interest rate (%)</label><input type="range" min="11.5" max="24" step="0.5" value="16" id="lrate" oninput="calcL()"><div class="ro" id="lrateo">16.0%</div></div>
-        <div class="lres">
-          <div class="lrr"><span>Monthly instalment</span><span id="lr1" style="color:var(--g);font-weight:700">R 2,812</span></div>
-          <div class="lrr"><span>Total repayment</span><span id="lr2">R 101,232</span></div>
-          <div class="lrr"><span>Total interest</span><span id="lr3">R 21,232</span></div>
-        </div>
-      </div>
-      <div>
-        <div class="card" style="margin-bottom:.9rem;border-top:3px solid var(--blu)">
-          <h3 style="margin-bottom:.9rem">Why consolidate?</h3>
-          <div style="display:flex;flex-direction:column;gap:9px">
-            <div style="display:flex;align-items:center;gap:9px;font-size:13px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-check" style="color:var(--gd);font-size:10px"></i></div>One monthly payment instead of many</div>
-            <div style="display:flex;align-items:center;gap:9px;font-size:13px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-check" style="color:var(--gd);font-size:10px"></i></div>Lower overall interest rate</div>
-            <div style="display:flex;align-items:center;gap:9px;font-size:13px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-check" style="color:var(--gd);font-size:10px"></i></div>Fixed term — know exactly when you'll be debt-free</div>
-            <div style="display:flex;align-items:center;gap:9px;font-size:13px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-check" style="color:var(--gd);font-size:10px"></i></div>Improve your credit score over time</div>
-            <div style="display:flex;align-items:center;gap:9px;font-size:13px"><div style="width:26px;height:26px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fas fa-check" style="color:var(--gd);font-size:10px"></i></div>We handle all lender negotiations on your behalf</div>
-          </div>
-        </div>
-        <div class="card" style="border-top:3px solid var(--amb)">
-          <h3 style="margin-bottom:6px">Requirements</h3>
-          <p style="font-size:12px;color:var(--mu);margin-bottom:9px">To qualify you need:</p>
-          <div style="font-size:12px;color:var(--mu);line-height:2">✓ SA citizen or permanent resident<br>✓ Employed or self-employed with proof of income<br>✓ Active bank account (3 months statements)<br>✓ Valid ID document<br>✓ Proof of residence (not older than 3 months)<br>✓ Signed Power of Attorney (POA)</div>
-        </div>
-      </div>
-    </div>
-    <div class="fw">
-      <h3><i class="fas fa-file-invoice" style="color:var(--blu);margin-right:7px"></i>Consolidation loan application</h3>
-      <div class="sub">Submit your documents and we'll match you with the best lenders</div>
-      <div class="fg2"><div class="fg"><label>Full name</label><input type="text" placeholder="Sipho Dlamini"></div><div class="fg"><label>ID number</label><input type="text" placeholder="9501015800087"></div></div>
-      <div class="fg2"><div class="fg"><label>Email</label><input type="email" placeholder="sipho@email.com"></div><div class="fg"><label>Mobile number</label><input type="tel" placeholder="+27 71 234 5678"></div></div>
-      <div class="fg2 f3"><div class="fg"><label>Monthly income (gross)</label><input type="number" placeholder="25000"></div><div class="fg"><label>Total debt owed</label><input type="number" placeholder="120000"></div><div class="fg"><label>Loan amount requested</label><input type="number" placeholder="80000"></div></div>
-      <div class="fg2"><div class="fg"><label>Employer / Business name</label><input type="text" placeholder="Employer or business name"></div><div class="fg"><label>Employment type</label><select><option>Permanently employed</option><option>Contract employee</option><option>Self-employed</option><option>Other</option></select></div></div>
-      <div style="margin:1.4rem 0 .9rem;font-size:13.5px;font-weight:700">Required documents</div>
-      <div class="dcc">
-        <div class="dc ok" onclick="tdc(this)"><i class="fas fa-file-pdf"></i><span class="dc-lbl">3 months bank statements</span><span class="dc-st">Uploaded</span></div>
-        <div class="dc" onclick="tdc(this)"><i class="fas fa-id-card"></i><span class="dc-lbl">Identity document (ID / Passport)</span><span class="dc-st">Required</span></div>
-        <div class="dc" onclick="tdc(this)"><i class="fas fa-home"></i><span class="dc-lbl">Proof of residence</span><span class="dc-st">Required</span></div>
-        <div class="dc" onclick="tdc(this)"><i class="fas fa-file-invoice-dollar"></i><span class="dc-lbl">Latest payslip (or 3 months if variable)</span><span class="dc-st">Required</span></div>
-        <div class="dc" onclick="tdc(this)"><i class="fas fa-file-signature"></i><span class="dc-lbl">Signed POA</span><span class="dc-st">Required</span></div>
-        <div class="dc" onclick="tdc(this)"><i class="fas fa-list-ul"></i><span class="dc-lbl">Schedule of all current debts</span><span class="dc-st">Required</span></div>
-      </div>
-      <div class="uz" onclick="st('Files uploaded successfully!')" style="margin-bottom:.9rem">
-        <i class="fas fa-cloud-upload-alt"></i>
-        <p>Upload all required documents here</p>
-        <span>PDF, JPG, PNG — max 20MB each</span>
-      </div>
-      <div class="brow">
-        <button class="btn bs" onclick="st('Loan application submitted! Case #DZ-LOAN-2025-0088 created. We\'ll contact you within 48 hours.')"><i class="fas fa-paper-plane"></i>Submit loan application</button>
-        <button class="btn bo" onclick="sp('poa',null)"><i class="fas fa-file-signature"></i>View POA template</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CLIENT PORTAL -->
-<div id="portal" class="pg" style="display:none">
-  <div class="sec">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.4rem;flex-wrap:wrap;gap:1rem">
-      <div>
-        <div style="font-size:21px;font-weight:700;font-family:var(--fh)">Welcome back, Sipho 👋</div>
-        <div style="font-size:13px;color:var(--mu)">Case #DZ-2025-1847 · Premium Audit + Consolidation · Active since 12 May 2025</div>
-      </div>
-      <span class="bdg bg" style="font-size:13px;padding:5px 13px"><i class="fas fa-circle" style="font-size:7px;margin-right:4px"></i>Active</span>
-    </div>
-    <div class="sbanner">
-      <div><h3>Projected monthly savings</h3><div class="big">R 2,340</div></div>
-      <div style="text-align:center"><h3>Confirmed savings so far</h3><div class="big">R 890</div></div>
-      <div style="text-align:right"><h3>Items resolved</h3><div class="big">6 / 9</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem">
-      <div class="card">
-        <h3 style="margin-bottom:.9rem;font-size:14px"><i class="fas fa-bell" style="color:var(--g);margin-right:7px"></i>Recent updates</h3>
-        <div style="display:flex;flex-direction:column;gap:7px">
-          <div style="display:flex;align-items:flex-start;gap:9px;font-size:13px;padding:9px;background:var(--gl);border-radius:9px"><div style="width:7px;height:7px;border-radius:50%;background:var(--g);margin-top:5px;flex-shrink:0"></div><div><div>Netflix cancelled successfully</div><div style="font-size:11px;color:var(--mu)">Today 09:14</div></div></div>
-          <div style="display:flex;align-items:flex-start;gap:9px;font-size:13px;padding:9px;background:#FFF8E6;border-radius:9px"><div style="width:7px;height:7px;border-radius:50%;background:var(--amb);margin-top:5px;flex-shrink:0"></div><div><div>Awaiting Virgin Active response</div><div style="font-size:11px;color:var(--mu)">Yesterday 14:30</div></div></div>
-          <div style="display:flex;align-items:flex-start;gap:9px;font-size:13px;padding:9px;background:var(--gl);border-radius:9px"><div style="width:7px;height:7px;border-radius:50%;background:var(--g);margin-top:5px;flex-shrink:0"></div><div><div>Vodacom plan renegotiated — saving R 220/mo</div><div style="font-size:11px;color:var(--mu)">2 days ago</div></div></div>
-          <div style="display:flex;align-items:flex-start;gap:9px;font-size:13px;padding:9px;background:#FFF0F3;border-radius:9px"><div style="width:7px;height:7px;border-radius:50%;background:var(--red);margin-top:5px;flex-shrink:0"></div><div><div>Action required: sign Discovery add-on removal form</div><div style="font-size:11px;color:var(--mu)">3 days ago</div></div></div>
-        </div>
-      </div>
-      <div class="card">
-        <h3 style="margin-bottom:.9rem;font-size:14px"><i class="fas fa-tasks" style="color:var(--g);margin-right:7px"></i>Progress overview</h3>
-        <div style="display:flex;flex-direction:column;gap:9px;font-size:12px">
-          <div><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span>Subscriptions cancelled</span><span style="font-weight:600">3/5</span></div><div class="pb"><div class="pbf" style="width:60%"></div></div></div>
-          <div><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span>Negotiations complete</span><span style="font-weight:600">2/3</span></div><div class="pb"><div class="pbf" style="width:66%"></div></div></div>
-          <div><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span>Documents verified</span><span style="font-weight:600">5/6</span></div><div class="pb"><div class="pbf" style="width:83%"></div></div></div>
-          <div><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span>Overall case progress</span><span style="font-weight:600;color:var(--gd)">65%</span></div><div class="pb"><div class="pbf" style="width:65%"></div></div></div>
-        </div>
-        <div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--bdr)">
-          <div style="font-size:12px;font-weight:600;margin-bottom:7px">Action needed from you</div>
-          <div style="background:#FFF0F3;border-radius:9px;padding:9px 12px;font-size:12px;color:var(--red);display:flex;align-items:center;gap:7px"><i class="fas fa-exclamation-circle"></i>Please sign and return the Discovery add-on removal form</div>
-        </div>
-      </div>
-    </div>
-    <div class="card" style="margin-bottom:1.4rem">
-      <h3 style="margin-bottom:.9rem;font-size:14px"><i class="fas fa-list-check" style="color:var(--g);margin-right:7px"></i>Subscription tracker</h3>
-      <div class="tw">
-        <table class="dt">
-          <thead><tr><th>Service</th><th>Category</th><th>Monthly cost</th><th>Action</th><th>Status</th><th>Saving</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Netflix</strong></td><td>Streaming</td><td>R 189</td><td>Cancel</td><td><span class="bdg bg"><i class="fas fa-check"></i>&nbsp;Done</span></td><td style="color:var(--gd);font-weight:600">R 189/mo</td></tr>
-            <tr><td><strong>Vodacom</strong></td><td>Telecom</td><td>R 699 → R 479</td><td>Negotiate</td><td><span class="bdg bg"><i class="fas fa-check"></i>&nbsp;Done</span></td><td style="color:var(--gd);font-weight:600">R 220/mo</td></tr>
-            <tr><td><strong>Showmax</strong></td><td>Streaming</td><td>R 149</td><td>Cancel</td><td><span class="bdg bg"><i class="fas fa-check"></i>&nbsp;Done</span></td><td style="color:var(--gd);font-weight:600">R 149/mo</td></tr>
-            <tr><td><strong>Virgin Active</strong></td><td>Gym</td><td>R 799</td><td>Cancel</td><td><span class="bdg ba">In progress</span></td><td style="color:var(--mu)">Pending</td></tr>
-            <tr><td><strong>Discovery add-on</strong></td><td>Insurance</td><td>R 340</td><td>Remove</td><td><span class="bdg br"><i class="fas fa-exclamation"></i>&nbsp;Action needed</span></td><td style="color:var(--mu)">Pending</td></tr>
-            <tr><td><strong>Audible</strong></td><td>App</td><td>R 225</td><td>Cancel</td><td><span class="bdg bb">Queued</span></td><td style="color:var(--mu)">—</td></tr>
-            <tr><td><strong>FNB Premium</strong></td><td>Banking</td><td>R 210</td><td>Downgrade</td><td><span class="bdg bb">Queued</span></td><td style="color:var(--mu)">—</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card">
-      <h3 style="margin-bottom:.9rem;font-size:14px"><i class="fas fa-history" style="color:var(--g);margin-right:7px"></i>Activity timeline</h3>
-      <div class="tl">
-        <div class="tlr"><div style="position:relative"><div class="tld"></div><div class="tlb dn"></div></div><div class="tlc"><div class="tlt">Documents received — audit started</div><div class="tlm">12 May 2025</div><div class="tld2">3 bank statements processed. 9 recurring charges identified totalling R 2,811/month.</div></div></div>
-        <div class="tlr"><div style="position:relative"><div class="tld"></div><div class="tlb dn"></div></div><div class="tlc"><div class="tlt">Savings report delivered</div><div class="tlm">13 May 2025</div><div class="tld2">Projected saving of R 2,340/month. Client approved 8 of 9 actions.</div></div></div>
-        <div class="tlr"><div style="position:relative"><div class="tld"></div><div class="tlb dn"></div></div><div class="tlc"><div class="tlt">Netflix &amp; Showmax cancelled</div><div class="tlm">14 May 2025</div><div class="tld2">Cancellation confirmed. Debit orders cease next billing cycle.</div></div></div>
-        <div class="tlr"><div style="position:relative"><div class="tld"></div><div class="tlb"></div></div><div class="tlc"><div class="tlt">Vodacom plan renegotiated</div><div class="tlm">16 May 2025</div><div class="tld2">Switched to Vodacom Smart S — saving R 220/month. Ref: VC-88221.</div></div></div>
-        <div class="tlr"><div style="position:relative"><div class="tld am"></div></div><div class="tlc"><div class="tlt" style="color:var(--mu)">Virgin Active — second escalation sent</div><div class="tlm" style="color:var(--mu)">19 May 2025 — awaiting response</div><div class="tld2">Cancellation notice sent twice. Waiting on gym admin within 5 business days.</div></div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN -->
-<div id="admin" class="pg" style="display:none">
-  <div class="sec">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
-      <div><div class="sec-title">Admin audit workspace</div><div class="sec-sub">Full case management, audit tool &amp; client oversight</div></div>
-      <div style="display:flex;gap:8px">
-        <button class="btn bo bsm"><i class="fas fa-download"></i>Export all</button>
-        <button class="btn bs bsm" onclick="st('Savings report sent to client via email &amp; WhatsApp!')"><i class="fas fa-paper-plane"></i>Send report</button>
-      </div>
-    </div>
-    <div style="display:flex;gap:7px;margin-bottom:1.4rem;flex-wrap:wrap">
-      <button class="btn bs bsm" id="atab1" onclick="atab('audit')"><i class="fas fa-search"></i>Audit tool</button>
-      <button class="btn bo bsm" id="atab2" onclick="atab('cases')"><i class="fas fa-users"></i>All cases</button>
-    </div>
-
-    <div id="adm-audit">
-      <div style="background:#fff;border-radius:var(--r);border:1px solid var(--bdr);padding:11px 15px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <div style="font-size:13.5px;font-weight:600">Client: <span style="color:var(--gd)">Sipho Dlamini</span> — Case #DZ-2025-1847</div>
-        <div style="display:flex;gap:6px"><span class="bdg bb">Premium</span><span class="bdg ba">In progress</span></div>
-      </div>
-      <div class="alyt">
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
         <div>
-          <div style="font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.4px;margin-bottom:9px">DETECTED SUBSCRIPTIONS</div>
-          <div class="si sl" onclick="sel(this,'Netflix','Streaming','R 189/month','Jan 2023','Credit card','Cancel — no usage detected','No logins in 3 months. Client confirmed not using.')"><div class="sic"><i class="fas fa-tv"></i></div><div class="sinf"><div class="sn">Netflix</div><div class="sd">Monthly · Streaming</div></div><div class="sa">R 189</div></div>
-          <div class="si" onclick="sel(this,'Virgin Active','Gym','R 799/month','Mar 2022','DebiCheck','Cancel — no check-ins in 6 months','Zero gym visits past 6 months per card pattern.')"><div class="sic"><i class="fas fa-dumbbell"></i></div><div class="sinf"><div class="sn">Virgin Active</div><div class="sd">Monthly · Gym</div></div><div class="sa">R 799</div></div>
-          <div class="si" onclick="sel(this,'Vodacom','Telecom','R 699/month','Jun 2021','Naedo debit','Renegotiate — better plan available','Smart S plan saves R220/mo with more data.')"><div class="sic"><i class="fas fa-mobile-alt"></i></div><div class="sinf"><div class="sn">Vodacom</div><div class="sd">Monthly · Telecom</div></div><div class="sa">R 699</div></div>
-          <div class="si" onclick="sel(this,'Discovery Add-on','Insurance','R 340/month','Sep 2020','Debit order','Remove — client unaware of add-on','Add-on added by agent in 2020. Client had no knowledge.')"><div class="sic"><i class="fas fa-heartbeat"></i></div><div class="sinf"><div class="sn">Discovery add-on</div><div class="sd">Monthly · Insurance</div></div><div class="sa">R 340</div></div>
-          <div class="si" onclick="sel(this,'Audible','App','R 225/month','Apr 2024','Card debit','Cancel — no activity in 4 months','Last book listened 4 months ago.')"><div class="sic"><i class="fas fa-headphones"></i></div><div class="sinf"><div class="sn">Audible</div><div class="sd">Monthly · App</div></div><div class="sa">R 225</div></div>
-          <div class="si" onclick="sel(this,'Adobe CC','Software','R 455/month','Nov 2022','Card debit','Review — possible business use','Used monthly — flag for client review before cancelling.')"><div class="sic"><i class="fas fa-paint-brush"></i></div><div class="sinf"><div class="sn">Adobe CC</div><div class="sd">Monthly · Software</div></div><div class="sa">R 455</div></div>
-          <div class="si" onclick="sel(this,'FNB Premium','Banking','R 210/month','Jan 2019','Internal debit','Downgrade — cheaper plan suits usage','Basic account at R95 covers all client usage patterns.')"><div class="sic"><i class="fas fa-university"></i></div><div class="sinf"><div class="sn">FNB Premium</div><div class="sd">Monthly · Banking</div></div><div class="sa">R 210</div></div>
+          <p style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">Monthly Savings</p>
+          <h2 style="font-family:'Playfair Display',serif;font-size:38px;color:var(--gold)">R2,240</h2>
         </div>
-        <div class="dcard">
-          <div style="font-size:15px;font-weight:700;font-family:var(--fh);margin-bottom:1rem" id="dn">Netflix</div>
-          <div class="dr"><span class="dlb">Category</span><span id="dcat">Streaming</span></div>
-          <div class="dr"><span class="dlb">Monthly cost</span><span id="dcost" style="color:var(--red);font-weight:700">R 189/month</span></div>
-          <div class="dr"><span class="dlb">Active since</span><span id="dsince">Jan 2023</span></div>
-          <div class="dr"><span class="dlb">Debit type</span><span id="dtype">Credit card</span></div>
-          <div class="dr"><span class="dlb">Recommendation</span><span id="drec" style="color:var(--gd);font-size:12px;font-weight:600">Cancel — no usage detected</span></div>
-          <div style="margin:.9rem 0 5px;font-size:11px;font-weight:700;color:var(--mu)">AUDIT NOTES</div>
-          <textarea id="dnotes" style="width:100%;padding:9px;border:1.5px solid var(--bdr);border-radius:8px;background:var(--off);color:var(--navy);font-size:12px;font-family:var(--fb);resize:vertical;outline:none" rows="3">No logins in 3 months. Client confirmed not using.</textarea>
-          <div style="margin:.9rem 0 7px;font-size:11px;font-weight:700;color:var(--mu)">ACTION</div>
-          <div class="brow">
-            <button class="btn bd bsm" onclick="st('Marked for cancellation')"><i class="fas fa-times"></i>Cancel</button>
-            <button class="btn bw bsm" onclick="st('Marked for renegotiation')"><i class="fas fa-exchange-alt"></i>Renegotiate</button>
-            <button class="btn bo bsm" onclick="st('Marked to keep')"><i class="fas fa-check"></i>Keep</button>
-          </div>
-          <div style="margin:1.1rem 0 7px;font-size:11px;font-weight:700;color:var(--mu)">CANCELLATION EMAIL TEMPLATE</div>
-          <textarea id="etmpl" style="width:100%;padding:9px;border:1.5px solid var(--bdr);border-radius:8px;background:var(--off);color:var(--navy);font-size:12px;font-family:var(--fb);resize:vertical;outline:none" rows="5">Dear Netflix Support,
-
-I am writing on behalf of my client, Sipho Dlamini (ID: 9501015800087), to formally request the immediate cancellation of their subscription registered to sipho.dlamini@email.com. Please confirm cancellation and cessation of all debit orders within 5 business days.
-
-Authorised by: DebtFree ZA (Pty) Ltd — Ref: DZ-2025-1847</textarea>
-          <div class="brow">
-            <button class="btn bs bsm" onclick="st('Cancellation email sent!')"><i class="fas fa-paper-plane"></i>Send email</button>
-            <button class="btn bo bsm" onclick="st('Copied to clipboard')"><i class="fas fa-copy"></i>Copy</button>
-          </div>
-        </div>
+        <div style="background:rgba(46,204,113,0.12);border-radius:10px;padding:8px 14px;color:var(--success);font-size:13px;font-weight:600">▲ 28%</div>
+      </div>
+      <div class="savings-bar">
+        <div class="savings-bar-label"><span>DStv Premium</span><span>-R899/mo</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="savings-bar">
+        <div class="savings-bar-label"><span>Gym Contract</span><span>-R650/mo</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+      </div>
+      <div class="savings-bar">
+        <div class="savings-bar-label"><span>Insurance Add-ons</span><span>-R450/mo</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:42%"></div></div>
+      </div>
+      <div class="savings-bar">
+        <div class="savings-bar-label"><span>Old Telkom Plan</span><span>-R241/mo</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:22%"></div></div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--success)"></div>
+        <span style="font-size:13px;color:var(--text-muted)">Audit completed • 4 cancellations processed</span>
       </div>
     </div>
+  </div>
+</section>
 
-    <div id="adm-cases" style="display:none">
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;flex-wrap:wrap;gap:8px">
-          <h3 style="font-size:15px">All client cases</h3>
-          <div style="display:flex;gap:8px">
-            <input type="text" placeholder="Search name or case #..." style="padding:7px 13px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--off);font-size:12.5px;outline:none;width:200px">
-            <select style="padding:7px 12px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--off);font-size:12.5px;outline:none"><option>All statuses</option><option>Active</option><option>Complete</option><option>Awaiting docs</option></select>
-          </div>
+<!-- SERVICES -->
+<section class="section" id="services" style="background:var(--navy-mid)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Financial Services <br>Designed for <span style="color:var(--gold)">Real South Africans</span></h2>
+    <p class="section-sub">From forgotten gym memberships to complex debt consolidation — we handle the admin so you don't have to.</p>
+    <div class="services-grid">
+      <a href="#" class="service-card" onclick="openApply('subscription');return false">
+        <div class="service-icon"><i class="fas fa-times-circle"></i></div>
+        <h3>Subscription Cancellation</h3>
+        <p>We audit all your debit orders, identify unused services, and manage the full cancellation process with service providers on your behalf.</p>
+        <span class="service-tag">Most Popular →</span>
+      </a>
+      <a href="#" class="service-card" onclick="openApply('debt');return false">
+        <div class="service-icon"><i class="fas fa-compress-arrows-alt"></i></div>
+        <h3>Debt Consolidation</h3>
+        <p>Combine multiple debts into one manageable monthly payment. We apply to financial institutions on your behalf and negotiate the best rates.</p>
+        <span class="service-tag">Apply Now →</span>
+      </a>
+      <a href="#" class="service-card" onclick="openApply('insurance');return false">
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Insurance Optimization</h3>
+        <p>Are you over-insured or paying for add-ons you never use? We analyze your policies and find you better value without reducing your cover.</p>
+        <span class="service-tag">Save Now →</span>
+      </a>
+      <a href="#" class="service-card" onclick="openApply('banking');return false">
+        <div class="service-icon"><i class="fas fa-university"></i></div>
+        <h3>Banking Fee Audit</h3>
+        <p>Hidden bank fees and outdated account packages could be costing you hundreds every month. We identify and eliminate unnecessary charges.</p>
+        <span class="service-tag">Free Audit →</span>
+      </a>
+      <a href="#" class="service-card" onclick="openApply('telecom');return false">
+        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Telecom & Fibre Review</h3>
+        <p>Outdated mobile contracts and overpriced fibre packages are common. We renegotiate or find better alternatives on your behalf.</p>
+        <span class="service-tag">Review Plan →</span>
+      </a>
+      <a href="#" class="service-card" onclick="openApply('credit');return false">
+        <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Credit Report Review</h3>
+        <p>We pull your credit report, identify negative listings, and guide you on improving your credit score for better financial opportunities.</p>
+        <span class="service-tag">Check Score →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section" id="how-it-works">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-label">The Process</div>
+    <h2 class="section-title">Simple. Fast. <span style="color:var(--gold)">Effective.</span></h2>
+    <p class="section-sub">We've streamlined the entire process so you can go from stressed to saving in days, not months.</p>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <h4>Apply Online</h4>
+        <p>Complete our secure online application in under 10 minutes. No paperwork. No office visits.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <h4>We Audit Everything</h4>
+        <p>Our team reviews your bank statements and identifies every unnecessary expense and saving opportunity.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <h4>Sign Your POA</h4>
+        <p>Sign a Power of Attorney electronically — giving us authority to act on your behalf with service providers.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <h4>Start Saving</h4>
+        <p>We do all the admin. You receive monthly savings reports and watch your disposable income grow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials" id="testimonials">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-label">Client Stories</div>
+    <h2 class="section-title">What Our Clients <span style="color:var(--gold)">Say</span></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"I had no idea I was still paying for a gym I hadn't visited in 2 years. ClearPath cancelled it and found 3 other debit orders I'd forgotten about. I'm saving R1,900 a month!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">TM</div>
+          <div><h5>Thabo Molefe</h5><span>Johannesburg</span></div>
         </div>
-        <div class="tw">
-          <table class="dt">
-            <thead><tr><th>Client</th><th>Case #</th><th>Submitted</th><th>Package</th><th>Items</th><th>Progress</th><th>Status</th><th>Action</th></tr></thead>
-            <tbody>
-              <tr><td><span class="av">SD</span><strong>Sipho Dlamini</strong></td><td style="color:var(--mu)">#DZ-1847</td><td>12 May</td><td><span class="bdg bb">Premium</span></td><td>9</td><td><div class="pb" style="width:90px"><div class="pbf" style="width:65%"></div></div><div style="font-size:10px;color:var(--mu)">65%</div></td><td><span class="bdg ba">In progress</span></td><td><button class="btn bo bsm" onclick="atab('audit')">Open ↗</button></td></tr>
-              <tr><td><span class="av" style="background:#EFF4FF;color:#1D4DBF">TM</span><strong>Thandi Mkhize</strong></td><td style="color:var(--mu)">#DZ-1846</td><td>10 May</td><td><span class="bdg bg">Standard</span></td><td>6</td><td><div class="pb" style="width:90px"><div class="pbf" style="width:100%"></div></div><div style="font-size:10px;color:var(--mu)">100%</div></td><td><span class="bdg bg">Complete</span></td><td><button class="btn bo bsm">Open ↗</button></td></tr>
-              <tr><td><span class="av" style="background:#FFF8E6;color:#7A5200">JV</span><strong>Jan van Wyk</strong></td><td style="color:var(--mu)">#DZ-1845</td><td>8 May</td><td><span class="bdg bgr">Basic</span></td><td>4</td><td><div class="pb" style="width:90px"><div class="pbf" style="width:25%"></div></div><div style="font-size:10px;color:var(--mu)">25%</div></td><td><span class="bdg ba">Awaiting docs</span></td><td><button class="btn bo bsm">Open ↗</button></td></tr>
-              <tr><td><span class="av" style="background:#FFF0F3;color:#C0003A">NP</span><strong>Nomsa Patel</strong></td><td style="color:var(--mu)">#DZ-1844</td><td>5 May</td><td><span class="bdg bb">Premium</span></td><td>12</td><td><div class="pb" style="width:90px"><div class="pbf" style="width:42%"></div></div><div style="font-size:10px;color:var(--mu)">42%</div></td><td><span class="bdg ba">In progress</span></td><td><button class="btn bo bsm">Open ↗</button></td></tr>
-              <tr><td><span class="av" style="background:#EFF4FF;color:#1D4DBF">BM</span><strong>Blessing Mokoena</strong></td><td style="color:var(--mu)">#DZ-1843</td><td>1 May</td><td><span class="bdg bg">Standard + Loan</span></td><td>8</td><td><div class="pb" style="width:90px"><div class="pbf" style="width:80%"></div></div><div style="font-size:10px;color:var(--mu)">80%</div></td><td><span class="bdg ba">In progress</span></td><td><button class="btn bo bsm">Open ↗</button></td></tr>
-            </tbody>
-          </table>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"The debt consolidation service was a lifesaver. My 7 different creditors became one affordable payment. The team handled everything and communicated throughout."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">NS</div>
+          <div><h5>Nomvula Sithole</h5><span>Durban</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Very professional and trustworthy. They found R650 in unnecessary insurance add-ons and sorted it all out within a week. Highly recommend to any South African."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">PV</div>
+          <div><h5>Pieter van der Berg</h5><span>Cape Town</span></div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- BILLING -->
-<div id="billing" class="pg" style="display:none">
-  <div class="sec" style="max-width:920px">
-    <div class="sec-title"><i class="fas fa-file-invoice-dollar" style="color:var(--g);margin-right:8px"></i>Billing &amp; DebiCheck Mandates</div>
-    <div class="sec-sub">Issue and manage client billing via authenticated DebiCheck debit order mandates</div>
-    <div style="display:flex;gap:7px;margin-bottom:1.4rem;flex-wrap:wrap">
-      <button class="btn bs bsm" onclick="btab('create')"><i class="fas fa-plus"></i>Create mandate</button>
-      <button class="btn bo bsm" onclick="btab('mandates')"><i class="fas fa-list"></i>Active mandates</button>
-      <button class="btn bo bsm" onclick="btab('invoices')"><i class="fas fa-receipt"></i>Invoices</button>
-    </div>
-
-    <div id="bc">
-      <div class="mf">
-        <div class="mhd">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem">
-            <div><h3>DebiCheck Debit Order Mandate</h3><p>Authenticated mandate — NCR &amp; NCA compliant</p></div>
-            <div style="text-align:right;font-size:12px;opacity:.55">DebtFree ZA (Pty) Ltd<br>Creditor ID: 12345678</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.4rem">
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:9px">CLIENT DETAILS</div>
-            <div class="fg2 f1">
-              <div class="fg"><label>Client full name</label><input type="text" value="Sipho Dlamini"></div>
-              <div class="fg"><label>ID number</label><input type="text" value="9501015800087"></div>
-              <div class="fg"><label>Account holder name</label><input type="text" value="Sipho Dlamini"></div>
-              <div class="fg"><label>Bank name</label><select><option>FNB</option><option>Standard Bank</option><option>ABSA</option><option>Nedbank</option><option>Capitec</option><option>African Bank</option><option>Investec</option><option>TymeBank</option></select></div>
-            </div>
-            <div class="fg2"><div class="fg"><label>Account number</label><input type="text" value="62001234567"></div><div class="fg"><label>Branch code</label><input type="text" value="250655"></div></div>
-            <div class="fg"><label>Account type</label><select><option>Cheque / Current</option><option>Savings</option><option>Transmission</option></select></div>
-          </div>
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:9px">COLLECTION DETAILS</div>
-            <div class="fg2 f1">
-              <div class="fg"><label>Service package</label>
-                <select id="pkgsel" onchange="updamt()">
-                  <option value="299">Basic Audit — R 299 once-off</option>
-                  <option value="599" selected>Standard Audit — R 599 once-off</option>
-                  <option value="999">Premium Optimization — R 999 once-off</option>
-                  <option value="450">Success fee — 15% monthly (est. R 450)</option>
-                </select>
-              </div>
-              <div class="fg"><label>Debit amount (ZAR)</label><input type="number" id="mamt" value="599"></div>
-              <div class="fg"><label>Collection frequency</label><select><option>Once-off</option><option>Monthly</option><option>Bi-monthly</option><option>Quarterly</option></select></div>
-              <div class="fg"><label>First collection date</label><input type="date" value="2025-06-01"></div>
-              <div class="fg"><label>Mandate reference</label><input type="text" value="DZ-2025-1847" readonly style="background:var(--bdr);color:var(--mu)"></div>
-            </div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.4rem">
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:9px">CLIENT SIGNATURE</div>
-            <div class="sig" onclick="st('Digital signature captured')"><i class="fas fa-pen" style="margin-right:6px"></i>Click to capture digital signature</div>
-            <div style="font-size:11px;color:var(--mu);margin-top:5px">Or upload a signed physical mandate</div>
-          </div>
-          <div>
-            <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:9px">AUTHORISED BY (DEBTFREEZA)</div>
-            <div class="sig" style="border-color:var(--g);background:var(--gl)" onclick="st('Company signature applied')"><i class="fas fa-stamp" style="margin-right:6px;color:var(--g)"></i>DebtFree ZA authorised signatory</div>
-          </div>
-        </div>
-        <div class="brow">
-          <button class="btn bs" onclick="st('DebiCheck mandate submitted to bank for authentication. Client will receive SMS to confirm.')"><i class="fas fa-university"></i>Submit to bank for authentication</button>
-          <button class="btn bo" onclick="st('Mandate sent to client WhatsApp &amp; email for signing')"><i class="fas fa-share-alt"></i>Send to client</button>
-          <button class="btn bo" onclick="st('Mandate PDF generated')"><i class="fas fa-file-pdf"></i>Generate PDF</button>
-        </div>
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--navy-mid)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-label">Our Packages</div>
+    <h2 class="section-title">Transparent <span style="color:var(--gold)">Pricing</span></h2>
+    <p class="section-sub">Choose the plan that fits your needs. No hidden fees, no surprises.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="plan-name">Basic Audit</div>
+        <div class="price"><span>R</span>499</div>
+        <div class="price-note">One-time fee</div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i>Full subscription audit</li>
+          <li><i class="fas fa-check"></i>Savings Report</li>
+          <li><i class="fas fa-check"></i>Up to 5 cancellations</li>
+          <li><i class="fas fa-check"></i>Email support</li>
+          <li><i class="fas fa-check"></i>30-day follow-up</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;text-align:center" onclick="openApply('subscription')">Get Started</a>
       </div>
-    </div>
-
-    <div id="bm" style="display:none">
-      <div class="card">
-        <h3 style="margin-bottom:.9rem;font-size:15px">Active DebiCheck mandates</h3>
-        <div class="tw">
-          <table class="dt">
-            <thead><tr><th>Client</th><th>Package</th><th>Amount</th><th>Frequency</th><th>Next debit</th><th>Bank status</th><th>Actions</th></tr></thead>
-            <tbody>
-              <tr><td><span class="av">SD</span><strong>Sipho Dlamini</strong></td><td>Standard Audit</td><td style="font-weight:700">R 599</td><td>Once-off</td><td>1 Jun 2025</td><td><span class="bdg bg"><i class="fas fa-check"></i>&nbsp;Authenticated</span></td><td><button class="btn bo bsm">View</button> <button class="btn bd bsm" onclick="st('Mandate cancellation requested')">Cancel</button></td></tr>
-              <tr><td><span class="av" style="background:#EFF4FF;color:#1D4DBF">TM</span><strong>Thandi Mkhize</strong></td><td>Success fee</td><td style="font-weight:700">R 270/mo</td><td>Monthly</td><td>1 Jun 2025</td><td><span class="bdg bg"><i class="fas fa-check"></i>&nbsp;Authenticated</span></td><td><button class="btn bo bsm">View</button> <button class="btn bd bsm" onclick="st('Mandate cancellation requested')">Cancel</button></td></tr>
-              <tr><td><span class="av" style="background:#FFF8E6;color:#7A5200">JV</span><strong>Jan van Wyk</strong></td><td>Basic Audit</td><td style="font-weight:700">R 299</td><td>Once-off</td><td>15 Jun 2025</td><td><span class="bdg ba">Pending auth</span></td><td><button class="btn bo bsm">View</button> <button class="btn bw bsm" onclick="st('Auth reminder sent to client')">Remind</button></td></tr>
-              <tr><td><span class="av" style="background:#FFF0F3;color:#C0003A">NP</span><strong>Nomsa Patel</strong></td><td>Premium + Loan</td><td style="font-weight:700">R 999</td><td>Once-off</td><td>20 Jun 2025</td><td><span class="bdg ba">Pending auth</span></td><td><button class="btn bo bsm">View</button> <button class="btn bw bsm" onclick="st('Auth reminder sent')">Remind</button></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="pricing-card featured">
+        <div class="featured-badge">Most Popular</div>
+        <div class="plan-name">Full Optimization</div>
+        <div class="price"><span>R</span>999</div>
+        <div class="price-note">One-time fee</div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i>Everything in Basic</li>
+          <li><i class="fas fa-check"></i>Unlimited cancellations</li>
+          <li><i class="fas fa-check"></i>Insurance review</li>
+          <li><i class="fas fa-check"></i>Banking fee audit</li>
+          <li><i class="fas fa-check"></i>Telecom renegotiation</li>
+          <li><i class="fas fa-check"></i>90-day support</li>
+        </ul>
+        <a href="#" class="btn btn-gold" style="width:100%;text-align:center" onclick="openApply('subscription')">Get Started</a>
       </div>
-    </div>
-
-    <div id="bi" style="display:none">
-      <div class="card">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;flex-wrap:wrap;gap:8px">
-          <h3 style="font-size:15px">Invoice history</h3>
-          <button class="btn bs bsm" onclick="st('New invoice created')"><i class="fas fa-plus"></i>Create invoice</button>
-        </div>
-        <div class="tw">
-          <table class="dt">
-            <thead><tr><th>Invoice #</th><th>Client</th><th>Service</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
-            <tbody>
-              <tr><td style="font-weight:600;color:var(--gd)">INV-0047</td><td>Sipho Dlamini</td><td>Standard Audit</td><td style="font-weight:700">R 599</td><td>12 May 2025</td><td><span class="bdg bg">Paid</span></td><td><button class="btn bo bsm"><i class="fas fa-download"></i></button></td></tr>
-              <tr><td style="font-weight:600;color:var(--gd)">INV-0046</td><td>Thandi Mkhize</td><td>Success fee (May)</td><td style="font-weight:700">R 270</td><td>10 May 2025</td><td><span class="bdg bg">Paid</span></td><td><button class="btn bo bsm"><i class="fas fa-download"></i></button></td></tr>
-              <tr><td style="font-weight:600;color:var(--navy)">INV-0045</td><td>Jan van Wyk</td><td>Basic Audit</td><td style="font-weight:700">R 299</td><td>8 May 2025</td><td><span class="bdg ba">Pending</span></td><td><button class="btn bo bsm"><i class="fas fa-download"></i></button> <button class="btn bw bsm" onclick="st('Payment reminder sent')"><i class="fas fa-bell"></i></button></td></tr>
-              <tr><td style="font-weight:600;color:var(--navy)">INV-0044</td><td>Nomsa Patel</td><td>Premium + Loan</td><td style="font-weight:700">R 999</td><td>5 May 2025</td><td><span class="bdg br">Overdue</span></td><td><button class="btn bo bsm"><i class="fas fa-download"></i></button> <button class="btn bd bsm" onclick="st('Overdue notice sent')"><i class="fas fa-exclamation"></i></button></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div style="display:flex;justify-content:flex-end;gap:1.5rem;padding-top:.9rem;border-top:1px solid var(--bdr);font-size:13px;flex-wrap:wrap;margin-top:.5rem">
-          <span style="color:var(--mu)">Total billed: <strong style="color:var(--navy)">R 2,167</strong></span>
-          <span style="color:var(--mu)">Collected: <strong style="color:var(--gd)">R 1,869</strong></span>
-          <span style="color:var(--mu)">Outstanding: <strong style="color:var(--red)">R 1,298</strong></span>
-        </div>
+      <div class="pricing-card">
+        <div class="plan-name">Debt Consolidation</div>
+        <div class="price"><span></span>% Based</div>
+        <div class="price-note">Performance fee model</div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i>Full debt audit</li>
+          <li><i class="fas fa-check"></i>Credit bureau check</li>
+          <li><i class="fas fa-check"></i>Lender negotiation</li>
+          <li><i class="fas fa-check"></i>Application handling</li>
+          <li><i class="fas fa-check"></i>POA & legal docs</li>
+          <li><i class="fas fa-check"></i>Dedicated case manager</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;text-align:center" onclick="openApply('debt')">Apply Now</a>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- INBOX -->
-<div id="inbox" class="pg" style="display:none">
-  <div class="sec">
-    <div class="sec-title"><i class="fas fa-comments" style="color:var(--g);margin-right:8px"></i>Messages</div>
-    <div class="sec-sub">Client communications and external service provider correspondence</div>
-    <div class="ilyt">
+<!-- CONTACT -->
+<section class="section" id="contact" style="background:var(--navy)">
+  <div style="max-width:800px;margin:0 auto;text-align:center">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Ready to Start <span style="color:var(--gold)">Saving?</span></h2>
+    <p class="section-sub" style="margin:0 auto 40px">Book a free consultation or apply directly online. Our team is standing by to help you take control of your finances.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn btn-gold btn-xl" onclick="openApply('subscription')">Apply Now — It's Free</a>
+      <a href="mailto:info@clearpath.co.za" class="btn btn-outline btn-xl"><i class="fas fa-envelope" style="margin-right:8px"></i>Email Us</a>
+    </div>
+    <div style="margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div style="font-size:24px;color:var(--gold);margin-bottom:8px"><i class="fas fa-phone"></i></div>
+        <p style="font-size:15px;font-weight:600">+27 10 123 4567</p>
+        <p style="font-size:13px;color:var(--text-muted)">Mon–Fri 8am–6pm</p>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:24px;color:var(--gold);margin-bottom:8px"><i class="fab fa-whatsapp"></i></div>
+        <p style="font-size:15px;font-weight:600">+27 81 234 5678</p>
+        <p style="font-size:13px;color:var(--text-muted)">WhatsApp us anytime</p>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:24px;color:var(--gold);margin-bottom:8px"><i class="fas fa-envelope"></i></div>
+        <p style="font-size:15px;font-weight:600">info@clearpath.co.za</p>
+        <p style="font-size:13px;color:var(--text-muted)">Replies within 2 hours</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="margin-bottom:16px;display:inline-flex">
+          <div class="logo-icon">💎</div>
+          <span class="logo-text" style="font-size:22px">Clear<span>Path</span></span>
+        </a>
+        <p>South Africa's leading subscription management and financial optimization service. We put your money back in your pocket.</p>
+        <div style="display:flex;gap:12px;margin-top:20px">
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-instagram"></i></a>
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-tiktok"></i></a>
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
       <div>
-        <div style="margin-bottom:9px;position:relative">
-          <input type="text" placeholder="Search conversations..." style="width:100%;padding:8px 13px 8px 34px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--off);font-size:12.5px;outline:none">
-          <i class="fas fa-search" style="position:absolute;left:11px;top:10px;color:var(--mu);font-size:12px"></i>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Subscription Cancellation</a></li>
+          <li><a href="#">Debt Consolidation</a></li>
+          <li><a href="#">Insurance Optimization</a></li>
+          <li><a href="#">Banking Fee Audit</a></li>
+          <li><a href="#">Credit Report Review</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">POPIA Compliance</a></li>
+          <li><a href="#">NCA Registration</a></li>
+          <li><a href="#">NCR Registration</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ClearPath Financial (Pty) Ltd. Registered in South Africa. NCR Registered Debt Counsellor.</p>
+      <p style="color:var(--gold);font-size:12px">Regulated | Trusted | South African</p>
+    </div>
+  </div>
+</footer>
+
+<!-- APPLY MODAL -->
+<div class="modal-overlay" id="applyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="modalTitle">Apply for Service</h2>
+        <p id="modalSub">Complete the form below — takes under 10 minutes</p>
+      </div>
+      <button class="modal-close" onclick="closeApply()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="step-indicators" id="stepDots"></div>
+
+      <!-- STEP 1: Personal Info -->
+      <div class="form-step active" id="step1">
+        <h3>Personal Information</h3>
+        <p>Tell us about yourself. All information is securely encrypted.</p>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" id="f_first" placeholder="Thabo" required></div>
+          <div class="form-group"><label>Last Name</label><input type="text" id="f_last" placeholder="Molefe" required></div>
         </div>
-        <div class="ii sl" onclick="omsg(this,'Sipho Dlamini','SD','#DZ-2025-1847','Can you let me know when the Virgin Active cancellation is done? I\'ve been waiting a week now. They keep transferring me. Thank you for handling this.','Today 10:24')">
-          <div class="iav">SD</div><div class="ib"><div class="inm">Sipho Dlamini</div><div class="ipv">Waiting on Virgin Active...</div><div class="itm">10:24</div></div><div class="ud"></div>
+        <div class="form-row">
+          <div class="form-group"><label>ID Number</label><input type="text" id="f_id" placeholder="8001015009087" maxlength="13"></div>
+          <div class="form-group"><label>Date of Birth</label><input type="date" id="f_dob"></div>
         </div>
-        <div class="ii" onclick="omsg(this,'Thandi Mkhize','TM','#DZ-2025-1846','All done! Thank you so much. I cannot believe I was paying for all those things. R 1,800 saved a month!','Yesterday')">
-          <div class="iav" style="background:#EFF4FF;color:#1D4DBF">TM</div><div class="ib"><div class="inm">Thandi Mkhize</div><div class="ipv">Thank you so much!</div><div class="itm">Yesterday</div></div>
+        <div class="form-row">
+          <div class="form-group"><label>Email Address</label><input type="email" id="f_email" placeholder="thabo@email.com" required></div>
+          <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" id="f_phone" placeholder="0812345678" required></div>
         </div>
-        <div class="ii" onclick="omsg(this,'Nomsa Patel','NP','#DZ-2025-1844','I uploaded additional statements. Can you also check for any Capitec hidden fees? I noticed a R95 charge I don\'t recognise.','19 May')">
-          <div class="iav" style="background:#FFF0F3;color:#C0003A">NP</div><div class="ib"><div class="inm">Nomsa Patel</div><div class="ipv">Uploaded extra statements...</div><div class="itm">19 May</div></div><div class="ud"></div>
+        <div class="form-group"><label>Physical Address</label><input type="text" id="f_address" placeholder="123 Main Street, Johannesburg, 2001"></div>
+        <div class="form-group">
+          <label>Employment Status</label>
+          <select id="f_employ">
+            <option value="">Select...</option>
+            <option>Employed (Full-time)</option>
+            <option>Employed (Part-time)</option>
+            <option>Self-employed</option>
+            <option>Unemployed</option>
+            <option>Pensioner</option>
+          </select>
         </div>
-        <div class="ii" onclick="omsg(this,'Virgin Active Support','VA','External','Dear DebtFree ZA, We have received your cancellation request. Please note that a 20-business-day notice period applies per the membership agreement. We will process accordingly and confirm in writing.','17 May')">
-          <div class="iav" style="background:#FFF8E6;color:#7A5200">VA</div><div class="ib"><div class="inm">Virgin Active Support</div><div class="ipv">Re: Cancellation — notice period applies...</div><div class="itm">17 May</div></div><div class="ud" style="background:var(--amb)"></div>
-        </div>
-        <div class="ii" onclick="omsg(this,'Jan van Wyk','JV','#DZ-2025-1845','Hello, I still need to upload my Standard Bank statements. Will do tonight. Is there a deadline?','18 May')">
-          <div class="iav" style="background:#FFF8E6;color:#7A5200">JV</div><div class="ib"><div class="inm">Jan van Wyk</div><div class="ipv">Will upload tonight...</div><div class="itm">18 May</div></div>
+        <div class="form-row">
+          <div class="form-group"><label>Monthly Income (Gross)</label><input type="number" id="f_income" placeholder="25000"></div>
+          <div class="form-group"><label>Monthly Expenses (Est.)</label><input type="number" id="f_expenses" placeholder="18000"></div>
         </div>
       </div>
-      <div class="card" id="msgpanel" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div style="padding:.9rem 1.2rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:9px">
-          <div class="iav" id="mav" style="width:38px;height:38px;font-size:12px">SD</div>
-          <div><div style="font-weight:700;font-size:13.5px" id="mnm">Sipho Dlamini</div><div style="font-size:12px;color:var(--mu)" id="mcs">#DZ-2025-1847</div></div>
-          <div style="margin-left:auto;display:flex;gap:6px">
-            <button class="btn bo bsm"><i class="fas fa-user"></i>View case</button>
-            <button class="btn bo bsm" onclick="st('Marked as resolved')"><i class="fas fa-check-double"></i>Resolve</button>
+
+      <!-- STEP 2: Financial Details -->
+      <div class="form-step" id="step2">
+        <h3>Financial Details</h3>
+        <p>Help us understand your current financial obligations.</p>
+        <div class="form-group">
+          <label>Total Monthly Debt Repayments (Est.)</label>
+          <input type="number" id="f_debt_total" placeholder="8000">
+        </div>
+        <div class="form-group">
+          <label>Number of Active Credit Accounts</label>
+          <select id="f_num_accounts">
+            <option value="">Select...</option>
+            <option>1-2</option><option>3-4</option><option>5-6</option><option>7+</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Services You Want Help With</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px" id="serviceCheckboxes">
+            <label style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" value="subscription" style="width:16px;height:16px;accent-color:var(--gold)">Subscription Cancellation</label>
+            <label style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" value="debt" style="width:16px;height:16px;accent-color:var(--gold)">Debt Consolidation</label>
+            <label style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" value="insurance" style="width:16px;height:16px;accent-color:var(--gold)">Insurance Review</label>
+            <label style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" value="banking" style="width:16px;height:16px;accent-color:var(--gold)">Banking Fee Audit</label>
+            <label style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" value="telecom" style="width:16px;height:16px;accent-color:var(--gold)">Telecom Review</label>
+            <label style="display:flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400"><input type="checkbox" value="credit" style="width:16px;height:16px;accent-color:var(--gold)">Credit Report</label>
           </div>
         </div>
-        <div style="flex:1;padding:1.2rem;overflow-y:auto;min-height:160px">
-          <div class="mb" id="mcont">Can you let me know when the Virgin Active cancellation is done? I've been waiting a week now. They keep transferring me. Thank you for handling this.</div>
-          <div style="font-size:11px;color:var(--mu);margin-top:5px" id="mtm">Today 10:24</div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea id="f_notes" rows="3" placeholder="Tell us anything else about your financial situation..."></textarea>
         </div>
-        <div style="padding:.9rem 1.2rem;border-top:1px solid var(--bdr)">
-          <textarea style="width:100%;padding:9px 13px;border:1.5px solid var(--bdr);border-radius:8px;background:var(--off);color:var(--navy);font-size:13px;font-family:var(--fb);resize:none;outline:none" rows="3" placeholder="Type your reply..."></textarea>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:7px;flex-wrap:wrap;gap:7px">
-            <div style="display:flex;gap:7px">
-              <button class="btn bo bsm"><i class="fas fa-paperclip"></i>Attach</button>
-              <button class="btn bo bsm"><i class="fas fa-file-alt"></i>Template</button>
-              <button class="btn bo bsm"><i class="fab fa-whatsapp"></i>WhatsApp</button>
-            </div>
-            <button class="btn bs bsm" onclick="st('Reply sent!')"><i class="fas fa-paper-plane"></i>Send reply</button>
+      </div>
+
+      <!-- STEP 3: Documents Upload -->
+      <div class="form-step" id="step3">
+        <h3>Upload Documents</h3>
+        <p>Please upload the following documents. All files are encrypted and secure.</p>
+        <div class="form-group">
+          <label>Latest 3 Months Bank Statements</label>
+          <div class="upload-area" onclick="document.getElementById('upBankStmt').click()">
+            <i class="fas fa-file-pdf"></i>
+            <p><strong>Click to upload</strong> or drag & drop</p>
+            <p>PDF, JPG, PNG (max 10MB each)</p>
+            <input type="file" id="upBankStmt" multiple accept=".pdf,.jpg,.png">
           </div>
+          <div id="upBankStmtList" style="margin-top:8px;font-size:13px;color:var(--gold)"></div>
+        </div>
+        <div class="form-group">
+          <label>Copy of ID Document</label>
+          <div class="upload-area" onclick="document.getElementById('upID').click()">
+            <i class="fas fa-id-card"></i>
+            <p><strong>Click to upload</strong> ID, Smart Card or Passport</p>
+            <input type="file" id="upID" accept=".pdf,.jpg,.png">
+          </div>
+          <div id="upIDList" style="margin-top:8px;font-size:13px;color:var(--gold)"></div>
+        </div>
+        <div class="form-group">
+          <label>Proof of Income (Latest Payslip or 3-month Bank statements)</label>
+          <div class="upload-area" onclick="document.getElementById('upIncome').click()">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <p><strong>Click to upload</strong></p>
+            <input type="file" id="upIncome" multiple accept=".pdf,.jpg,.png">
+          </div>
+          <div id="upIncomeList" style="margin-top:8px;font-size:13px;color:var(--gold)"></div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Banking Details for Service Payment -->
+      <div class="form-step" id="step4">
+        <h3>Payment & Banking Details</h3>
+        <p>Required to authenticate your service fee payment. Protected by 256-bit encryption.</p>
+        <div class="bank-security-note">
+          <i class="fas fa-lock"></i>
+          <p>Your banking details are encrypted using bank-grade SSL security. We use this solely for the service fee debit order as per our terms.</p>
+        </div>
+        <div class="form-group">
+          <label>Package Selected</label>
+          <select id="f_package">
+            <option>Basic Audit — R499 once-off</option>
+            <option>Full Optimization — R999 once-off</option>
+            <option>Debt Consolidation — Performance % basis</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Account Holder Name</label><input type="text" id="f_accname" placeholder="As on bank account"></div>
+          <div class="form-group"><label>Bank Name</label>
+            <select id="f_bank">
+              <option value="">Select Bank...</option>
+              <option>ABSA Bank</option><option>Standard Bank</option><option>FNB</option>
+              <option>Nedbank</option><option>Capitec Bank</option><option>Discovery Bank</option>
+              <option>African Bank</option><option>TymeBank</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Account Number</label><input type="text" id="f_accnum" placeholder="1234567890"></div>
+          <div class="form-group"><label>Account Type</label>
+            <select id="f_acctype">
+              <option>Cheque / Current</option><option>Savings</option><option>Transmission</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Branch Code</label><input type="text" id="f_branchcode" placeholder="632005"></div>
+        <div style="background:rgba(201,168,76,0.06);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:8px">
+          <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:13px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">
+            <input type="checkbox" id="f_debit_auth" style="width:16px;height:16px;margin-top:2px;accent-color:var(--gold)">
+            <span>I authorize ClearPath Financial to debit my account for the selected service fee as a once-off payment. I have read and agree to the Terms of Service and Privacy Policy.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- STEP 5: POA Sign -->
+      <div class="form-step" id="step5">
+        <h3>Power of Attorney</h3>
+        <p>Please read and sign the Power of Attorney authorizing us to act on your behalf.</p>
+        <div class="poa-box" id="poaText">
+          <strong>POWER OF ATTORNEY</strong><br><br>
+          I, the undersigned ("the Principal"), hereby appoint ClearPath Financial (Pty) Ltd, Registration Number [XXXXXXX], ("the Agent"), to act as my lawful attorney and agent in my name, place and stead, to do the following on my behalf:<br><br>
+          1. To communicate with, correspond with, and negotiate with any and all subscription service providers, financial institutions, insurance companies, telecommunications companies, and any other service providers with whom I have current agreements or contracts;<br><br>
+          2. To request, obtain, and review any statements, contracts, billing information, and related documents from such service providers;<br><br>
+          3. To cancel, renegotiate, modify, or optimize any subscription, contract, insurance policy, banking service, or telecommunications agreement on my behalf;<br><br>
+          4. To submit applications for debt consolidation loans on my behalf to registered financial institutions and credit providers;<br><br>
+          5. To obtain my credit report from registered credit bureaux for purposes of providing the above services;<br><br>
+          6. To sign any documents reasonably necessary to give effect to the above on my behalf;<br><br>
+          This Power of Attorney shall remain in force until the completion of the agreed services or until revoked by me in writing with 5 (five) business days notice.<br><br>
+          I confirm that I am over 18 years of age, am legally competent to enter into this agreement, and have read and understood the terms set out herein.<br><br>
+          Signed at _____________ on this _____ day of _____________ 20___
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:10px">Draw Your Signature Below</label>
+          <div class="sign-canvas-wrap">
+            <canvas id="sigCanvas" height="140" style="background:rgba(255,255,255,0.04)"></canvas>
+          </div>
+          <div class="sign-actions">
+            <button class="btn btn-outline" onclick="clearSig()" style="font-size:13px;padding:8px 16px"><i class="fas fa-redo" style="margin-right:6px"></i>Clear</button>
+            <a href="#" class="btn btn-outline" onclick="downloadPOA()" style="font-size:13px;padding:8px 16px"><i class="fas fa-download" style="margin-right:6px"></i>Download POA PDF</a>
+          </div>
+        </div>
+        <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:13px;color:var(--text-muted)">
+          <input type="checkbox" id="f_poa_agree" style="width:16px;height:16px;margin-top:2px;accent-color:var(--gold)">
+          <span>I have read, understood, and agree to the Power of Attorney above. My electronic signature constitutes a legally binding signature under the Electronic Communications and Transactions Act (ECT Act) of South Africa.</span>
+        </label>
+      </div>
+
+      <!-- STEP 6: Review & Submit -->
+      <div class="form-step" id="step6">
+        <h3>Review & Submit</h3>
+        <p>Please review your details before submitting your application.</p>
+        <div id="reviewSummary" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px;margin-bottom:20px;font-size:14px;line-height:2;color:var(--text-muted)"></div>
+        <div style="background:rgba(201,168,76,0.06);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px">
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.7">
+            <i class="fas fa-shield-alt" style="color:var(--gold);margin-right:8px"></i>
+            By submitting this application, you confirm that all information provided is accurate and complete. Your application will be reviewed within 24 hours and you will receive a confirmation email and WhatsApp message.
+          </p>
+        </div>
+      </div>
+
+      <!-- SUCCESS SCREEN -->
+      <div class="success-screen" id="successScreen">
+        <div class="success-icon"><i class="fas fa-check"></i></div>
+        <h2>Application Submitted!</h2>
+        <p>Thank you! We've received your application and will review it within 24 hours. Check your email and WhatsApp for confirmation.</p>
+        <div class="ref-badge" id="refNumber">REF: CP-000000</div>
+        <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="client-portal.html" class="btn btn-gold">Access Client Portal</a>
+          <button class="btn btn-outline" onclick="closeApply()">Close</button>
+        </div>
+      </div>
+
+      <div class="form-nav" id="formNav">
+        <span class="step-label" id="stepLabel">Step 1 of 6</span>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-outline" id="prevBtn" onclick="prevStep()" style="display:none">← Back</button>
+          <button class="btn btn-gold" id="nextBtn" onclick="nextStep()">Continue →</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- METRICS -->
-<div id="metrics" class="pg" style="display:none">
-  <div class="sec">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem">
-      <div><div class="sec-title">Business metrics</div><div class="sec-sub">Live operational dashboard</div></div>
-      <select style="padding:7px 13px;border-radius:8px;border:1.5px solid var(--bdr);background:#fff;font-size:12.5px;outline:none" onchange="st('Date range updated')"><option>This month (May 2025)</option><option>Last month</option><option>Last 3 months</option><option>YTD 2025</option></select>
-    </div>
-    <div class="mrow">
-      <div class="mc"><div class="mn gr">R 2.4M</div><div class="ml">Total saved for clients</div></div>
-      <div class="mc"><div class="mn bl">47</div><div class="ml">Active cases</div></div>
-      <div class="mc"><div class="mn">1,248</div><div class="ml">Total clients</div></div>
-      <div class="mc"><div class="mn am">12</div><div class="ml">Pending submissions</div></div>
-      <div class="mc"><div class="mn gr">R 1,950</div><div class="ml">Avg saving/client</div></div>
-      <div class="mc"><div class="mn">4,812</div><div class="ml">Subscriptions cancelled</div></div>
-      <div class="mc"><div class="mn gr">R 87.4K</div><div class="ml">Revenue this month</div></div>
-      <div class="mc"><div class="mn">98%</div><div class="ml">Satisfaction rate</div></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem">
-      <div class="card">
-        <h3 style="font-size:14px;margin-bottom:.9rem"><i class="fas fa-chart-bar" style="color:var(--g);margin-right:7px"></i>Savings by category</h3>
-        <div class="bchart">
-          <div class="brr"><div class="brl">Streaming</div><div class="brt"><div class="brf" style="width:82%;background:var(--g)"></div></div><div class="brv">R 340K</div></div>
-          <div class="brr"><div class="brl">Gym</div><div class="brt"><div class="brf" style="width:74%;background:var(--blu)"></div></div><div class="brv">R 306K</div></div>
-          <div class="brr"><div class="brl">Telecom</div><div class="brt"><div class="brf" style="width:65%;background:var(--amb)"></div></div><div class="brv">R 270K</div></div>
-          <div class="brr"><div class="brl">Insurance</div><div class="brt"><div class="brf" style="width:50%;background:#D4537E"></div></div><div class="brv">R 210K</div></div>
-          <div class="brr"><div class="brl">Banking</div><div class="brt"><div class="brf" style="width:40%;background:#7F77DD"></div></div><div class="brv">R 168K</div></div>
-          <div class="brr"><div class="brl">Debt</div><div class="brt"><div class="brf" style="width:32%;background:var(--navy)"></div></div><div class="brv">R 134K</div></div>
-        </div>
+<!-- CHAT WIDGET -->
+<div class="chat-float">
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar"><i class="fas fa-headset"></i></div>
+      <div>
+        <h4>ClearPath Support</h4>
+        <p><i class="fas fa-circle" style="font-size:8px"></i> Online now</p>
       </div>
-      <div class="card">
-        <h3 style="font-size:14px;margin-bottom:.9rem"><i class="fas fa-chart-line" style="color:var(--g);margin-right:7px"></i>New clients per month</h3>
-        <div style="display:flex;align-items:flex-end;gap:7px;height:130px;padding-top:.9rem">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;color:var(--mu)">89</div><div style="width:100%;background:var(--g);border-radius:4px 4px 0 0;height:89px"></div><div style="font-size:9px;color:var(--mu)">Dec</div></div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;color:var(--mu)">104</div><div style="width:100%;background:var(--g);border-radius:4px 4px 0 0;height:104px"></div><div style="font-size:9px;color:var(--mu)">Jan</div></div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;color:var(--mu)">98</div><div style="width:100%;background:#9FE1CB;border-radius:4px 4px 0 0;height:98px"></div><div style="font-size:9px;color:var(--mu)">Feb</div></div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;color:var(--mu)">120</div><div style="width:100%;background:var(--g);border-radius:4px 4px 0 0;height:120px"></div><div style="font-size:9px;color:var(--mu)">Mar</div></div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;color:var(--mu)">136</div><div style="width:100%;background:var(--g);border-radius:4px 4px 0 0;height:130px"></div><div style="font-size:9px;color:var(--mu)">Apr</div></div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><div style="font-size:9px;color:var(--gd);font-weight:700">142</div><div style="width:100%;background:var(--navy);border-radius:4px 4px 0 0;height:130px;border:2px solid var(--g)"></div><div style="font-size:9px;color:var(--gd);font-weight:700">May</div></div>
-        </div>
-      </div>
+      <button onclick="toggleChat()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;margin-left:auto;font-size:16px"><i class="fas fa-times"></i></button>
     </div>
-    <div class="pipe">
-      <div class="ps"><div class="pc" style="color:var(--blu)">12</div><div class="plb">New submissions</div></div>
-      <div class="ps"><div class="pc" style="color:var(--amb)">18</div><div class="plb">In audit</div></div>
-      <div class="ps"><div class="pc" style="color:#7F77DD">17</div><div class="plb">In progress</div></div>
-      <div class="ps"><div class="pc" style="color:var(--red)">8</div><div class="plb">Awaiting client</div></div>
-      <div class="ps hi"><div class="pc">64</div><div class="plb">Completed this month</div></div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="chat-msg agent">👋 Hello! Welcome to ClearPath Financial. How can I help you today?</div>
     </div>
-    <div class="card">
-      <h3 style="font-size:14px;margin-bottom:.9rem"><i class="fas fa-file-invoice-dollar" style="color:var(--g);margin-right:7px"></i>Revenue breakdown (May 2025)</h3>
-      <div class="tw">
-        <table class="dt">
-          <thead><tr><th>Package</th><th>Units sold</th><th>Unit price</th><th>Revenue</th><th>% of total</th></tr></thead>
-          <tbody>
-            <tr><td>Basic Audit</td><td>42</td><td>R 299</td><td style="font-weight:700">R 12,558</td><td><div class="pb" style="width:80px;display:inline-block;vertical-align:middle;margin-right:6px"><div class="pbf" style="width:14%"></div></div>14%</td></tr>
-            <tr><td>Standard Audit</td><td>65</td><td>R 599</td><td style="font-weight:700">R 38,935</td><td><div class="pb" style="width:80px;display:inline-block;vertical-align:middle;margin-right:6px"><div class="pbf" style="width:45%"></div></div>45%</td></tr>
-            <tr><td>Premium Optimization</td><td>23</td><td>R 999</td><td style="font-weight:700">R 22,977</td><td><div class="pb" style="width:80px;display:inline-block;vertical-align:middle;margin-right:6px"><div class="pbf" style="width:26%"></div></div>26%</td></tr>
-            <tr><td>Success fees</td><td>48</td><td>~R 270</td><td style="font-weight:700">R 12,960</td><td><div class="pb" style="width:80px;display:inline-block;vertical-align:middle;margin-right:6px"><div class="pbf" style="width:15%"></div></div>15%</td></tr>
-            <tr style="background:var(--gl)"><td colspan="3" style="font-weight:700">Total</td><td style="font-weight:700;color:var(--gd)">R 87,430</td><td style="font-weight:700">100%</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChat()">
+      <button onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
     </div>
   </div>
+  <button class="chat-btn" onclick="toggleChat()" title="Chat with us">
+    <i class="fas fa-comments"></i>
+  </button>
 </div>
 
-<!-- POA -->
-<div id="poa" class="pg" style="display:none">
-  <div class="sec" style="max-width:760px">
-    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem;flex-wrap:wrap">
-      <div class="sec-title" style="margin-bottom:0"><i class="fas fa-file-signature" style="color:var(--g);margin-right:7px"></i>Power of Attorney</div>
-      <div style="margin-left:auto;display:flex;gap:7px;flex-wrap:wrap">
-        <button class="btn bo bsm" onclick="window.print()"><i class="fas fa-print"></i>Print</button>
-        <button class="btn bs bsm" onclick="st('POA PDF downloaded')"><i class="fas fa-download"></i>Download PDF</button>
-        <button class="btn bo bsm" onclick="history.back()"><i class="fas fa-arrow-left"></i>Back</button>
-      </div>
-    </div>
-    <div class="poa">
-      <h2>SPECIAL POWER OF ATTORNEY</h2>
-      <p style="text-align:center;font-size:12px;color:var(--mu);margin-bottom:1.4rem">DebtFree ZA (Pty) Ltd — Registration No. 2023/456789/07</p>
-      <div class="poas"><h4>I, the undersigned</h4>
-        <table style="width:100%;font-size:13px;border-collapse:collapse">
-          <tr><td style="padding:5px 0;width:40%;color:var(--mu)">Full name:</td><td><span class="pfl" style="min-width:280px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>
-          <tr><td style="padding:5px 0;color:var(--mu)">ID number:</td><td><span class="pfl" style="min-width:190px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>
-          <tr><td style="padding:5px 0;color:var(--mu)">Physical address:</td><td><span class="pfl" style="min-width:290px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>
-          <tr><td style="padding:5px 0;color:var(--mu)">Email address:</td><td><span class="pfl" style="min-width:270px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>
-          <tr><td style="padding:5px 0;color:var(--mu)">Contact number:</td><td><span class="pfl" style="min-width:190px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>
-        </table>
-      </div>
-      <div class="poas"><h4>Hereby appoint</h4>
-        <p style="font-size:13px"><strong>DebtFree ZA (Pty) Ltd</strong>, registration number 2023/456789/07, of 123 Sandton Drive, Sandton, Gauteng, 2196, as my lawfully appointed agent ("the Agent") to act on my behalf in terms of this Power of Attorney.</p>
-      </div>
-      <div class="poas"><h4>Powers granted</h4>
-        <ol style="font-size:13px;line-height:2.1;padding-left:1.4rem">
-          <li>To review, analyse, and audit all financial statements and debit orders provided by me;</li>
-          <li>To contact, correspond with, and negotiate with any service provider, insurer, telecommunications company, gym, streaming platform, banking institution, or any other creditor on my behalf;</li>
-          <li>To submit written cancellation notices, renegotiation requests, and/or account downgrade requests to any service provider;</li>
-          <li>To request the cancellation or reduction of any recurring debit order, direct debit, or payment instruction;</li>
-          <li>To apply for debt consolidation on my behalf with any registered credit provider;</li>
-          <li>To correspond with the National Credit Regulator (NCR) or any debt counsellor as required;</li>
-          <li>To execute any documents reasonably required to carry out the above instructions.</li>
-        </ol>
-      </div>
-      <div class="poas"><h4>Limitations</h4>
-        <p style="font-size:13px;line-height:1.7">This Power of Attorney does NOT grant the Agent authority to: access my banking credentials or login to any banking platform; transfer, withdraw, or deposit funds; sign any new credit agreements without my prior written approval; or act beyond the scope of the services described herein.</p>
-      </div>
-      <div class="poas"><h4>Duration &amp; revocation</h4>
-        <p style="font-size:13px;line-height:1.7">This Power of Attorney is valid for 12 months from the date of signature, or until revoked by written notice to DebtFree ZA via email at legal@debtfreeza.co.za or registered mail to the address above.</p>
-      </div>
-      <div class="poas"><h4>Governing law</h4>
-        <p style="font-size:13px">This Power of Attorney is governed by the laws of the Republic of South Africa, including the Consumer Protection Act 68 of 2008, the Protection of Personal Information Act 4 of 2013, and the National Credit Act 34 of 2005.</p>
-      </div>
-      <div class="sigrow">
-        <div><div class="sig" style="height:55px;margin-bottom:5px">Client signature</div><div class="sigl">Signature of principal</div><div style="margin-top:9px;font-size:12px;color:var(--mu)">Date: ____________________</div><div style="margin-top:5px;font-size:12px;color:var(--mu)">Place: ____________________</div></div>
-        <div><div class="sig" style="height:55px;margin-bottom:5px;border-color:var(--g)">Witness signature</div><div class="sigl">Signature of witness</div><div style="margin-top:9px;font-size:12px;color:var(--mu)">Full name: ____________________</div><div style="margin-top:5px;font-size:12px;color:var(--mu)">ID number: ____________________</div></div>
-      </div>
-    </div>
-    <div class="brow">
-      <button class="btn bs" onclick="st('POA sent to client email and WhatsApp for signing')"><i class="fas fa-share-alt"></i>Send to client for signing</button>
-      <button class="btn bo" onclick="st('POA PDF downloaded')"><i class="fas fa-download"></i>Download PDF</button>
-    </div>
-  </div>
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fas fa-bell"></i>
+  <div class="toast-content"><h5 id="toastTitle"></h5><p id="toastMsg"></p></div>
 </div>
 
 <script>
-// Page navigation
-function sp(id,btn){
-  document.querySelectorAll('.pg').forEach(p=>p.style.display='none');
-  document.querySelectorAll('.nl').forEach(b=>b.classList.remove('act'));
-  const pg=document.getElementById(id);
-  if(pg)pg.style.display='block';
-  if(btn&&btn.classList)btn.classList.add('act');
-  window.scrollTo(0,0);
-}
+  // --- APPLICATION MODAL ---
+  let currentStep = 1;
+  const totalSteps = 6;
 
-// Toast
-let toastTimer;
-function st(msg){
-  clearTimeout(toastTimer);
-  document.getElementById('tmsg').textContent=msg;
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  toastTimer=setTimeout(()=>t.classList.remove('show'),3400);
-}
-
-// Onboard steps
-let obs=2;
-function obn(to){
-  document.getElementById('obs'+obs).style.display='none';
-  obs=to;
-  document.getElementById('obs'+to).style.display='block';
-  oupdui();
-}
-function obsub(){
-  document.getElementById('obs3').style.display='none';
-  obs=4;
-  document.getElementById('obs4').style.display='block';
-  oupdui();
-  st('Application submitted! Case #DZ-2025-1847 created.');
-}
-function oupdui(){
-  for(let i=1;i<=4;i++){
-    const c=document.getElementById('oc'+i);
-    if(!c)continue;
-    if(i<obs){c.className='psc dn';c.innerHTML='<i class="fas fa-check"></i>';}
-    else if(i===obs){c.className='psc ac';c.textContent=i;}
-    else{c.className='psc td';c.textContent=i;}
-    if(i<4){const l=document.getElementById('ol'+i);if(l)l.className='psln'+(i<obs?' dn':'');}
+  function openApply(service) {
+    const titles = {
+      subscription: 'Subscription Cancellation',
+      debt: 'Debt Consolidation',
+      insurance: 'Insurance Optimization',
+      banking: 'Banking Fee Audit',
+      telecom: 'Telecom Review',
+      credit: 'Credit Report Review'
+    };
+    document.getElementById('modalTitle').textContent = 'Apply: ' + (titles[service] || 'Service Application');
+    // Pre-check relevant service
+    document.querySelectorAll('#serviceCheckboxes input[type=checkbox]').forEach(cb => {
+      if (cb.value === service) cb.checked = true;
+    });
+    document.getElementById('applyModal').classList.add('active');
+    currentStep = 1;
+    updateSteps();
+    initSignature();
+    return false;
   }
-}
 
-// Doc checkbox toggle
-function tdc(el){
-  if(el.classList.contains('ok')){
-    el.classList.remove('ok','pend');
-    el.querySelector('.dc-st').textContent='Required';
-  }else{
-    el.classList.remove('pend');
-    el.classList.add('ok');
-    el.querySelector('.dc-st').textContent='Uploaded';
+  function closeApply() {
+    document.getElementById('applyModal').classList.remove('active');
+    document.getElementById('successScreen').style.display = 'none';
+    document.getElementById('formNav').style.display = 'flex';
+    currentStep = 1;
+    updateSteps();
   }
-}
 
-// Loan calculator
-function calcL(){
-  const P=parseFloat(document.getElementById('lamt').value);
-  const n=parseInt(document.getElementById('lterm').value);
-  const r=parseFloat(document.getElementById('lrate').value)/100/12;
-  const m=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
-  const tot=m*n;
-  document.getElementById('lamto').textContent='R '+P.toLocaleString('en-ZA');
-  document.getElementById('ltermo').textContent=n+' months';
-  document.getElementById('lrateo').textContent=parseFloat(document.getElementById('lrate').value).toFixed(1)+'%';
-  document.getElementById('lr1').textContent='R '+Math.round(m).toLocaleString('en-ZA');
-  document.getElementById('lr2').textContent='R '+Math.round(tot).toLocaleString('en-ZA');
-  document.getElementById('lr3').textContent='R '+Math.round(tot-P).toLocaleString('en-ZA');
-}
+  function updateSteps() {
+    document.querySelectorAll('.form-step').forEach((s, i) => {
+      s.classList.toggle('active', i + 1 === currentStep);
+    });
+    const dots = document.getElementById('stepDots');
+    dots.innerHTML = '';
+    for (let i = 1; i <= totalSteps; i++) {
+      const d = document.createElement('div');
+      d.className = 'step-dot' + (i === currentStep ? ' active' : i < currentStep ? ' done' : '');
+      dots.appendChild(d);
+    }
+    document.getElementById('stepLabel').textContent = `Step ${currentStep} of ${totalSteps}`;
+    document.getElementById('prevBtn').style.display = currentStep > 1 ? 'block' : 'none';
+    document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Submit Application' : 'Continue →';
+    if (currentStep === totalSteps) buildReview();
+  }
 
-// Billing tabs
-function btab(t){
-  document.getElementById('bc').style.display=t==='create'?'block':'none';
-  document.getElementById('bm').style.display=t==='mandates'?'block':'none';
-  document.getElementById('bi').style.display=t==='invoices'?'block':'none';
-}
+  function buildReview() {
+    const s = document.getElementById('reviewSummary');
+    const v = id => document.getElementById(id)?.value || '—';
+    s.innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 24px">
+        <div><span style="color:var(--white);font-weight:600">Name:</span> ${v('f_first')} ${v('f_last')}</div>
+        <div><span style="color:var(--white);font-weight:600">ID:</span> ${v('f_id')}</div>
+        <div><span style="color:var(--white);font-weight:600">Email:</span> ${v('f_email')}</div>
+        <div><span style="color:var(--white);font-weight:600">Phone:</span> ${v('f_phone')}</div>
+        <div><span style="color:var(--white);font-weight:600">Income:</span> R${Number(v('f_income')).toLocaleString()}/mo</div>
+        <div><span style="color:var(--white);font-weight:600">Package:</span> ${v('f_package').split('—')[0]}</div>
+        <div><span style="color:var(--white);font-weight:600">Bank:</span> ${v('f_bank')}</div>
+        <div><span style="color:var(--white);font-weight:600">Account:</span> ****${v('f_accnum').slice(-4)}</div>
+      </div>`;
+  }
 
-// Mandate amount update
-function updamt(){
-  document.getElementById('mamt').value=document.getElementById('pkgsel').value;
-}
+  function nextStep() {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateSteps();
+    } else {
+      submitApplication();
+    }
+  }
 
-// Admin tabs
-function atab(t){
-  document.getElementById('adm-audit').style.display=t==='audit'?'block':'none';
-  document.getElementById('adm-cases').style.display=t==='cases'?'block':'none';
-  document.getElementById('atab1').className=t==='audit'?'btn bs bsm':'btn bo bsm';
-  document.getElementById('atab2').className=t==='cases'?'btn bs bsm':'btn bo bsm';
-}
+  function prevStep() {
+    if (currentStep > 1) { currentStep--; updateSteps(); }
+  }
 
-// Audit subscription select
-function sel(el,name,cat,cost,since,type,rec,notes){
-  document.querySelectorAll('.si').forEach(s=>s.classList.remove('sl'));
-  el.classList.add('sl');
-  document.getElementById('dn').textContent=name;
-  document.getElementById('dcat').textContent=cat;
-  document.getElementById('dcost').textContent=cost;
-  document.getElementById('dsince').textContent=since;
-  document.getElementById('dtype').textContent=type;
-  document.getElementById('drec').textContent=rec;
-  document.getElementById('dnotes').value=notes;
-  document.getElementById('etmpl').value='Dear '+name+' Support Team,\n\nI am writing on behalf of my client, Sipho Dlamini (ID: 9501015800087), to formally request the immediate cancellation of their '+name+' subscription/service.\n\nPlease confirm cancellation and cessation of all associated debit orders within 5 business days.\n\nAuthorised by: DebtFree ZA (Pty) Ltd\nRef: DZ-2025-1847\nEmail: admin@debtfreeza.co.za';
-}
+  function submitApplication() {
+    const ref = 'CP-' + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('refNumber').textContent = 'REF: ' + ref;
+    document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
+    document.getElementById('stepDots').style.display = 'none';
+    document.getElementById('formNav').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'block';
+    showToast('Application Submitted!', 'Reference: ' + ref);
+    saveApplicationToStorage(ref);
+  }
 
-// Inbox open message
-function omsg(el,name,initials,caseNum,body,time){
-  document.querySelectorAll('.ii').forEach(i=>i.classList.remove('sl'));
-  el.classList.add('sl');
-  const dot=el.querySelector('.ud');if(dot)dot.remove();
-  document.getElementById('mav').textContent=initials;
-  document.getElementById('mnm').textContent=name;
-  document.getElementById('mcs').textContent=caseNum;
-  document.getElementById('mcont').textContent=body;
-  document.getElementById('mtm').textContent=time;
-}
+  function saveApplicationToStorage(ref) {
+    const apps = JSON.parse(localStorage.getItem('cp_applications') || '[]');
+    apps.push({
+      ref, date: new Date().toISOString(),
+      name: (document.getElementById('f_first')?.value || '') + ' ' + (document.getElementById('f_last')?.value || ''),
+      email: document.getElementById('f_email')?.value || '',
+      phone: document.getElementById('f_phone')?.value || '',
+      income: document.getElementById('f_income')?.value || '',
+      bank: document.getElementById('f_bank')?.value || '',
+      package: document.getElementById('f_package')?.value || '',
+      status: 'New',
+      notes: document.getElementById('f_notes')?.value || ''
+    });
+    localStorage.setItem('cp_applications', JSON.stringify(apps));
+  }
 
-// Init
-calcL();
+  // --- FILE UPLOADS ---
+  document.getElementById('upBankStmt').addEventListener('change', function() {
+    showFiles(this.files, 'upBankStmtList');
+  });
+  document.getElementById('upID').addEventListener('change', function() {
+    showFiles(this.files, 'upIDList');
+  });
+  document.getElementById('upIncome').addEventListener('change', function() {
+    showFiles(this.files, 'upIncomeList');
+  });
+  function showFiles(files, listId) {
+    const list = document.getElementById(listId);
+    list.innerHTML = Array.from(files).map(f =>
+      `<div style="display:flex;gap:8px;align-items:center;margin-top:4px"><i class="fas fa-check-circle" style="color:var(--success)"></i>${f.name} (${(f.size/1024).toFixed(0)}KB)</div>`
+    ).join('');
+  }
+
+  // --- SIGNATURE ---
+  let sigCtx, sigDrawing = false;
+  function initSignature() {
+    setTimeout(() => {
+      const canvas = document.getElementById('sigCanvas');
+      if (!canvas) return;
+      canvas.width = canvas.offsetWidth || 540;
+      sigCtx = canvas.getContext('2d');
+      sigCtx.strokeStyle = '#C9A84C';
+      sigCtx.lineWidth = 2;
+      sigCtx.lineCap = 'round';
+      canvas.addEventListener('mousedown', e => { sigDrawing = true; sigCtx.beginPath(); sigCtx.moveTo(e.offsetX, e.offsetY); });
+      canvas.addEventListener('mousemove', e => { if (!sigDrawing) return; sigCtx.lineTo(e.offsetX, e.offsetY); sigCtx.stroke(); });
+      canvas.addEventListener('mouseup', () => sigDrawing = false);
+      canvas.addEventListener('touchstart', e => {
+        sigDrawing = true; const r = canvas.getBoundingClientRect(); const t = e.touches[0];
+        sigCtx.beginPath(); sigCtx.moveTo(t.clientX - r.left, t.clientY - r.top); e.preventDefault();
+      }, {passive:false});
+      canvas.addEventListener('touchmove', e => {
+        if (!sigDrawing) return; const r = canvas.getBoundingClientRect(); const t = e.touches[0];
+        sigCtx.lineTo(t.clientX - r.left, t.clientY - r.top); sigCtx.stroke(); e.preventDefault();
+      }, {passive:false});
+      canvas.addEventListener('touchend', () => sigDrawing = false);
+    }, 200);
+  }
+  function clearSig() {
+    const c = document.getElementById('sigCanvas');
+    if (sigCtx) sigCtx.clearRect(0, 0, c.width, c.height);
+  }
+  function downloadPOA() {
+    const text = document.getElementById('poaText').innerText;
+    const name = document.getElementById('f_first')?.value + ' ' + document.getElementById('f_last')?.value;
+    const blob = new Blob([`POWER OF ATTORNEY\n\nClient: ${name}\nDate: ${new Date().toLocaleDateString('en-ZA')}\n\n${text}`], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `ClearPath_POA_${name.replace(/ /g,'_')}.txt`; a.click();
+    showToast('Download Started', 'POA document downloaded');
+  }
+
+  // --- CHAT ---
+  function toggleChat() {
+    document.getElementById('chatWindow').classList.toggle('open');
+  }
+  function sendChat() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    const msgs = document.getElementById('chatMsgs');
+    msgs.innerHTML += `<div class="chat-msg client">${msg}</div>`;
+    input.value = '';
+    setTimeout(() => {
+      msgs.innerHTML += `<div class="chat-msg agent">Thanks for your message! A consultant will respond shortly. For urgent queries, WhatsApp us on 081 234 5678. 🌟</div>`;
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 800);
+    msgs.scrollTop = msgs.scrollHeight;
+    saveChatMsg(msg);
+  }
+  function saveChatMsg(msg) {
+    const chats = JSON.parse(localStorage.getItem('cp_chats') || '[]');
+    chats.push({ msg, time: new Date().toISOString(), from: 'client' });
+    localStorage.setItem('cp_chats', JSON.stringify(chats));
+  }
+
+  // --- TOAST ---
+  function showToast(title, msg) {
+    document.getElementById('toastTitle').textContent = title;
+    document.getElementById('toastMsg').textContent = msg;
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  // --- CLOSE MODAL ON OVERLAY CLICK ---
+  document.getElementById('applyModal').addEventListener('click', function(e) {
+    if (e.target === this) closeApply();
+  });
+
+  // --- ANIMATE BARS ON LOAD ---
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.bar-fill').forEach(b => { const w = b.style.width; b.style.width = '0'; setTimeout(() => b.style.width = w, 100); });
+    }, 500);
+  });
 </script>
 </body>
 </html>
