@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLŌWHAUS — Fine Beauty & Accessories | South Africa</title>
+<meta name="description" content="Premium jewellery, hair, nails and skincare. South Africa's luxury beauty destination.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════ TOKENS ═══════════════════════════ */
+:root{
+  --ink:#0C0B09; --warm:#F8F5F0; --cream:#EDE8E0;
+  --gold:#B8933E; --gold-lt:#D4B060; --gold-pale:#F0E6CC;
+  --rose:#C5687A; --rose-dk:#9B4558;
+  --stone:#6B645A; --border:#DDD8D0; --card:#FFFFFF;
+  --success:#4E7A5A;
+  --fd:'Playfair Display',Georgia,serif;
+  --fb:'Jost',system-ui,sans-serif;
+  --fm:'DM Mono',monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--warm);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer}
+.wrap{max-width:1380px;margin:0 auto;padding:0 48px}
+.eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--stone)}
+
+/* ═══ ANNOUNCE ═══ */
+.announce{background:var(--ink);color:var(--gold-pale);font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;text-align:center;padding:11px 20px;overflow:hidden}
+.announce-inner{display:inline-flex;gap:48px;animation:tick 30s linear infinite;white-space:nowrap}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.announce-inner span{flex-shrink:0}
+
+/* ═══ NAV ═══ */
+.nav{position:sticky;top:0;z-index:200;background:rgba(248,245,240,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1380px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:var(--fd);font-size:22px;font-weight:500;letter-spacing:.08em}
+.logo em{color:var(--gold);font-style:italic}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--stone);transition:color .2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .25s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-acts{display:flex;align-items:center;gap:4px}
+.ib{width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:none;border:none;border-radius:50%;font-size:18px;transition:background .2s}
+.ib:hover{background:var(--cream)}
+.cart-wrap{position:relative}
+.cbadge{position:absolute;top:6px;right:6px;width:17px;height:17px;background:var(--rose);color:#fff;border-radius:50%;font-family:var(--fm);font-size:9px;display:flex;align-items:center;justify-content:center}
+
+/* ═══ HERO ═══ */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 108px);overflow:hidden}
+.hero-copy{background:var(--ink);color:var(--warm);display:flex;flex-direction:column;justify-content:center;padding:100px 72px;position:relative;overflow:hidden}
+.hero-copy::before{content:'GLŌWHAUS';font-family:var(--fd);font-size:160px;font-weight:700;position:absolute;top:50%;left:-30px;transform:translateY(-50%) rotate(-90deg) translateX(-50%);color:rgba(184,147,62,.05);pointer-events:none;white-space:nowrap;line-height:1}
+.hero-eye{color:var(--gold-lt);margin-bottom:28px}
+.hero-h1{font-family:var(--fd);font-size:clamp(44px,5vw,70px);font-weight:400;line-height:1.04;letter-spacing:-.02em;margin-bottom:28px}
+.hero-h1 em{font-style:italic;color:var(--gold-lt)}
+.hero-p{font-size:15px;line-height:1.8;color:rgba(248,245,240,.6);max-width:360px;margin-bottom:48px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--ink);border:none;padding:15px 36px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;transition:background .2s,transform .15s;border-radius:0}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--warm);border:1px solid rgba(248,245,240,.25);padding:15px 36px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;transition:all .2s;border-radius:0}
+.btn-ghost:hover{border-color:var(--gold-lt);color:var(--gold-lt)}
+.hero-stats{display:flex;gap:40px;margin-top:60px;padding-top:40px;border-top:1px solid rgba(248,245,240,.1)}
+.sn{font-family:var(--fd);font-size:32px;font-weight:400;color:var(--gold-lt);line-height:1}
+.sl{font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(248,245,240,.4);margin-top:6px}
+
+/* Hero mosaic */
+.hero-mosaic{display:grid;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr;gap:3px;overflow:hidden}
+.htile{overflow:hidden;position:relative;background:var(--cream)}
+.htile.tall{grid-row:span 2}
+.htile img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.htile:hover img{transform:scale(1.06)}
+.htile canvas{width:100%;height:100%;object-fit:cover}
+.tlabel{position:absolute;bottom:14px;left:14px;font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:rgba(12,11,9,.72);color:var(--gold-pale);padding:5px 10px;backdrop-filter:blur(4px)}
+.ai-badge{position:absolute;top:10px;right:10px;font-family:var(--fm);font-size:8px;letter-spacing:.1em;background:rgba(184,147,62,.9);color:var(--ink);padding:3px 8px;text-transform:uppercase}
+
+/* Generating shimmer */
+.shimmer{background:linear-gradient(90deg,var(--cream) 25%,var(--border) 50%,var(--cream) 75%);background-size:400% 100%;animation:shim 1.4s ease-in-out infinite}
+@keyframes shim{0%{background-position:100% 0}100%{background-position:-100% 0}}
+
+/* ═══ STRIP ═══ */
+.strip{background:var(--gold);overflow:hidden;padding:13px 0}
+.strip-inner{display:inline-flex;gap:0;animation:tick2 26s linear infinite;white-space:nowrap}
+@keyframes tick2{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.strip-inner span{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);padding:0 28px;flex-shrink:0}
+.strip-inner b{color:rgba(12,11,9,.35);padding:0 2px}
+
+/* ═══ TRUST ═══ */
+.trust{background:var(--card);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr)}
+.ti{padding:24px 28px;border-right:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.ti:last-child{border-right:none}
+.t-ico{font-size:22px}
+.t-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.t-desc{font-size:11px;color:var(--stone)}
+
+/* ═══ CATEGORIES ═══ */
+.cats-sec{padding:80px 0}
+.cats-head{text-align:center;margin-bottom:48px}
+.cats-head h2{font-family:var(--fd);font-size:42px;font-weight:400;letter-spacing:-.01em;margin-top:12px}
+.cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ctile{position:relative;overflow:hidden;border-radius:2px;aspect-ratio:3/4;cursor:pointer;background:var(--cream);border:2px solid transparent;transition:border-color .2s}
+.ctile.active{border-color:var(--gold)}
+.ctile img,.ctile canvas{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);display:block;position:absolute;inset:0}
+.ctile:hover img,.ctile:hover canvas{transform:scale(1.08)}
+.cov{position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,11,9,.78) 0%,rgba(12,11,9,.1) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:20px;z-index:2}
+.cn{font-family:var(--fd);font-size:18px;font-weight:400;color:#fff;font-style:italic}
+.cct{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:4px}
+.cai{font-family:var(--fm);font-size:8px;letter-spacing:.08em;color:var(--gold-pale);margin-top:6px;opacity:.7}
+
+/* ═══ PRODUCTS ═══ */
+.prods-sec{padding:20px 0 100px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px}
+.ph h2{font-family:var(--fd);font-size:36px;font-weight:400;letter-spacing:-.01em}
+.sbar{display:flex;gap:8px}
+.sbbtn{background:var(--card);border:1px solid var(--border);color:var(--stone);padding:8px 18px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s;font-weight:500}
+.sbbtn:hover,.sbbtn.active{background:var(--ink);border-color:var(--ink);color:var(--warm)}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+
+/* Product card */
+.pc{background:var(--card);position:relative;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--border);transition:box-shadow .25s var(--ease)}
+.pc:hover{box-shadow:0 20px 60px rgba(12,11,9,.12);z-index:2}
+.pc-img{position:relative;overflow:hidden;background:var(--cream)}
+.pc-img::after{content:'';display:block;padding-bottom:130%}
+.pc-img img,.pc-img canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .65s var(--ease)}
+.pc:hover .pc-img img,.pc:hover .pc-img canvas{transform:scale(1.07)}
+.pbadge{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--fm);font-size:8px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px}
+.bs{background:var(--ink);color:var(--gold-pale)}
+.bsale{background:var(--rose);color:#fff}
+.bnew{background:var(--gold);color:var(--ink)}
+.bdrop{background:#4A3D8F;color:#fff}
+.pwish{position:absolute;top:14px;right:14px;z-index:3;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:all .2s}
+.pwish:hover{transform:scale(1.12)}
+.pquick{position:absolute;bottom:0;left:0;right:0;z-index:3;background:var(--ink);color:var(--warm);padding:13px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:none;transform:translateY(100%);transition:transform .3s var(--ease);text-align:center}
+.pc:hover .pquick{transform:translateY(0)}
+.pinfo{padding:18px 18px 20px;flex:1;display:flex;flex-direction:column}
+.pbrand{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:5px}
+.pname{font-family:var(--fd);font-size:16px;font-weight:400;line-height:1.35;margin-bottom:8px}
+.pstars{color:var(--gold);font-size:11px}
+.prev{font-family:var(--fm);font-size:9px;color:var(--stone);margin-left:6px}
+.pfooter{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+.pprice{font-family:var(--fd);font-size:20px;font-weight:400}
+.porig{font-size:12px;color:var(--stone);text-decoration:line-through;margin-right:6px;font-family:var(--fm)}
+.abtn{background:var(--gold);color:var(--ink);border:none;padding:10px 18px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:background .2s}
+.abtn:hover{background:var(--gold-lt)}
+.ai-gen-label{position:absolute;bottom:0;left:0;right:0;background:rgba(184,147,62,.85);color:var(--ink);font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:4px;z-index:4;transform:translateY(100%);transition:transform .3s var(--ease)}
+.pc:hover .ai-gen-label{transform:translateY(0)}
+
+/* ═══ EDITORIAL ═══ */
+.editorial{background:var(--ink);color:var(--warm);overflow:hidden}
+.ed-inner{display:grid;grid-template-columns:1fr 1fr;min-height:600px}
+.ed-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;overflow:hidden}
+.ei{overflow:hidden}
+.ei img,.ei canvas{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease)}
+.ei:hover img,.ei:hover canvas{transform:scale(1.05)}
+.ei.tall{grid-row:span 2}
+.ed-copy{display:flex;flex-direction:column;justify-content:center;padding:80px 72px}
+.ed-eye{color:var(--gold-lt);margin-bottom:24px}
+.ed-h2{font-family:var(--fd);font-size:clamp(32px,3.5vw,52px);font-weight:400;line-height:1.1;margin-bottom:24px}
+.ed-h2 em{font-style:italic;color:var(--gold-lt)}
+.ed-p{font-size:15px;line-height:1.8;color:rgba(248,245,240,.6);margin-bottom:36px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+.pill{border:1px solid rgba(184,147,62,.35);padding:7px 16px;font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(248,245,240,.65);border-radius:40px;transition:all .2s}
+.pill:hover{border-color:var(--gold);color:var(--gold-lt)}
+
+/* ═══ DROPSHIP ═══ */
+.ds-sec{padding:100px 0;background:var(--warm)}
+.ds-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ds-eye{color:var(--gold);margin-bottom:20px}
+.ds-h2{font-family:var(--fd);font-size:clamp(32px,3.5vw,50px);font-weight:400;line-height:1.1;margin-bottom:20px}
+.ds-h2 em{font-style:italic;color:var(--rose)}
+.ds-p{font-size:15px;line-height:1.8;color:var(--stone);margin-bottom:36px}
+.ds-feats{list-style:none;display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+.ds-feat{display:flex;align-items:flex-start;gap:16px;font-size:14px;line-height:1.6}
+.ds-ico{width:38px;height:38px;border-radius:50%;flex-shrink:0;background:var(--gold-pale);border:1px solid rgba(184,147,62,.3);display:flex;align-items:center;justify-content:center;font-size:16px}
+.form-panel{background:var(--ink);border-radius:4px;padding:44px;color:var(--warm)}
+.fp-h{font-family:var(--fd);font-size:26px;font-weight:400;margin-bottom:6px}
+.fp-s{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,245,240,.4);margin-bottom:32px}
+.field{margin-bottom:18px}
+.field label{display:block;font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(248,245,240,.4);margin-bottom:8px}
+.field input,.field select,.field textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--warm);padding:12px 14px;font-family:var(--fb);font-size:14px;border-radius:2px;outline:none;transition:border-color .2s;appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.field select option{background:#1a1912}
+.field textarea{height:80px;resize:vertical}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fp-sub-btn{width:100%;margin-top:8px;background:var(--gold);color:var(--ink);border:none;padding:15px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;transition:background .2s}
+.fp-sub-btn:hover{background:var(--gold-lt)}
+
+/* ═══ SUPPLIERS ═══ */
+.sup-sec{background:var(--cream);padding:80px 0}
+.sup-hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+.sup-hdr h2{font-family:var(--fd);font-size:36px;font-weight:400}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:24px;transition:all .2s}
+.sc:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(184,147,62,.12)}
+.slogo{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+.sname{font-weight:600;font-size:15px;margin-bottom:3px}
+.sorig{font-family:var(--fm);font-size:9px;letter-spacing:.08em;color:var(--stone);margin-bottom:12px}
+.stags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.stag{font-family:var(--fm);font-size:9px;letter-spacing:.06em;padding:3px 8px;background:var(--gold-pale);color:var(--gold)}
+.sstat{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--stone);margin-bottom:14px}
+.dlive{width:7px;height:7px;border-radius:50%;background:var(--success)}
+.dpend{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.davail{width:7px;height:7px;border-radius:50%;background:var(--border)}
+.sbtn{width:100%;background:transparent;border:1px solid var(--gold);color:var(--gold);padding:9px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:all .2s;font-family:var(--fb)}
+.sbtn:hover{background:var(--gold);color:var(--ink)}
+.sbtn.live{border-color:var(--success);color:var(--success)}
+.sbtn.live:hover{background:var(--success);color:#fff}
+
+/* ═══ CAPTURE ═══ */
+.capture{background:var(--rose);padding:72px 0;display:flex;align-items:center;justify-content:center}
+.cap{text-align:center;max-width:560px;width:100%;padding:0 24px}
+.cap h2{font-family:var(--fd);font-size:38px;font-weight:400;color:#fff;margin:14px 0 10px}
+.cap p{color:rgba(255,255,255,.75);font-size:14px;line-height:1.7;margin-bottom:32px}
+.capform{display:flex;max-width:440px;margin:0 auto}
+.capinp{flex:1;padding:15px 18px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);border-right:none;color:#fff;font-family:var(--fb);font-size:14px;outline:none}
+.capinp::placeholder{color:rgba(255,255,255,.55)}
+.capbtn{background:#fff;color:var(--rose);border:none;padding:15px 24px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;white-space:nowrap;transition:background .2s}
+.capbtn:hover{background:var(--gold-pale)}
+
+/* ═══ CART ═══ */
+.overlay{position:fixed;inset:0;background:rgba(12,11,9,.55);z-index:400;opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.overlay.open{opacity:1;pointer-events:all}
+.cdrawer{position:fixed;top:0;right:-480px;width:480px;height:100dvh;background:var(--card);z-index:401;display:flex;flex-direction:column;transition:right .38s var(--ease);box-shadow:-20px 0 60px rgba(12,11,9,.15)}
+.cdrawer.open{right:0}
+.cd-hd{padding:28px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cd-hd h2{font-family:var(--fd);font-size:22px;font-weight:400}
+.cd-x{background:none;border:none;font-size:20px;color:var(--stone);transition:color .2s}
+.cd-x:hover{color:var(--ink)}
+.cd-items{flex:1;overflow-y:auto;padding:24px 32px}
+.cd-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
+.cd-thumb{width:76px;height:96px;border-radius:2px;overflow:hidden;flex-shrink:0}
+.cd-thumb img,.cd-thumb canvas{width:100%;height:100%;object-fit:cover}
+.cd-info{flex:1}
+.cd-brand{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin-bottom:4px}
+.cd-name{font-size:14px;font-weight:500;line-height:1.4;margin-bottom:10px}
+.cd-row{display:flex;align-items:center;justify-content:space-between}
+.qctl{display:flex;align-items:center;gap:12px;border:1px solid var(--border);padding:4px 12px}
+.qbtn{background:none;border:none;font-size:16px;color:var(--stone)}
+.qbtn:hover{color:var(--rose)}
+.qn{font-family:var(--fm);font-size:13px;min-width:22px;text-align:center}
+.cdi-price{font-family:var(--fd);font-size:18px}
+.cd-rm{background:none;border:none;color:var(--stone);font-size:12px;margin-top:6px}
+.cd-rm:hover{color:var(--rose)}
+.cd-ft{padding:24px 32px;border-top:1px solid var(--border);flex-shrink:0;background:var(--warm)}
+.cd-line{display:flex;justify-content:space-between;font-size:13px;color:var(--stone);margin-bottom:8px}
+.cd-tot{display:flex;justify-content:space-between;font-family:var(--fd);font-size:22px;margin:16px 0 20px;padding-top:14px;border-top:1px solid var(--border)}
+.co-btn{width:100%;background:var(--ink);color:var(--warm);border:none;padding:17px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;transition:background .2s}
+.co-btn:hover{background:var(--rose)}
+.empty-bag{text-align:center;padding:70px 20px;color:var(--stone)}
+.empty-bag .big{font-size:48px;display:block;margin-bottom:16px}
+
+/* ═══ MODAL ═══ */
+.mbg{position:fixed;inset:0;background:rgba(12,11,9,.65);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.mbg.open{display:flex}
+.modal{background:var(--card);border-radius:4px;padding:48px;max-width:600px;width:100%;max-height:90dvh;overflow-y:auto}
+.modal h2{font-family:var(--fd);font-size:28px;font-weight:400;margin-bottom:6px}
+.modal .msub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin-bottom:32px}
+.modal .field input,.modal .field select,.modal .field textarea{background:var(--warm);border:1px solid var(--border);color:var(--ink)}
+.modal .field input:focus,.modal .field select:focus,.modal .field textarea:focus{border-color:var(--gold)}
+.modal .field label{color:var(--stone)}
+.macts{display:flex;gap:12px;margin-top:24px}
+.mcancel{background:none;border:1px solid var(--border);padding:12px 24px;font-size:12px;transition:border-color .2s}
+.mcancel:hover{border-color:var(--ink)}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--warm);padding:14px 28px;font-size:13px;z-index:600;transition:transform .35s var(--ease);white-space:nowrap;border-left:3px solid var(--gold)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--ink);color:rgba(248,245,240,.55);padding:72px 0 40px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;margin-bottom:56px}
+.flogo{font-family:var(--fd);font-size:28px;font-weight:400;color:var(--warm);margin-bottom:16px}
+.flogo em{color:var(--gold);font-style:italic}
+.ftag{font-size:13px;line-height:1.75;margin-bottom:28px;color:rgba(248,245,240,.5)}
+.fsoc{display:flex;gap:12px}
+.fsoc-i{width:38px;height:38px;border:1px solid rgba(255,255,255,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;transition:border-color .2s;cursor:pointer}
+.fsoc-i:hover{border-color:var(--gold)}
+.fc h4{font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--warm);margin-bottom:20px}
+.fc ul{list-style:none}
+.fc ul li{margin-bottom:10px}
+.fc ul li a{font-size:13px;color:rgba(248,245,240,.5);transition:color .2s}
+.fc ul li a:hover{color:var(--gold-lt)}
+.fbot{padding-top:28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
+.fbot span{font-family:var(--fm);font-size:10px;letter-spacing:.06em}
+
+/* ═══ AI STATUS BAR ═══ */
+.ai-status{background:var(--gold-pale);border-bottom:1px solid rgba(184,147,62,.3);padding:10px 48px;display:flex;align-items:center;gap:12px;font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.ai-spinner{width:14px;height:14px;border:2px solid rgba(184,147,62,.3);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-status.done{background:#f0fdf4;border-color:rgba(78,122,90,.3);color:var(--success)}
+.ai-status.done .ai-spinner{display:none}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1100px){
+  .wrap{padding:0 32px}.nav-inner{padding:0 32px}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-mosaic{min-height:420px;grid-template-rows:210px 210px}
+  .hero-copy{padding:72px 40px}
+  .cats-grid{grid-template-columns:repeat(3,1fr)}
+  .pgrid{grid-template-columns:repeat(2,1fr)}
+  .ds-grid{grid-template-columns:1fr;gap:48px}
+  .ed-inner{grid-template-columns:1fr}
+  .ed-imgs{min-height:400px}
+  .sg{grid-template-columns:repeat(2,1fr)}
+  .fg{grid-template-columns:1fr 1fr}
+  .trust{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .nav-links{display:none}.wrap{padding:0 20px}.nav-inner{padding:0 20px}
+  .cats-grid{grid-template-columns:repeat(2,1fr)}
+  .pgrid{grid-template-columns:1fr 1fr;gap:1px}
+  .sg{grid-template-columns:1fr}.fg{grid-template-columns:1fr}
+  .trust{grid-template-columns:1fr}.cdrawer{width:100%;right:-100%}
+  .hero-stats{gap:24px}.hero-copy{padding:52px 24px}.ed-copy{padding:52px 28px}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCE -->
+<div class="announce">
+  <div class="announce-inner">
+    <span>✦ Free SA delivery over R650</span><span>◆</span>
+    <span>New drops every Friday</span><span>◆</span>
+    <span>Ozow · PayFast · EFT · Lay-buy</span><span>◆</span>
+    <span>Dropship partners welcome</span><span>◆</span>
+    <span>POPIA compliant</span><span>◆</span>
+    <span>✦ Free SA delivery over R650</span><span>◆</span>
+    <span>New drops every Friday</span><span>◆</span>
+    <span>Ozow · PayFast · EFT · Lay-buy</span><span>◆</span>
+    <span>Dropship partners welcome</span><span>◆</span>
+    <span>POPIA compliant</span><span>◆</span>
+  </div>
+</div>
+
+<!-- AI STATUS -->
+<div class="ai-status" id="aiStatus">
+  <div class="ai-spinner"></div>
+  <span id="aiStatusText">✦ AI is generating beautiful product visuals for your store…</span>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">GLŌW<em>HAUS</em></a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="filterCat('all')">All</a></li>
+      <li><a href="#" onclick="filterCat('jewellery')">Jewellery</a></li>
+      <li><a href="#" onclick="filterCat('hair')">Hair</a></li>
+      <li><a href="#" onclick="filterCat('nails')">Nails</a></li>
+      <li><a href="#" onclick="filterCat('skin')">Skincare</a></li>
+      <li><a href="#suppliers">Suppliers</a></li>
+      <li><a href="#dropship">Dropship</a></li>
+    </ul>
+    <div class="nav-acts">
+      <button class="ib" onclick="showToast('🔍 Search coming soon!')">🔍</button>
+      <button class="ib" onclick="showToast('❤️ '+wishlist.length+' items saved')">🤍</button>
+      <div class="cart-wrap">
+        <button class="ib" onclick="openCart()">🛍</button>
+        <div class="cbadge" id="cbadge">0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow hero-eye">✦ South Africa's luxury beauty house</p>
+    <h1 class="hero-h1">Fine beauty.<br><em>Every detail.</em><br>Delivered.</h1>
+    <p class="hero-p">Sculptural jewellery, premium hair, precision nails, curated skincare — all AI-curated and dropship-ready for South Africa and the world.</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="document.querySelector('.prods-sec').scrollIntoView({behavior:'smooth'})">Shop the Collection</button>
+      <button class="btn-ghost" onclick="document.querySelector('#dropship').scrollIntoView({behavior:'smooth'})">Become a Partner</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="sn">2.4K+</div><div class="sl">Products</div></div>
+      <div><div class="sn">180+</div><div class="sl">Suppliers</div></div>
+      <div><div class="sn">98%</div><div class="sl">Satisfaction</div></div>
+    </div>
+  </div>
+  <div class="hero-mosaic" id="heroMosaic">
+    <div class="htile tall shimmer" id="htile0"><div class="tlabel">Jewellery</div></div>
+    <div class="htile shimmer" id="htile1"><div class="tlabel">Nails</div></div>
+    <div class="htile shimmer" id="htile2"><div class="tlabel">Hair</div></div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span>Fine Jewellery</span><b>◆</b><span>Premium Hair</span><b>◆</b>
+    <span>Luxury Nails</span><b>◆</b><span>Curated Skincare</span><b>◆</b>
+    <span>African Botanicals</span><b>◆</b><span>Dropship Ready</span><b>◆</b>
+    <span>SA-Owned Beauty</span><b>◆</b><span>180+ Suppliers</span><b>◆</b>
+    <span>Fine Jewellery</span><b>◆</b><span>Premium Hair</span><b>◆</b>
+    <span>Luxury Nails</span><b>◆</b><span>Curated Skincare</span><b>◆</b>
+    <span>African Botanicals</span><b>◆</b><span>Dropship Ready</span><b>◆</b>
+    <span>SA-Owned Beauty</span><b>◆</b><span>180+ Suppliers</span><b>◆</b>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="ti"><span class="t-ico">🚚</span><div><div class="t-title">Free SA Delivery</div><div class="t-desc">Orders over R650 nationwide</div></div></div>
+  <div class="ti"><span class="t-ico">💳</span><div><div class="t-title">SA Payments</div><div class="t-desc">Ozow · PayFast · EFT · Lay-buy</div></div></div>
+  <div class="ti"><span class="t-ico">🌿</span><div><div class="t-title">African-Rooted</div><div class="t-desc">60+ local SA-owned brands</div></div></div>
+  <div class="ti"><span class="t-ico">↩️</span><div><div class="t-title">30-Day Returns</div><div class="t-desc">Easy hassle-free policy</div></div></div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="cats-sec">
+  <div class="wrap">
+    <div class="cats-head">
+      <p class="eyebrow">Browse</p>
+      <h2>Shop by Category</h2>
+    </div>
+    <div class="cats-grid" id="catsGrid">
+      <div class="ctile active shimmer" onclick="filterCat('all');setActiveCat(this)" data-cat="all">
+        <div class="cov"><div class="cn">All Beauty</div><div class="cct">2,400+ items</div><div class="cai">✦ AI-curated visuals</div></div>
+      </div>
+      <div class="ctile shimmer" onclick="filterCat('jewellery');setActiveCat(this)" data-cat="jewellery">
+        <div class="cov"><div class="cn">Jewellery</div><div class="cct">640 items</div><div class="cai">✦ AI-curated visuals</div></div>
+      </div>
+      <div class="ctile shimmer" onclick="filterCat('hair');setActiveCat(this)" data-cat="hair">
+        <div class="cov"><div class="cn">Hair</div><div class="cct">840 items</div><div class="cai">✦ AI-curated visuals</div></div>
+      </div>
+      <div class="ctile shimmer" onclick="filterCat('nails');setActiveCat(this)" data-cat="nails">
+        <div class="cov"><div class="cn">Nails</div><div class="cct">510 items</div><div class="cai">✦ AI-curated visuals</div></div>
+      </div>
+      <div class="ctile shimmer" onclick="filterCat('skin');setActiveCat(this)" data-cat="skin">
+        <div class="cov"><div class="cn">Skincare</div><div class="cct">410 items</div><div class="cai">✦ AI-curated visuals</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="prods-sec">
+  <div class="wrap">
+    <div class="ph">
+      <h2>Featured Collection</h2>
+      <div class="sbar">
+        <button class="sbbtn active" onclick="sortP('popular',this)">Popular</button>
+        <button class="sbbtn" onclick="sortP('new',this)">New In</button>
+        <button class="sbbtn" onclick="sortP('sale',this)">Sale</button>
+        <button class="sbbtn" onclick="sortP('price',this)">Price ↑</button>
+      </div>
+    </div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<!-- EDITORIAL -->
+<section class="editorial">
+  <div class="ed-inner">
+    <div class="ed-imgs" id="editorialImgs">
+      <div class="ei tall shimmer" id="edImg0"></div>
+      <div class="ei shimmer" id="edImg1"></div>
+      <div class="ei shimmer" id="edImg2"></div>
+    </div>
+    <div class="ed-copy">
+      <p class="eyebrow ed-eye">✦ Proudly South African</p>
+      <h2 class="ed-h2">Beauty rooted<br>in <em>African soil.</em></h2>
+      <p class="ed-p">From baobab-infused hair oils born in Limpopo to rooibos skincare from the Karoo — we celebrate ingredients and beauty rituals native to this land. Supporting 60+ South African-owned beauty brands.</p>
+      <div class="pills">
+        <span class="pill">🌿 Rooibos Extracts</span>
+        <span class="pill">🥥 Baobab Oil</span>
+        <span class="pill">✨ Marula Oil</span>
+        <span class="pill">🌸 Buchu Botanical</span>
+        <span class="pill">🍯 Raw Honey</span>
+        <span class="pill">🌍 Shea Butter</span>
+      </div>
+      <button class="btn-gold" onclick="filterCat('skin');document.querySelector('.prods-sec').scrollIntoView({behavior:'smooth'})">Explore SA Brands →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL -->
+<section class="capture">
+  <div class="cap">
+    <p class="eyebrow" style="color:rgba(255,255,255,.6)">✦ Members Club</p>
+    <h2>Join the Glōwhaus Family</h2>
+    <p>Get 15% off your first order, early access to new drops, and exclusive member-only deals sent straight to you.</p>
+    <div class="capform">
+      <input type="email" class="capinp" placeholder="your@email.com" id="emailInp">
+      <button class="capbtn" onclick="handleEmail()">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- DROPSHIP -->
+<section class="ds-sec" id="dropship">
+  <div class="wrap">
+    <div class="ds-grid">
+      <div>
+        <p class="eyebrow ds-eye">✦ Dropship Partner Program</p>
+        <h2 class="ds-h2">Sell beauty,<br><em>without the stock.</em></h2>
+        <p class="ds-p">Connect your store to 180+ vetted beauty and accessories suppliers across South Africa and the globe. We handle warehousing, fulfilment, and returns.</p>
+        <ul class="ds-feats">
+          <li class="ds-feat"><div class="ds-ico">🚀</div><span>Live in under 24 hours — zero upfront inventory cost</span></li>
+          <li class="ds-feat"><div class="ds-ico">🇿🇦</div><span>SA, Nigerian, Kenyan & global supplier network</span></li>
+          <li class="ds-feat"><div class="ds-ico">📦</div><span>Automated order fulfilment and real-time tracking</span></li>
+          <li class="ds-feat"><div class="ds-ico">💰</div><span>30–70% margins across jewellery, hair, nails & skincare</span></li>
+          <li class="ds-feat"><div class="ds-ico">📊</div><span>Live inventory sync and sales analytics dashboard</span></li>
+          <li class="ds-feat"><div class="ds-ico">💳</div><span>SA gateways built-in: Ozow, PayFast, SnapScan</span></li>
+          <li class="ds-feat"><div class="ds-ico">⚖️</div><span>POPIA compliant — data processing agreements included</span></li>
+        </ul>
+        <button class="btn-gold" onclick="openModal()">Apply to Dropship →</button>
+      </div>
+      <div class="form-panel">
+        <h3 class="fp-h">Quick Supplier Connect</h3>
+        <p class="fp-s">Already a supplier? List your products here.</p>
+        <div class="frow">
+          <div class="field"><label>Business Name</label><input type="text" placeholder="Your Brand"></div>
+          <div class="field"><label>Province / Country</label>
+            <select><option>Gauteng, SA</option><option>Western Cape, SA</option><option>KwaZulu-Natal, SA</option><option>Eastern Cape, SA</option><option>Limpopo, SA</option><option>Nigeria</option><option>Kenya</option><option>South Korea</option><option>Other</option></select>
+          </div>
+        </div>
+        <div class="field"><label>Business Email</label><input type="email" placeholder="contact@yourbrand.co.za"></div>
+        <div class="field"><label>Product Category</label>
+          <select><option>Jewellery & Accessories</option><option>Hair Care & Extensions</option><option>Nail Products & Gel</option><option>Skincare & Face</option><option>African Naturals & Botanicals</option><option>Multiple Categories</option></select>
+        </div>
+        <div class="field"><label>Monthly Units Available</label><input type="text" placeholder="e.g. 500–2,000 units/month"></div>
+        <div class="field"><label>Message (optional)</label><textarea placeholder="Products, certifications, minimum orders…"></textarea></div>
+        <button class="fp-sub-btn" onclick="showToast('✅ Request received! We\'ll respond within 48 hours.')">Submit Partnership Request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLIERS -->
+<section class="sup-sec" id="suppliers">
+  <div class="wrap">
+    <div class="sup-hdr">
+      <div><p class="eyebrow" style="margin-bottom:10px">✦ Vetted & Verified</p><h2>180+ Global Partners</h2></div>
+      <button class="btn-gold" onclick="openModal()">+ Add Your Brand</button>
+    </div>
+    <div class="sg" id="supGrid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <div class="flogo">GLŌW<em>HAUS</em></div>
+        <p class="ftag">South Africa's premium beauty & accessories destination. Jewellery, hair, nails, skincare — curated with intention, delivered with care.</p>
+        <div class="fsoc">
+          <div class="fsoc-i">📸</div><div class="fsoc-i">🎵</div>
+          <div class="fsoc-i">🐦</div><div class="fsoc-i">📌</div>
+        </div>
+      </div>
+      <div class="fc"><h4>Shop</h4><ul>
+        <li><a href="#">Jewellery</a></li><li><a href="#">Hair Care</a></li>
+        <li><a href="#">Nails & Gel</a></li><li><a href="#">Skincare</a></li>
+        <li><a href="#">New Arrivals</a></li><li><a href="#">Sale</a></li>
+      </ul></div>
+      <div class="fc"><h4>Partner</h4><ul>
+        <li><a href="#dropship">Dropship Program</a></li><li><a href="#suppliers">Supplier Portal</a></li>
+        <li><a href="#">Affiliate Program</a></li><li><a href="#">Wholesale</a></li>
+        <li><a href="#">API Integration</a></li>
+      </ul></div>
+      <div class="fc"><h4>Help</h4><ul>
+        <li><a href="#">Track My Order</a></li><li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Delivery Info</a></li><li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li><li><a href="#">POPIA Policy</a></li>
+      </ul></div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 Glōwhaus (Pty) Ltd · Registered in South Africa · POPIA Compliant</span>
+      <span style="font-size:20px">💳 🏦 📱</span>
+      <span>Privacy · Terms · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cdrawer" id="cdrawer">
+  <div class="cd-hd"><h2>Your Bag</h2><button class="cd-x" onclick="closeCart()">✕</button></div>
+  <div class="cd-items" id="cdItems"></div>
+  <div class="cd-ft" id="cdFt"></div>
+</div>
+
+<!-- MODAL -->
+<div class="mbg" id="mbg" onclick="if(event.target===this)closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2>Apply as a Dropship Partner</h2>
+    <p class="msub">Complete your application · We respond within 48 hours · POPIA compliant</p>
+    <div class="frow">
+      <div class="field"><label>First Name</label><input type="text" placeholder="Thandiwe"></div>
+      <div class="field"><label>Last Name</label><input type="text" placeholder="Dlamini"></div>
+    </div>
+    <div class="field"><label>Business / Brand Name</label><input type="text" placeholder="Thandi's Beauty Studio (Pty) Ltd"></div>
+    <div class="field"><label>Email Address</label><input type="email" placeholder="you@yourbrand.co.za"></div>
+    <div class="frow">
+      <div class="field"><label>WhatsApp Number</label><input type="tel" placeholder="+27 71 000 0000"></div>
+      <div class="field"><label>Province</label>
+        <select><option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option><option>Eastern Cape</option><option>Limpopo</option><option>Mpumalanga</option><option>North West</option><option>Free State</option><option>Northern Cape</option><option>Outside South Africa</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Store / Social Page URL</label><input type="url" placeholder="https://yourstore.co.za or @yourhandle"></div>
+    <div class="field"><label>Selling Platform</label>
+      <select><option>Shopify</option><option>WooCommerce</option><option>Wix</option><option>Instagram Shop</option><option>Facebook Shop</option><option>WhatsApp Business</option><option>TikTok Shop</option><option>Other</option></select>
+    </div>
+    <div class="field"><label>About Your Business</label><textarea placeholder="How long have you been selling? Who is your target customer?"></textarea></div>
+    <div class="macts">
+      <button class="mcancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-gold" onclick="submitApp()">Submit Application ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════════════════════════════════════════
+   DATA
+════════════════════════════════════════ */
+const PRODUCTS = [
+  {id:1, name:'Wavy Days Gold Cuff Bangle',      cat:'jewellery', price:1290, orig:null, brand:'Ettika Edit',       rating:4.9, reviews:218, badge:'bestseller', prompt:'luxury sculptural wavy gold cuff bangle bracelet on dark background, product photography, editorial fashion jewellery, high-end luxury, bokeh lighting'},
+  {id:2, name:'Sculptural Heart Statement Ring',  cat:'jewellery', price:890,  orig:1200, brand:'Soodress SA',       rating:4.8, reviews:312, badge:'sale',        prompt:'large sculptural gold heart statement ring, fashion jewellery editorial, on dark slate, luxury product shot, dramatic lighting'},
+  {id:3, name:'HD Lace Front Wig 22 inch',        cat:'hair',      price:2900, orig:3600, brand:'QueenHair SA',      rating:4.7, reviews:423, badge:'sale',        prompt:'luxury HD lace front human hair wig, beauty editorial, black woman wearing gorgeous long flowing hair, professional salon photography, South Africa'},
+  {id:4, name:'Rose Gold Crystal Eternity Ring',  cat:'jewellery', price:650,  orig:null, brand:'Supermade ZA',      rating:4.8, reviews:189, badge:'new',         prompt:'rose gold eternity ring encrusted with sparkling crystals, luxury jewellery product photography, white background, macro shot, fine jewellery'},
+  {id:5, name:'Silver Heart Bangle Bracelet',     cat:'jewellery', price:480,  orig:null, brand:'Ettika Edit',       rating:4.7, reviews:267, badge:null,          prompt:'delicate silver heart charm bangle bracelet on wrist, beauty editorial, minimalist jewellery, soft natural lighting, premium product photography'},
+  {id:6, name:'Gel Nail Starter Collection',      cat:'nails',     price:799,  orig:1050, brand:'NailPro Studio',    rating:4.9, reviews:187, badge:'sale',        prompt:'luxury gel nail kit collection, bottles of gel polish in pink rose gold tones, flat lay, beauty product photography, marble background, elegant'},
+  {id:7, name:'Marula Oil Glow Serum',            cat:'skin',      price:620,  orig:null, brand:'Ubuntu Beauty',     rating:4.9, reviews:142, badge:'new',         prompt:'luxury African marula oil skincare serum bottle, minimalist beauty product photography, golden dropper bottle, warm earthy tones, editorial'},
+  {id:8, name:'Baobab Protein Treatment',         cat:'hair',      price:580,  orig:null, brand:'Naturals by Thandi',rating:4.8, reviews:99,  badge:'drop',        prompt:'luxury African baobab hair treatment bottle, natural beauty product photography, earthy organic aesthetic, dark background, gold accents'},
+  {id:9, name:'Rooibos Brightening Mask',         cat:'skin',      price:490,  orig:640,  brand:'Ubuntu Beauty',     rating:4.8, reviews:156, badge:'sale',        prompt:'South African rooibos herbal face mask jar, natural skincare product photography, warm terracotta tones, botanical beauty, editorial'},
+  {id:10,name:'Chrome Nail Powder Kit',           cat:'nails',     price:420,  orig:null, brand:'NailPro Studio',    rating:4.6, reviews:201, badge:'new',         prompt:'chrome mirror nail powder pigment kit, beauty nail art products, metallic shimmery colors, flat lay product photography, luxury'},
+  {id:11,name:'Abstract Open Gold Cuff',          cat:'jewellery', price:1490, orig:1900, brand:'Soodress SA',       rating:4.9, reviews:88,  badge:'drop',        prompt:'abstract sculptural open gold cuff bracelet with negative space cutout, editorial jewellery photography, luxury fashion accessory, dark moody background'},
+  {id:12,name:'Rooibos Scalp Serum',              cat:'hair',      price:380,  orig:null, brand:'Naturals by Thandi',rating:4.6, reviews:134, badge:null,          prompt:'luxury rooibos scalp serum bottle with dropper, African natural haircare product photography, warm gold tones, editorial beauty'},
+];
+
+const SUPPLIERS = [
+  {name:'QueenHair SA',       origin:'🇿🇦 Johannesburg', tags:['Extensions','Wigs','Bundles'], emoji:'👸', bg:'#FDF8F0', status:'connected'},
+  {name:'Naturals by Thandi', origin:'🇿🇦 Cape Town',    tags:['Baobab','Marula','Rooibos'],  emoji:'🌿', bg:'#F0FFF4', status:'connected'},
+  {name:'NailPro Studio',     origin:'🇿🇦 Durban',       tags:['Gel','Chrome','Nail Art'],    emoji:'💅', bg:'#F8F0FF', status:'connected'},
+  {name:'Ubuntu Beauty',      origin:'🇿🇦 Pretoria',     tags:['Rooibos','SA Botanicals'],   emoji:'✨', bg:'#FFFDF0', status:'connected'},
+  {name:'Ettika Edit',        origin:'🇺🇸 Los Angeles',  tags:['Cuffs','Bangles','Gold'],     emoji:'💍', bg:'#F5F0E8', status:'connected'},
+  {name:'Soodress SA',        origin:'🌏 International', tags:['Sculptural','Rings','Fine'],  emoji:'💎', bg:'#F0F4FF', status:'connected'},
+  {name:'Lagos Glam',         origin:'🇳🇬 Lagos, Nigeria',tags:['Wigs','Braids','Weaves'],   emoji:'👑', bg:'#FFF0F8', status:'pending'},
+  {name:'Seoul Glow',         origin:'🇰🇷 Seoul, Korea', tags:['K-Beauty','Serums','Glass'], emoji:'🧴', bg:'#F0F8FF', status:'available'},
+];
+
+/* ════════════════════════════════════════
+   AI IMAGE GENERATION
+════════════════════════════════════════ */
+const IMG_CACHE = {};
+let generatedCount = 0;
+let totalToGenerate = 0;
+
+// Fallback Unsplash images per category (used if API not available)
+const FALLBACKS = {
+  jewellery: [
+    'https://images.unsplash.com/photo-1611085583191-a3b181a88552?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1573408301185-9519f94f5a06?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80&auto=format&fit=crop',
+  ],
+  hair: [
+    'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1585751119414-ef2636f8aede?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1617333387457-c36dca93edc8?w=600&q=80&auto=format&fit=crop',
+  ],
+  nails: [
+    'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&auto=format&fit=crop',
+  ],
+  skin: [
+    'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1571781565036-d3f759be73e4?w=600&q=80&auto=format&fit=crop',
+  ],
+  all: [
+    'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80&auto=format&fit=crop',
+  ],
+  editorial: [
+    'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519415510236-718bdfcd89c8?w=600&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1617333387457-c36dca93edc8?w=600&q=80&auto=format&fit=crop',
+  ]
+};
+
+function getFallback(cat, idx) {
+  const arr = FALLBACKS[cat] || FALLBACKS.jewellery;
+  return arr[idx % arr.length];
+}
+
+async function generateImage(prompt, targetEl, cat, fallbackIdx) {
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1024,
+        messages: [{
+          role: 'user',
+          content: `Generate a beautiful, photorealistic product image URL description for an e-commerce beauty store. 
+The product is: ${prompt}
+Respond ONLY with a valid JSON object like: {"url": "https://..."} 
+Use one of these high-quality Unsplash image URLs that best matches the product description. Pick the most relevant:
+- Gold jewellery/bangles: https://images.unsplash.com/photo-1611085583191-a3b181a88552?w=600&q=80&auto=format&fit=crop
+- Heart/love jewellery: https://images.unsplash.com/photo-1573408301185-9519f94f5a06?w=600&q=80&auto=format&fit=crop  
+- Rose gold rings: https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80&auto=format&fit=crop
+- Sculptural rings: https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=600&q=80&auto=format&fit=crop
+- Abstract cuffs: https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop
+- Diamond jewellery: https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80&auto=format&fit=crop
+- Hair wigs/extensions: https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop
+- Natural hair: https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80&auto=format&fit=crop
+- Hair products/bottles: https://images.unsplash.com/photo-1617333387457-c36dca93edc8?w=600&q=80&auto=format&fit=crop
+- Nail art/polish: https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&auto=format&fit=crop
+- Skincare serums: https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80&auto=format&fit=crop
+- Skincare face mask: https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop
+- Beauty ritual: https://images.unsplash.com/photo-1571781565036-d3f759be73e4?w=600&q=80&auto=format&fit=crop
+- All beauty: https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80&auto=format&fit=crop`
+        }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(clean);
+    const url = parsed.url || getFallback(cat, fallbackIdx);
+    setImgUrl(targetEl, url);
+  } catch(e) {
+    // Use intelligent fallback based on category
+    setImgUrl(targetEl, getFallback(cat, fallbackIdx));
+  }
+  
+  generatedCount++;
+  updateAIStatus();
+}
+
+function setImgUrl(el, url) {
+  if (!el) return;
+  el.classList.remove('shimmer');
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = 'Product image';
+  img.loading = 'lazy';
+  img.onerror = () => { img.style.opacity = '.4'; };
+  // Insert before overlay/label divs
+  const firstChild = el.firstElementChild;
+  if (firstChild) el.insertBefore(img, firstChild);
+  else el.appendChild(img);
+}
+
+function updateAIStatus() {
+  const pct = Math.round((generatedCount / totalToGenerate) * 100);
+  const el = document.getElementById('aiStatus');
+  const txt = document.getElementById('aiStatusText');
+  if (generatedCount >= totalToGenerate) {
+    el.classList.add('done');
+    txt.textContent = '✦ All product visuals loaded — ' + totalToGenerate + ' images AI-curated for your store';
+  } else {
+    txt.textContent = '✦ Curating product visuals… ' + generatedCount + ' of ' + totalToGenerate + ' complete (' + pct + '%)';
+  }
+}
+
+/* Category tile images */
+const CAT_PROMPTS = [
+  { el: 'all',       prompt: 'luxury beauty collection flatlay jewellery nails hair skincare',       cat:'all',       fi:0 },
+  { el: 'jewellery', prompt: 'luxury gold sculptural cuff bangles rings fine jewellery editorial',   cat:'jewellery', fi:0 },
+  { el: 'hair',      prompt: 'beautiful natural hair extensions wigs luxury beauty editorial',        cat:'hair',      fi:0 },
+  { el: 'nails',     prompt: 'luxury nail art gel polish beauty editorial close up hands',            cat:'nails',     fi:0 },
+  { el: 'skin',      prompt: 'luxury African skincare serums oils beauty editorial natural',          cat:'skin',      fi:0 },
+];
+
+const HERO_PROMPTS = [
+  { id:'htile0', prompt:'luxury gold sculptural jewellery bangle editorial dark background', cat:'jewellery', fi:0 },
+  { id:'htile1', prompt:'luxury nail art close up hands beauty editorial',                  cat:'nails',     fi:0 },
+  { id:'htile2', prompt:'natural hair beauty editorial South Africa',                       cat:'hair',      fi:0 },
+];
+
+const EDITORIAL_PROMPTS = [
+  { id:'edImg0', prompt:'African woman natural beauty editorial skincare',        cat:'editorial', fi:0 },
+  { id:'edImg1', prompt:'South African baobab marula natural beauty products',   cat:'editorial', fi:1 },
+  { id:'edImg2', prompt:'African botanical beauty ritual rooibos skincare',      cat:'editorial', fi:2 },
+];
+
+async function initAIImages() {
+  // Count everything
+  totalToGenerate = PRODUCTS.length + CAT_PROMPTS.length + HERO_PROMPTS.length + EDITORIAL_PROMPTS.length;
+  updateAIStatus();
+
+  // Generate hero tiles
+  for (const h of HERO_PROMPTS) {
+    const el = document.getElementById(h.id);
+    if (el) generateImage(h.prompt, el, h.cat, h.fi);
+  }
+
+  // Generate category tiles
+  const catTiles = document.querySelectorAll('.ctile');
+  CAT_PROMPTS.forEach((cp, i) => {
+    if (catTiles[i]) generateImage(cp.prompt, catTiles[i], cp.cat, cp.fi);
+  });
+
+  // Generate editorial
+  for (const ep of EDITORIAL_PROMPTS) {
+    const el = document.getElementById(ep.id);
+    if (el) generateImage(ep.prompt, el, ep.cat, ep.fi);
+  }
+
+  // Product images are generated on render
+}
+
+/* ════════════════════════════════════════
+   PRODUCT RENDERING
+════════════════════════════════════════ */
+const BADGEC = {bestseller:'bs', new:'bnew', sale:'bsale', drop:'bdrop'};
+const BADGEL = {bestseller:'★ Best Seller', new:'✦ New', sale:'% Sale', drop:'◉ Just Dropped'};
+
+let cart = [], wishlist = [], currentCat = 'all';
+
+function renderProducts(list) {
+  const grid = document.getElementById('pgrid');
+  grid.innerHTML = list.map(p => `
+    <div class="pc">
+      <div class="pc-img shimmer" id="pimg-${p.id}">
+        ${p.badge ? `<span class="pbadge ${BADGEC[p.badge]}">${BADGEL[p.badge]}</span>` : ''}
+        <button class="pwish" onclick="toggleWish(${p.id},this)">${wishlist.includes(p.id)?'❤️':'🤍'}</button>
+        <button class="pquick" onclick="addToCart(${p.id})">Add to Bag</button>
+        <div class="ai-gen-label">✦ AI-curated visual</div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">${p.brand}</div>
+        <div class="pname">${p.name}</div>
+        <div style="margin-bottom:10px">
+          <span class="pstars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span>
+          <span class="prev">${p.rating} (${p.reviews})</span>
+        </div>
+        <div class="pfooter">
+          <div class="pprice">${p.orig?`<span class="porig">R${p.orig.toLocaleString()}</span>`:''}R${p.price.toLocaleString()}</div>
+          <button class="abtn" onclick="addToCart(${p.id})">+ Bag</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Generate images for each product
+  list.forEach((p, i) => {
+    const el = document.getElementById('pimg-' + p.id);
+    if (el) {
+      // Use cached or generate
+      if (IMG_CACHE[p.id]) {
+        setImgUrl(el, IMG_CACHE[p.id]);
+      } else {
+        generateImage(p.prompt, el, p.cat, i).then ? 
+          generateImageCached(p, el) : null;
+        generateImageCached(p, el);
+      }
+    }
+  });
+}
+
+async function generateImageCached(p, el) {
+  if (IMG_CACHE[p.id]) {
+    setImgUrl(el, IMG_CACHE[p.id]);
+    return;
+  }
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 512,
+        messages: [{role:'user', content:`Pick the single best matching Unsplash URL for this product: "${p.prompt}". 
+Respond ONLY with JSON: {"url":"<url>"}
+URLs to choose from:
+{"jewellery_gold_bangle":"https://images.unsplash.com/photo-1611085583191-a3b181a88552?w=600&q=80&auto=format&fit=crop"}
+{"jewellery_heart_ring":"https://images.unsplash.com/photo-1573408301185-9519f94f5a06?w=600&q=80&auto=format&fit=crop"}
+{"jewellery_rose_gold":"https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&q=80&auto=format&fit=crop"}
+{"jewellery_sculptural":"https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=600&q=80&auto=format&fit=crop"}
+{"jewellery_abstract_cuff":"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80&auto=format&fit=crop"}
+{"jewellery_diamond":"https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&q=80&auto=format&fit=crop"}
+{"hair_wig":"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format&fit=crop"}
+{"hair_natural":"https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&q=80&auto=format&fit=crop"}
+{"hair_products":"https://images.unsplash.com/photo-1617333387457-c36dca93edc8?w=600&q=80&auto=format&fit=crop"}
+{"nails":"https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80&auto=format&fit=crop"}
+{"skincare_serum":"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80&auto=format&fit=crop"}
+{"skincare_mask":"https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80&auto=format&fit=crop"}
+{"beauty_ritual":"https://images.unsplash.com/photo-1571781565036-d3f759be73e4?w=600&q=80&auto=format&fit=crop"}`
+        }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(clean);
+    const url = parsed.url || getFallback(p.cat, 0);
+    IMG_CACHE[p.id] = url;
+    setImgUrl(el, url);
+  } catch(e) {
+    const url = getFallback(p.cat, 0);
+    IMG_CACHE[p.id] = url;
+    setImgUrl(el, url);
+  }
+  generatedCount++;
+  updateAIStatus();
+}
+
+function filterCat(cat) {
+  currentCat = cat;
+  const list = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
+  renderProducts(list);
+}
+
+function sortP(type, btn) {
+  document.querySelectorAll('.sbbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  let list = currentCat === 'all' ? [...PRODUCTS] : PRODUCTS.filter(p => p.cat === currentCat);
+  if(type==='new')     list = list.filter(p=>p.badge==='new').concat(list.filter(p=>p.badge!=='new'));
+  if(type==='sale')    list = list.filter(p=>p.orig).concat(list.filter(p=>!p.orig));
+  if(type==='price')   list.sort((a,b)=>a.price-b.price);
+  if(type==='popular') list.sort((a,b)=>b.reviews-a.reviews);
+  renderProducts(list);
+}
+
+function setActiveCat(el) {
+  document.querySelectorAll('.ctile').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ════════════════════════════════════════
+   CART
+════════════════════════════════════════ */
+function addToCart(id) {
+  const p = PRODUCTS.find(x=>x.id===id);
+  const ex = cart.find(x=>x.id===id);
+  if(ex) ex.qty++; else cart.push({...p, qty:1});
+  updateBadge();
+  showToast('🛍 Added: '+p.name);
+}
+function updateBadge() {
+  document.getElementById('cbadge').textContent = cart.reduce((s,x)=>s+x.qty,0);
+}
+function openCart() {
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('cdrawer').classList.add('open');
+  renderCart();
+}
+function closeCart() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('cdrawer').classList.remove('open');
+}
+function renderCart() {
+  const items = document.getElementById('cdItems');
+  const ft = document.getElementById('cdFt');
+  if(!cart.length) {
+    items.innerHTML = '<div class="empty-bag"><span class="big">🛍</span><p>Your bag is empty.<br>Time to treat yourself.</p></div>';
+    ft.innerHTML=''; return;
+  }
+  items.innerHTML = cart.map(item => `
+    <div class="cd-item">
+      <div class="cd-thumb">${IMG_CACHE[item.id]?`<img src="${IMG_CACHE[item.id]}" alt="${item.name}">`:'<div style="width:100%;height:100%;background:var(--cream)"></div>'}</div>
+      <div class="cd-info">
+        <div class="cd-brand">${item.brand}</div>
+        <div class="cd-name">${item.name}</div>
+        <div class="cd-row">
+          <div class="qctl">
+            <button class="qbtn" onclick="chQty(${item.id},-1)">−</button>
+            <span class="qn">${item.qty}</span>
+            <button class="qbtn" onclick="chQty(${item.id},1)">+</button>
+          </div>
+          <div class="cdi-price">R${(item.price*item.qty).toLocaleString()}</div>
+        </div>
+        <button class="cd-rm" onclick="rmItem(${item.id})">Remove</button>
+      </div>
+    </div>
+  `).join('');
+  const sub = cart.reduce((s,x)=>s+x.price*x.qty,0);
+  const ship = sub>=650?0:85;
+  ft.innerHTML = `
+    <div class="cd-line"><span>Subtotal</span><span>R${sub.toLocaleString()}</span></div>
+    <div class="cd-line"><span>Shipping</span><span>${ship===0?'<span style="color:var(--success)">Free ✓</span>':'R'+ship}</span></div>
+    <div class="cd-tot"><span>Total</span><span>R${(sub+ship).toLocaleString()}</span></div>
+    <button class="co-btn" onclick="showToast('🔐 Connect Ozow or PayFast to enable live checkout!')">Proceed to Checkout</button>
+  `;
+}
+function chQty(id,d){const i=cart.find(x=>x.id===id);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(x=>x.id!==id);updateBadge();renderCart()}
+function rmItem(id){cart=cart.filter(x=>x.id!==id);updateBadge();renderCart()}
+
+/* ════════════════════════════════════════
+   WISHLIST / MODAL / SUPPLIERS
+════════════════════════════════════════ */
+function toggleWish(id,btn){
+  if(wishlist.includes(id)){wishlist=wishlist.filter(x=>x!==id);btn.textContent='🤍'}
+  else{wishlist.push(id);btn.textContent='❤️';showToast('❤️ Saved to wishlist')}
+}
+function openModal(){document.getElementById('mbg').classList.add('open')}
+function closeModal(){document.getElementById('mbg').classList.remove('open')}
+function submitApp(){closeModal();showToast('✅ Application submitted! Check your email within 48 hours.')}
+function handleEmail(){
+  const v=document.getElementById('emailInp').value;
+  if(!v||!v.includes('@')){showToast('⚠️ Please enter a valid email');return}
+  showToast('🎉 Welcome! 15% off code sent to '+v);
+  document.getElementById('emailInp').value='';
+}
+function renderSuppliers(){
+  document.getElementById('supGrid').innerHTML=SUPPLIERS.map(s=>`
+    <div class="sc">
+      <div class="slogo" style="background:${s.bg}">${s.emoji}</div>
+      <div class="sname">${s.name}</div>
+      <div class="sorig">${s.origin}</div>
+      <div class="stags">${s.tags.map(t=>`<span class="stag">${t}</span>`).join('')}</div>
+      <div class="sstat"><div class="${s.status==='connected'?'dlive':s.status==='pending'?'dpend':'davail'}"></div>
+      <span>${s.status==='connected'?'Connected':s.status==='pending'?'Pending review':'Available'}</span></div>
+      <button class="sbtn ${s.status==='connected'?'live':''}" onclick="showToast('${s.status==='connected'?'✓ Already connected to':'Connecting to'} ${s.name}…')">
+        ${s.status==='connected'?'✓ Connected':s.status==='pending'?'⏳ Pending':'+ Connect Now'}
+      </button>
+    </div>
+  `).join('');
+}
+
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+renderProducts(PRODUCTS);
+renderSuppliers();
+initAIImages();
+</script>
+</body>
+</html>
